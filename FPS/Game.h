@@ -62,8 +62,17 @@ public:
 
 	void spawnBadFaerie(Player* player, IrrlichtDevice* device, ISceneManager* smgr, IVideoDriver* driver);
 
-private:
 	list<GameObject*> updateList;
+
+	// updateList = list<GameObject*>();
+
+	list<GameObject*>& getUpdateList() {
+		return updateList;
+	}
+
+
+private:
+	
 	f32 lastUpdate;
 	f32 timeSinceStart;
 	ITriangleSelector* selector;

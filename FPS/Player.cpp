@@ -274,60 +274,60 @@ bool Player::update(s32 elapsedTime, s32 weapon, IrrlichtDevice *device) {
 	//}
 
 	switch (weapon) {
-	case REVOLVER: {
-		// Update projectiles and check collisions
-		core::list<CLaserProjectile*>::Iterator projIterev = LaserProjectiles.begin();
+	//case REVOLVER: {
+	//	// Update projectiles and check collisions
+	//	core::list<CLaserProjectile*>::Iterator projIterev = LaserProjectiles.begin();
 
-			while (projIterev != LaserProjectiles.end()) {
+	//		while (projIterev != LaserProjectiles.end()) {
 
-			if ((*projIterev)->update()) {
+	//		if ((*projIterev)->update()) {
 
-				delete *projIterev;
+	//			delete *projIterev;
 
-				projIterev = LaserProjectiles.erase(projIterev);
-			}
-			else {
-			//	CCharacter* enemy = NULL;
-				bool collision = false;
-				core::line3df ray((*projIterev)->getPreviousPosition(), (*projIterev)->getPosition());
-				core::vector3df outVec;
-				core::triangle3df outTri;
-				scene::ISceneNode* outNode;
-			/*	core::array<IAIEntity*> enemies = ((IPlayerAIEntity*)AIEntity)->getEnemyGroup()->Entities;
-				for (u32 i = 0; i < enemies.size(); ++i) {
-					enemy = (CCharacter*)(enemies[i]->getUserData());
-					if (enemy->getAIEntity()->getNode()->getTransformedBoundingBox().intersectsWithLine(ray)) {
-						enemy->registerHit(5);
-						collision = true;
-						delete *projIterev;
-						projIterev = GunProjectiles.erase(projIterev);
-						break;
-					}
-				}*/
-				if (smgr->getSceneCollisionManager()->getCollisionPoint(ray, MetaSelector, outVec, outTri, outNode)) {
-					//collision = true;
-					//delete *projIterev;
-					//projIterev = GunProjectiles.erase(projIterev);
-					
-					//for decals
-					
-					//decals[nextDecal]->Setup(outTri, outVec);
-					//nextDecal++;
-					//if (nextDecal >= MAX_DECALS)
-					//	nextDecal = 0;
-				}
-				if (!collision)
-					projIterev++;
-			}
-		}
-		if (ammo_rev == 0 && mag_rev > 0) {
-			mag_rev--;
-			ammo_rev = 6;
-		}
+	//			projIterev = LaserProjectiles.erase(projIterev);
+	//		}
+	//		else {
+	//		//	CCharacter* enemy = NULL;
+	//			bool collision = false;
+	//			core::line3df ray((*projIterev)->getPreviousPosition(), (*projIterev)->getPosition());
+	//			core::vector3df outVec;
+	//			core::triangle3df outTri;
+	//			scene::ISceneNode* outNode;
+	//		/*	core::array<IAIEntity*> enemies = ((IPlayerAIEntity*)AIEntity)->getEnemyGroup()->Entities;
+	//			for (u32 i = 0; i < enemies.size(); ++i) {
+	//				enemy = (CCharacter*)(enemies[i]->getUserData());
+	//				if (enemy->getAIEntity()->getNode()->getTransformedBoundingBox().intersectsWithLine(ray)) {
+	//					enemy->registerHit(5);
+	//					collision = true;
+	//					delete *projIterev;
+	//					projIterev = GunProjectiles.erase(projIterev);
+	//					break;
+	//				}
+	//			}*/
+	//			if (smgr->getSceneCollisionManager()->getCollisionPoint(ray, MetaSelector, outVec, outTri, outNode)) {
+	//				//collision = true;
+	//				//delete *projIterev;
+	//				//projIterev = GunProjectiles.erase(projIterev);
+	//				
+	//				//for decals
+	//				
+	//				//decals[nextDecal]->Setup(outTri, outVec);
+	//				//nextDecal++;
+	//				//if (nextDecal >= MAX_DECALS)
+	//				//	nextDecal = 0;
+	//			}
+	//			if (!collision)
+	//				projIterev++;
+	//		}
+	//	}
+	//	if (ammo_rev == 0 && mag_rev > 0) {
+	//		mag_rev--;
+	//		ammo_rev = 6;
+	//	}
 
 		//use this for freakish results (uncomment function below)
-		Projectiles.clear();
-	} break;
+	//	Projectiles.clear();
+	//} break;
 	case REVEVO: {
 		// Update projectiles and check collisions
 		core::list<CGunProjectile*>::Iterator projIterev = GunProjectiles.begin();
@@ -510,60 +510,60 @@ bool Player::update(s32 elapsedTime, s32 weapon, IrrlichtDevice *device) {
 				ammo_smg = 15;
 			}
 		} break;	//end smg
-	case LASER: {
-		// Update projectiles and check collisions
-		core::list<CLaserProjectile*>::Iterator projIter = LaserProjectiles.begin();
-		while (projIter != LaserProjectiles.end()) {
+	//case LASER: {
+	//	// Update projectiles and check collisions
+	//	core::list<CLaserProjectile*>::Iterator projIter = LaserProjectiles.begin();
+	//	while (projIter != LaserProjectiles.end()) {
 
-			//  if update() return false (if ammo move more then SqDistTravelled distance) iterator projIter removing
-			// если пуля пролетела установленное растояние и не пересеклась ни счем то она удаляется
-			if ((*projIter)->update()) {
-				delete *projIter;
-				projIter = LaserProjectiles.erase(projIter);
-			}
-			else {
+	//		//  if update() return false (if ammo move more then SqDistTravelled distance) iterator projIter removing
+	//		// если пуля пролетела установленное растояние и не пересеклась ни счем то она удаляется
+	//		if ((*projIter)->update()) {
+	//			delete *projIter;
+	//			projIter = LaserProjectiles.erase(projIter);
+	//		}
+	//		else {
 
-				//CCharacter* enemy = NULL;
-				bool collision = false;
+	//			//CCharacter* enemy = NULL;
+	//			bool collision = false;
 
-				// луч создается из начальной позиции выстрела и постоянно обновляющейся позиции пули (тоесть луч растет пока пуля летит или пока не произойдет коллизия/закончется дистанция полета )
-				core::line3df ray((*projIter)->getPreviousPosition(), (*projIter)->getPosition());
-				core::vector3df outVec;
-				core::triangle3df outTri;
-				scene::ISceneNode* outNode;
+	//			// луч создается из начальной позиции выстрела и постоянно обновляющейся позиции пули (тоесть луч растет пока пуля летит или пока не произойдет коллизия/закончется дистанция полета )
+	//			core::line3df ray((*projIter)->getPreviousPosition(), (*projIter)->getPosition());
+	//			core::vector3df outVec;
+	//			core::triangle3df outTri;
+	//			scene::ISceneNode* outNode;
 
-				// если луч пересекся с врагами
-				//core::array<IAIEntity*> enemies = ((IPlayerAIEntity*)AIEntity)->getEnemyGroup()->Entities;
-				//for (u32 i = 0; i < enemies.size(); ++i) {
-				//	enemy = (CCharacter*)(enemies[i]->getUserData());
-				//	if (enemy->getAIEntity()->getNode()->getTransformedBoundingBox().intersectsWithLine(ray)) {
-				//		enemy->registerHit(50);
-				//		collision = true;
-				//		delete *projIter;
-				//		projIter = LaserProjectiles.erase(projIter);
-				//		break;
-				//	}
-				//}
+	//			// если луч пересекся с врагами
+	//			//core::array<IAIEntity*> enemies = ((IPlayerAIEntity*)AIEntity)->getEnemyGroup()->Entities;
+	//			//for (u32 i = 0; i < enemies.size(); ++i) {
+	//			//	enemy = (CCharacter*)(enemies[i]->getUserData());
+	//			//	if (enemy->getAIEntity()->getNode()->getTransformedBoundingBox().intersectsWithLine(ray)) {
+	//			//		enemy->registerHit(50);
+	//			//		collision = true;
+	//			//		delete *projIter;
+	//			//		projIter = LaserProjectiles.erase(projIter);
+	//			//		break;
+	//			//	}
+	//			//}
 
-				// если луч соприкоснулся с картой создаем декали на месте соприкосновения
-				if (smgr->getSceneCollisionManager()->getCollisionPoint(ray, MetaSelector, outVec, outTri, outNode)) {
-					collision = true;
-					delete *projIter;
-					projIter = LaserProjectiles.erase(projIter);
+	//			// если луч соприкоснулся с картой создаем декали на месте соприкосновения
+	//			if (smgr->getSceneCollisionManager()->getCollisionPoint(ray, MetaSelector, outVec, outTri, outNode)) {
+	//				collision = true;
+	//				delete *projIter;
+	//				projIter = LaserProjectiles.erase(projIter);
 
-					//for decals
-					/*decals[nextDecal]->Setup(outTri, outVec);
-					nextDecal++;
-					if (nextDecal >= MAX_DECALS)
-						nextDecal = 0;*/
-				}
+	//				//for decals
+	//				/*decals[nextDecal]->Setup(outTri, outVec);
+	//				nextDecal++;
+	//				if (nextDecal >= MAX_DECALS)
+	//					nextDecal = 0;*/
+	//			}
 
-				if (!collision) 
-					projIter++;
+	//			if (!collision) 
+	//				projIter++;
 
-			}		//end else
-		}			//end while
-	} break; //laser
+	//		}		//end else
+	//	}			//end while
+	//} break; //laser
 
 	}
    

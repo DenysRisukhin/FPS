@@ -39,9 +39,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CLaserProjectile.cpp">
-      <Filter>Projectile</Filter>
-    </ClCompile>
     <ClCompile Include="CProjectile.cpp">
       <Filter>Projectile</Filter>
     </ClCompile>
@@ -52,9 +49,6 @@
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="BadFaerie.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="PowerBall.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
@@ -78,6 +72,15 @@
     <ClCompile Include="Terrain.cpp">
       <Filter>Level</Filter>
     </ClCompile>
+    <ClCompile Include="PowerBall.cpp">
+      <Filter>Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="CLaserProjectile1.cpp">
+      <Filter>Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="CLaserProjectile.cpp">
+      <Filter>Projectile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCharacter.h">
@@ -92,9 +95,6 @@
     <ClInclude Include="Player.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="CLaserProjectile.h">
-      <Filter>Projectile</Filter>
-    </ClInclude>
     <ClInclude Include="CProjectile.h">
       <Filter>Projectile</Filter>
     </ClInclude>
@@ -108,9 +108,6 @@
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="PowerBall.h">
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
@@ -130,6 +127,15 @@
     </ClInclude>
     <ClInclude Include="Terrain.h">
       <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerBall.h">
+      <Filter>Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="CLaserProjectile1.h">
+      <Filter>Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="CLaserProjectile.h">
+      <Filter>Projectile</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

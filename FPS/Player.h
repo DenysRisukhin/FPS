@@ -83,6 +83,10 @@ public:
 	scene::IAnimatedMesh* mesh;
 	scene::IAnimatedMesh* handmesh;
 
+	ISceneManager* getSmgr() {
+		return smgr;
+	}
+
 	f32 lastAttack;
 private:
 	list<GameObject*> * listPtr;

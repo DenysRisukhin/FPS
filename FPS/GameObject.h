@@ -26,6 +26,7 @@ public:
 	virtual bool isActive();
 	virtual ISceneNode* getNode();
 	virtual vector3df getPosition();
+	virtual vector3df getPreviousPosition();
 
 	bool needsUpdate();
 

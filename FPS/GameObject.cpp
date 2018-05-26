@@ -19,6 +19,10 @@ vector3df GameObject::getPosition()
 	return vector3df(0, 0, 0);
 }
 
+vector3df GameObject::getPreviousPosition() {
+	return origPosition;
+}
+
 ISceneNode* GameObject::getNode()
 {
 	return NULL;

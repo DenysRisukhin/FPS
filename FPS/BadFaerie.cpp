@@ -27,7 +27,7 @@ void BadFaerie::attack()
 	vector3df direction = pos - node->getAbsolutePosition();
 	direction.normalize();
 
-	PowerBallEnemy* powerBall = new PowerBallEnemy(smgr, driver, node->getAbsolutePosition(), direction, 1.0f);
+	PowerBallEnemy* powerBall = new PowerBallEnemy(smgr, driver, node->getAbsolutePosition(), pos, 1.0f);
 	lastAttack = device->getTimer()->getTime();
 
 	//listPtr->push_back(powerBall);

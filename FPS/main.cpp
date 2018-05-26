@@ -25,11 +25,13 @@ int main() {
 
 	// Making instance of our game.
 	Game app;
+	//list<GameObject*> &vm = app.getUpdateList();
+	//app->getUpdateList();
 
 	// Instantiating game objects.
 	Terrain* terrain = new Terrain(smgr, driver);
 	Camera* camera = new Camera(smgr);
-	Player* player = new Player(device, smgr, driver, camera, nullptr); // list<GameObject*>();
+	Player* player = new Player(device, smgr, driver, camera, &(app.getUpdateList()) ); // list<GameObject*>();
 	Skybox* skybox = new Skybox(smgr, driver);
 	smgr->setShadowColor();
 
@@ -208,23 +210,27 @@ int main() {
 				//CHealthPowerupObject pi(player, smgr, { 0,0,0 });
 
 				//update player
-				if (player)
-				{
-					/*vector3df playerpos = player->getAbsolutePosition();
-					printf("Pos: %f %f %f \n", playerpos.X, playerpos.Y, playerpos.Z);
-					*/
-					//if (crosshairEl->isVisible() && playerShoot) {
-					if (playerShoot) {
-						//player->lastAttack = device->getTimer()->getTime();
-						player->fire(player->getWeapon(), device);
-					}
+				//if (player)
+				//{
+				//	/*vector3df playerpos = player->getAbsolutePosition();
+				//	printf("Pos: %f %f %f \n", playerpos.X, playerpos.Y, playerpos.Z);
+				//	*/
+				//	//if (crosshairEl->isVisible() && playerShoot) {
+				//	if (playerShoot) {
+				//		//player->lastAttack = device->getTimer()->getTime();
+				//		player->fire(player->getWeapon(), device);
+				//	}
 
-					if (player->update(elapsedTime, player->getWeapon(), device))
-					{
-						delete player;
-						player = NULL;
-					}
-				}
+				//	if (player->update(elapsedTime, player->getWeapon(), device))
+				//	{
+				//		delete player;
+				//		player = NULL;
+				//	}
+				//}
+
+
+
+
 				// draw fire & dragons background world
 				//driver->draw2DImage(driver->getTexture("Textures/crosshair.png"), core::position2d<s32>(300, 200));
 
@@ -256,8 +262,6 @@ int main() {
 				//device->getGUIEnvironment()->
 				guienv->drawAll();
 
-				
-
 			}
 			else
 			{
@@ -276,7 +280,7 @@ int main() {
 				//std::cout << "\nDelta Time = " << deltaTime << std::endl;
 				//std::cout << "FPS = " << (1000.0f / deltaTime) << "\n\n";
 				//std::cout << "Player position = " << player->getPosition().X << ", " << player->getPosition().Y << ", " << player->getPosition().Z << std::endl;
-				//std::cout << "Number of Enemies = " << (int)app.getNumOfEnemies() << std::endl;
+				std::cout << "Number of Enemies = " << (int)app.getNumOfEnemies() << std::endl;
 				previous = now;
 			}
 #endif

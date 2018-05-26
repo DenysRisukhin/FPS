@@ -2,7 +2,7 @@
 
 #define PROJECTILE_SPEED 85.0f
 
-CLaserProjectile::CLaserProjectile(const core::vector3df& pos, const core::vector3df& dir, scene::ISceneManager* smgr) {
+CLaserProjectile::CLaserProjectile(const core::vector3df& pos, const core::vector3df& dir, scene::ISceneManager* smgr): GameObject(pos, PROJECTILE_SPEED, smgr) {
 
 	Direction = dir;
 	PrevPos = pos;
@@ -55,20 +55,28 @@ void CLaserProjectile::remove() {
 
 }
 
-bool CLaserProjectile::update() {
+//bool CLaserProjectile::update()
+void CLaserProjectile::update(f32 deltaTime) {
 
-	if (SqDistTravelled > 100000)  // 1000000 it's time which allow a make new shoot. this parameter to influance to destance and time of shoot
-		return true;
+	if (bNeedsUpdate)
+	{
+		if (SqDistTravelled > 100000)
+			bNeedsUpdate = false;
+		else {
 
-	PrevPos = Bill->getAbsolutePosition();
+			PrevPos = Bill->getAbsolutePosition();
 
-	core::vector3df distance = Direction*PROJECTILE_SPEED;
+			core::vector3df distance = Direction*PROJECTILE_SPEED;
 
-	if (Bill) 
-		Bill->setPosition(PrevPos + distance);
+			if (Bill) 
+				Bill->setPosition(PrevPos + distance);
 
-	SqDistTravelled += distance.getLengthSQ();
+			SqDistTravelled += distance.getLengthSQ();
+		}
+	}
+}
 
-	return false;
-
+ISceneNode* CLaserProjectile::getNode()
+{
+	return Bill;
 }

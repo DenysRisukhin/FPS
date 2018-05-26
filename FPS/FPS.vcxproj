@@ -154,6 +154,7 @@
     <ClCompile Include="CGunProjectile.cpp" />
     <ClCompile Include="CHealthPowerupObject.cpp" />
     <ClCompile Include="CLaserProjectile.cpp" />
+    <ClCompile Include="CLaserProjectile1.cpp" />
     <ClCompile Include="CProjectile.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventReciever.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="CGunProjectile.h" />
     <ClInclude Include="CHealthPowerupObject.h" />
     <ClInclude Include="CLaserProjectile.h" />
+    <ClInclude Include="CLaserProjectile1.h" />
     <ClInclude Include="CProjectile.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EventReciever.h" />
