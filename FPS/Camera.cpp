@@ -34,7 +34,7 @@ Camera::Camera(ISceneManager* smgr)
 	keyMap[9].Action = EKA_CROUCH;
 	keyMap[9].KeyCode = KEY_KEY_C;
 
-	node = smgr->addCameraSceneNodeFPS(0, 100.0f, 0.21f, -1, keyMap, 9, false, 9.0f);
+	node = smgr->addCameraSceneNodeFPS(0, 100.0f, 3.81f, -1, keyMap, 18, false, 9.0f); // 0.21
 
 	//node = smgr->addCameraSceneNodeFPS(NULL, 75.0f, 0.25f, -1, keyMap, 8);
 

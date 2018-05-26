@@ -9,7 +9,7 @@
 #include "EventReciever.h"
 #include "Skybox.h"
 #include "PowerBall.h"
-//#include "BadFaerie.h"
+#include "BadFaerie.h"
 //#include "Monster.h"
 //#include "Wraith.h"
 #include "GameHud.h"
@@ -38,6 +38,13 @@ public:
 	//void handleCollisions(Player*, Camera*, f32);
 	//void handleCollisionWithPlayer(Player*, Camera*, f32);
 	
+	void handleCollisions(Player*, Camera*, f32);
+	void handleCollisionWithPlayer(Player*, Camera*, f32);
+	void handleCollisionEnemyPowerBall(void);
+	void handleCollisionBetweenEnemies(GameObject*);
+	bool collisionsBetweenEnemyAndBalls(ISceneNode*);
+	void collisionBetweenFaerieAndPlayer(Player*, Camera*, ISceneNode*, f32);
+
 	void updateGameObjects(f32);
 	void handleGameState(GameState &, Player*, IrrlichtDevice*, ISceneManager*, IVideoDriver*);
 	
@@ -45,13 +52,15 @@ public:
 	void displayMainMenu(GameState &, IrrlichtDevice*);
 	//f32 getLastUpdate();
 	//void setLastUpdate(f32 update);
-	//u8 getNumOfEnemies();
+	u8 getNumOfEnemies();
 
 	bool gamePaused;
 
 	void initiateWave1(Player*, IrrlichtDevice*, ISceneManager*, IVideoDriver*);
 
 	void updateWaveStatus(GameState &, IrrlichtDevice*, Player*, ISceneManager*, IVideoDriver*);
+
+	void spawnBadFaerie(Player* player, IrrlichtDevice* device, ISceneManager* smgr, IVideoDriver* driver);
 
 private:
 	list<GameObject*> updateList;
@@ -65,6 +74,11 @@ private:
 	bool bGameOverDisplayed;
 	bool bGameCompleteDisplayed;
 
+	Enemy* enemies[20];
+
+	BadFaerie* badFaerie;
+
+	u8 numOfEnemies;
 	bool bWave1Finished;
 
 	bool bWave1Started;

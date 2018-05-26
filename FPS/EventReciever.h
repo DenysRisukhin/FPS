@@ -8,10 +8,6 @@ enum GameState
 {
 	MAIN_MENU,
 	WAVE_1,
-	WAVE_2,
-	WAVE_3,
-	WAVE_4,
-	WAVE_5,
 	GAME_COMPLETE,
 	GAME_OVER
 };

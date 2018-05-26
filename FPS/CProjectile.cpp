@@ -69,13 +69,15 @@ void CProjectile::remove() {
 
 bool CProjectile::update() {
 
-	if (SqDistTravelled > 1000000) return true;
+	if (SqDistTravelled > 1000000)
+		return true;
 
 	PrevPos = Bill->getPosition();
 
 	core::vector3df distance = Direction*PROJECTILE_SPEED;
 
-	if (Bill) Bill->setPosition(PrevPos + distance);
+	if (Bill) 
+		Bill->setPosition(PrevPos + distance);
 
 	SqDistTravelled += distance.getLengthSQ();
 

@@ -45,20 +45,16 @@ public:
 	WEAPON weapon;
 	WEAPON getWeapon();
 	void setWeapon(WEAPON);
-	Player(IrrlichtDevice* irrDevice, ISceneManager* smgr, IVideoDriver* driver, Camera* camera);
+	Player(IrrlichtDevice* irrDevice, ISceneManager* smgr, IVideoDriver* driver, Camera* camera, list<GameObject*> *updateListPtr);
+
+	void setUpdateList(list<GameObject*> *updateListPtr);
+
 	IAnimatedMesh* getMesh();
 	IAnimatedMeshSceneNode* getNode();
 	vector3df getPosition();
 	vector3df getDirection();
-	void moveForward(f32 deltaTime);
-	void moveBackward(f32 deltaTime);
-	void turnLeft(f32 deltaTime);
-	void turnRight(f32 deltaTime);
-	void strafeLeft(f32 deltaTime);
-	void strafeRight(f32 deltaTime);
-	void setIdleAnimation();
-	void setRunningAnimation();
-	void setAttackAnimation();
+	
+	
 	PowerBall* Attack();
 	bool push();
 	void teleport();
@@ -87,8 +83,10 @@ public:
 	scene::IAnimatedMesh* mesh;
 	scene::IAnimatedMesh* handmesh;
 
-private:
 	f32 lastAttack;
+private:
+	list<GameObject*> * listPtr;
+	//f32 lastAttack;
 	f32 lastPush;
 	f32 lastTeleport;
 	f32 cameraDistance;

@@ -1,6 +1,6 @@
 #include "CGunProjectile.h"
 
-#define PROJECTILE_SPEED 15.0f
+#define PROJECTILE_SPEED 985.0f
 
 CGunProjectile::CGunProjectile(const core::vector3df& start, const core::vector3df& end, scene::ISceneManager* smgr) { //: GameObject(start, PROJECTILE_SPEED, smgr), direction(0) {
 
@@ -12,7 +12,7 @@ CGunProjectile::CGunProjectile(const core::vector3df& start, const core::vector3
 	// create projectile
 	Bill = smgr->addBillboardSceneNode(SceneManager->getRootSceneNode(), core::dimension2d<f32>(15, 15), start, -3);
 	Bill->setMaterialFlag(video::EMF_LIGHTING, false);
-	Bill->setMaterialTexture(0, SceneManager->getVideoDriver()->getTexture("stuff/logos/bulletflying.jpg"));
+	Bill->setMaterialTexture(0, SceneManager->getVideoDriver()->getTexture("stuff/logos/bulletflying.jpg")); // laser.bmp   bulletflying.jpg
 	Bill->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
 }
 
@@ -56,14 +56,15 @@ void CGunProjectile::remove() {
 
 bool CGunProjectile::update() {
 
-	if (SqDistTravelled > 1000000) // 1000000
+	if (SqDistTravelled > 100000000) // 1000000
 		return true;
 
 	PrevPos = Bill->getAbsolutePosition();
 
 	core::vector3df distance = Direction*PROJECTILE_SPEED;
 
-	if (Bill) Bill->setPosition(PrevPos + distance);
+	if (Bill)
+		Bill->setPosition(PrevPos + distance);
 
 	SqDistTravelled += distance.getLengthSQ();
 

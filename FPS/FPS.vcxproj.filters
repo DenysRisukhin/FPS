@@ -13,36 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Projectile">
+      <UniqueIdentifier>{cd374385-d729-4622-812b-a9945667a654}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{89063b8c-3171-4a7d-a2d4-c20c520736cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level">
+      <UniqueIdentifier>{f9e33fae-b1e1-4329-8617-9903a43f9fa5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CCharacter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CGunProjectile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CHealthPowerupObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CLaserProjectile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CProjectile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EventReciever.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameHud.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -51,58 +39,97 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CLaserProjectile.cpp">
+      <Filter>Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="CProjectile.cpp">
+      <Filter>Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="CGunProjectile.cpp">
+      <Filter>Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BadFaerie.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
     <ClCompile Include="PowerBall.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerBallEnemy.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="EventReciever.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="GameHud.cpp">
+      <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="SkyBox.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="Terrain.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="CCharacter.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CGunProjectile.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="CHealthPowerupObject.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="CLaserProjectile.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CProjectile.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EventReciever.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameHud.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="CLaserProjectile.h">
+      <Filter>Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="CProjectile.h">
+      <Filter>Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="CGunProjectile.h">
+      <Filter>Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerBallEnemy.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="BadFaerie.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
     <ClInclude Include="PowerBall.h">
-      <Filter>Source Files</Filter>
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="EventReciever.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="GameHud.h">
+      <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="SkyBox.h">
-      <Filter>Source Files</Filter>
+      <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="Terrain.h">
-      <Filter>Source Files</Filter>
+      <Filter>Level</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

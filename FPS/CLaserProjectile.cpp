@@ -57,13 +57,15 @@ void CLaserProjectile::remove() {
 
 bool CLaserProjectile::update() {
 
-	if (SqDistTravelled > 1000000) return true;
+	if (SqDistTravelled > 100000)  // 1000000 it's time which allow a make new shoot. this parameter to influance to destance and time of shoot
+		return true;
 
 	PrevPos = Bill->getAbsolutePosition();
 
 	core::vector3df distance = Direction*PROJECTILE_SPEED;
 
-	if (Bill) Bill->setPosition(PrevPos + distance);
+	if (Bill) 
+		Bill->setPosition(PrevPos + distance);
 
 	SqDistTravelled += distance.getLengthSQ();
 

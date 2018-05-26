@@ -29,7 +29,7 @@ int main() {
 	// Instantiating game objects.
 	Terrain* terrain = new Terrain(smgr, driver);
 	Camera* camera = new Camera(smgr);
-	Player* player = new Player(device, smgr, driver, camera);
+	Player* player = new Player(device, smgr, driver, camera, nullptr); // list<GameObject*>();
 	Skybox* skybox = new Skybox(smgr, driver);
 	smgr->setShadowColor();
 
@@ -84,8 +84,9 @@ int main() {
 	bool playerShoot = true;
 	s32 startTime, elapsedTime, endTime;
 
-	startTime = device->getTimer()->getTime();
-	elapsedTime = 0;
+//	device->getTimer()->start();
+	//device->getTimer()->setTime(0);
+	
 
 	//// Create a visual representation
 	//scene::ISceneNode* Cube = smgr->addCubeSceneNode(5);
@@ -127,7 +128,10 @@ int main() {
 	//app.processInput(device, smgr, driver, selector, reciever, player, camera, deltaTime);
 	//CHealthPowerupObject pi(player, smgr, {0,0,0});
 
-	
+	startTime = device->getTimer()->getTime();
+	elapsedTime = 0;
+
+	u32 shotPause = 0;
 	// Main game loop.
 	while (device->run())
 	{
@@ -164,6 +168,9 @@ int main() {
 		{
 			previousTime = presentTime;
 			driver->beginScene(true, true, SColor(255, 255, 255, 255));
+
+			//elapsedTime = device->getTimer()->getTime() - startTime;
+			//startTime = device->getTimer()->getTime();
 //
 //			// Checking Game State.
 			app.handleGameState(gameState, player, device, smgr, driver);
@@ -182,7 +189,7 @@ int main() {
 			app.updateGameObjects(deltaTime);
 //
 //			// Handle collisions between faerie and powerballs.
-//			//app.handleCollisions(player, camera, deltaTime);
+			app.handleCollisions(player, camera, deltaTime);
 //
 			//driver->draw2DImage(driver->getTexture("Textures/crosshair.png"), core::position2d<s32>(300, 200));
 
@@ -208,6 +215,7 @@ int main() {
 					*/
 					//if (crosshairEl->isVisible() && playerShoot) {
 					if (playerShoot) {
+						//player->lastAttack = device->getTimer()->getTime();
 						player->fire(player->getWeapon(), device);
 					}
 
