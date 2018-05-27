@@ -10,7 +10,7 @@ using namespace scene;
 using namespace video;
 
 /** A class representing a simple projectile for demo purposes */
-class CGunProjectile {
+class CGunProjectile: public GameObject {
 
 public:
 	/**
@@ -32,7 +32,7 @@ public:
 	\brief Updates the projectile's position. Returns true if it wishes to be removed
 	\return a bool
 	*/
-     bool update();
+	virtual void update(f32 deltaTime);
 
 	/**
 	\brief Returns the current position of the projectile
@@ -43,7 +43,8 @@ public:
 	\brief Returns the position of the projectile at the last frame
 	\return a vector3df
 	*/
-	inline const core::vector3df& getPreviousPosition() { return PrevPos; }
+	//inline const core::vector3df& getPreviousPosition() { return PrevPos; }
+	ISceneNode* getNode();
 
 private:
 	scene::ISceneManager* SceneManager;

@@ -4,7 +4,6 @@
 #include "Camera.h"
 #include "PowerBall.h"
 
-#include "CProjectile.h"
 #include "CGunProjectile.h"
 #include "CLaserProjectile.h"
 
@@ -71,7 +70,7 @@ public:
 	void incrementMana();
 
 	// 
-	bool update(s32 elapsedTime, s32 weapon, IrrlichtDevice *device);
+	//bool update(s32 elapsedTime, s32 weapon, IrrlichtDevice *device);
 	//bool update(s32 elapsedTime, s32 weapon, IrrlichtDevice *device);
 	void fire(s32 weapon, IrrlichtDevice *device);
 	void changeWeapon(s32 weapon);
@@ -108,9 +107,7 @@ private:
 
 	//
 	s32 TimeSinceLastShot;
-	core::list<CProjectile*> Projectiles;
-	core::list<CGunProjectile*> GunProjectiles;
-	core::list<CLaserProjectile*> LaserProjectiles;
+	
 	scene::IMetaTriangleSelector* MetaSelector;
 	u32 now;
 	ISceneNode* gunflame;

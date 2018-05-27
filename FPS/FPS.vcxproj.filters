@@ -39,9 +39,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CProjectile.cpp">
-      <Filter>Projectile</Filter>
-    </ClCompile>
     <ClCompile Include="CGunProjectile.cpp">
       <Filter>Projectile</Filter>
     </ClCompile>
@@ -75,9 +72,6 @@
     <ClCompile Include="PowerBall.cpp">
       <Filter>Projectile</Filter>
     </ClCompile>
-    <ClCompile Include="CLaserProjectile1.cpp">
-      <Filter>Projectile</Filter>
-    </ClCompile>
     <ClCompile Include="CLaserProjectile.cpp">
       <Filter>Projectile</Filter>
     </ClCompile>
@@ -94,9 +88,6 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CProjectile.h">
-      <Filter>Projectile</Filter>
     </ClInclude>
     <ClInclude Include="CGunProjectile.h">
       <Filter>Projectile</Filter>
@@ -129,9 +120,6 @@
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="PowerBall.h">
-      <Filter>Projectile</Filter>
-    </ClInclude>
-    <ClInclude Include="CLaserProjectile1.h">
       <Filter>Projectile</Filter>
     </ClInclude>
     <ClInclude Include="CLaserProjectile.h">

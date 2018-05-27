@@ -243,7 +243,7 @@ bool Game::collisionsBetweenEnemyAndBalls(ISceneNode* enemy)
 {
 	if (updateList.getSize() != 0)
 	{
-		GameObject* ptr1 = NULL, *ptr2 = NULL;
+		GameObject* ptr1 = NULL, *ptr2 = NULL, *ptr3 = NULL;
 
 		list<GameObject*>::Iterator it = list<GameObject*>::Iterator();
 		list<GameObject*>::Iterator tempIterator = list<GameObject*>::Iterator();
@@ -258,8 +258,9 @@ bool Game::collisionsBetweenEnemyAndBalls(ISceneNode* enemy)
 				return false;
 			}
 
-			//ptr1 = dynamic_cast<PowerBall*>(it.operator*());
-			ptr1 = dynamic_cast<CLaserProjectile*>(it.operator*());
+			ptr1 = dynamic_cast<CGunProjectile*>(it.operator*());
+			ptr3 = dynamic_cast<CLaserProjectile*>(it.operator*());
+
 			ptr2 = dynamic_cast<PowerBallEnemy*>(it.operator*());
 
 			// Check for PowerBall.
@@ -272,11 +273,11 @@ bool Game::collisionsBetweenEnemyAndBalls(ISceneNode* enemy)
 					continue;
 				}
 
-
 				// COLLISION WITH Ray
 				core::line3df ray(ptr1->getPreviousPosition(), ptr1->getPosition());
+
 				if (enemy->getTransformedBoundingBox().intersectsWithLine(ray)) {
-					std::cout << "Collision occurred.\n";
+					std::cout << "Collision  with GunProjectile occurred.\n";
 					// Removing enemy from the scene.
 					enemy->remove();
 
@@ -308,9 +309,30 @@ bool Game::collisionsBetweenEnemyAndBalls(ISceneNode* enemy)
 				//}
 
 			}
-			else
+			else if (ptr3 != NULL && ptr2 == NULL)
 			{
-				// Not a PowerBall instance.
+				// LazeProjectile instance.
+				if (ptr3->getNode() == NULL)
+				{
+					it.operator++();
+					continue;
+				}
+
+				core::line3df ray2(ptr3->getPreviousPosition(), ptr3->getPosition());
+
+				if (enemy->getTransformedBoundingBox().intersectsWithLine(ray2)) {
+					std::cout << "Collision with LazeProjectile occurred.\n";
+					// Removing enemy from the scene.
+					enemy->remove();
+
+					// Removing PowerBall from scene and updateList.
+					ptr3->getNode()->remove();
+					updateList.erase(it);
+
+					// Return value to remove enemy from updateList.
+					return true;
+				}
+
 			}
 
 			// Check for it.current = NULL.
@@ -501,7 +523,6 @@ void Game::displayMainMenu(GameState & gameState, IrrlichtDevice* device)
 	guienv->addButton(rect<s32>(210, 200, 450, 270), NULL, GUI_ID_INSTRUCTIONS_BUTTON, L"Instructions");
 	guienv->addButton(rect<s32>(210, 300, 450, 370), NULL, GUI_ID_CONTROLS_BUTTON, L"Controls");
 	guienv->addButton(rect<s32>(210, 400, 450, 470), NULL, GUI_ID_QUIT_BUTTON, L"Exit");
-
 }
 
 // Function to start Wave 1.
@@ -510,7 +531,7 @@ void Game::initiateWave1(Player* player, IrrlichtDevice* device, ISceneManager* 
 	bWave1Started = true;
 
 	// Spawn BadFaerie.
-	for (int i = 0; i < 9; ++i)
+	for (int i = 0; i < 10; ++i)
 	{
 		spawnBadFaerie(player, device, smgr, driver);
 	}
@@ -529,10 +550,10 @@ void Game::updateWaveStatus(GameState & gameState, IrrlichtDevice* device, Playe
 	case WAVE_1:
 		if ((device->getTimer()->getTime() - timeSinceStart) > 10000.0f && bWave1Started && !bWave1Finished)
 		{
-			/*for (int i = 0; i < 5; ++i)
+			for (int i = 0; i < 10; ++i)
 			{
 				spawnBadFaerie(player, device, smgr, driver);
-			}*/
+			}
 			std::cout << "Wave 1 afterwave spawned.\n";
 			bWave1Finished = true;
 		}

@@ -2,7 +2,7 @@
 
 #define PROJECTILE_SPEED 985.0f
 
-CGunProjectile::CGunProjectile(const core::vector3df& start, const core::vector3df& end, scene::ISceneManager* smgr) { //: GameObject(start, PROJECTILE_SPEED, smgr), direction(0) {
+CGunProjectile::CGunProjectile(const core::vector3df& start, const core::vector3df& end, scene::ISceneManager* smgr) : GameObject(start, PROJECTILE_SPEED, smgr) {
 
 	Direction = end;
 	PrevPos = start;
@@ -54,18 +54,41 @@ void CGunProjectile::remove() {
 
 }
 
-bool CGunProjectile::update() {
+void CGunProjectile::update(f32 deltaTime) {
 
-	if (SqDistTravelled > 100000000) // 1000000
-		return true;
+	//if (SqDistTravelled > 100000000) // 1000000
+	//	return true;
 
-	PrevPos = Bill->getAbsolutePosition();
+	//PrevPos = Bill->getAbsolutePosition();
 
-	core::vector3df distance = Direction*PROJECTILE_SPEED;
+	//core::vector3df distance = Direction*PROJECTILE_SPEED;
 
-	if (Bill)
-		Bill->setPosition(PrevPos + distance);
+	//if (Bill)
+	//	Bill->setPosition(PrevPos + distance);
 
-	SqDistTravelled += distance.getLengthSQ();
+	//SqDistTravelled += distance.getLengthSQ();
 
+
+	if (bNeedsUpdate)
+	{
+		if (SqDistTravelled > 100000000)
+			bNeedsUpdate = false;
+		else {
+
+			PrevPos = Bill->getAbsolutePosition();
+
+			core::vector3df distance = Direction*PROJECTILE_SPEED;
+
+			if (Bill)
+				Bill->setPosition(PrevPos + distance);
+
+			SqDistTravelled += distance.getLengthSQ();
+		}
+	}
+
+}
+
+ISceneNode* CGunProjectile::getNode()
+{
+	return Bill;
 }

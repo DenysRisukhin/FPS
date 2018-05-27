@@ -30,7 +30,7 @@ CCharacter::CCharacter(ISceneManager* smgr, s32 characterType) {
 		Health = MAX_HEALTH;
 
 	Ammo = MAX_AMMO;
-	ammo_rev = MAX_AMMO; // - 44
+	ammo_rev = MAX_AMMO - 44;
 	ammo_revevo = MAX_AMMO - 40;
 	ammo_smg = MAX_AMMO - 35;
 	ammo_mgun = MAX_AMMO - 25;
