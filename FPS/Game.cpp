@@ -451,7 +451,8 @@ void Game::handleGameState(GameState & gameState, Player* player, IrrlichtDevice
 		}
 		else if (bWave1Finished)
 		{
-			//gameState = GAME_COMPLETE;
+			if (!getNumOfEnemies())
+				gameState = GAME_COMPLETE;
 		}
 		else if (!bWave1Started)// && updateList.getSize() == 0)
 		{
@@ -467,44 +468,56 @@ void Game::handleGameState(GameState & gameState, Player* player, IrrlichtDevice
 		}
 		break;
 	case GAME_COMPLETE:
-
 		//std::cout << "GAME_COMPLETE.\n";
-		//if (!bGameCompleteDisplayed)
-		//{
-		//	//displayGameCompleteScreen(driver, irrDevice->getGUIEnvironment());
-		//	bGameCompleteDisplayed = true;
-		//	delayTimer = irrDevice->getTimer()->getTime();
-		//}
-		//else
-		//{
-		//	// Delay for 5 seconds.
-		//	if ((irrDevice->getTimer()->getTime() - delayTimer) > 5000)
-		//	{
-		//		irrDevice->closeDevice();
-		//	}
-		//}
+		if (!bGameCompleteDisplayed)
+		{
+			displayGameCompleteScreen(driver, irrDevice->getGUIEnvironment());
+			bGameCompleteDisplayed = true;
+			delayTimer = irrDevice->getTimer()->getTime();
+		}
+		else
+		{
+			// Delay for 5 seconds.
+			if ((irrDevice->getTimer()->getTime() - delayTimer) > 5000)
+			{
+				irrDevice->closeDevice();
+			}
+		}
 		break;
 
 	case GAME_OVER:
-		//if (!bGameOverDisplayed)
-		//{
-		//	displayGameOverScreen(driver, irrDevice->getGUIEnvironment());
-		//	bGameOverDisplayed = true;
-		//	delayTimer = irrDevice->getTimer()->getTime();
-		//}
-		//else
-		//{
-		//	// Delay for 5 seconds.
-		//	if ((irrDevice->getTimer()->getTime() - delayTimer) > 5000)
-		//	{
-		//		irrDevice->closeDevice();
-		//	}
-		//}
+		if (!bGameOverDisplayed)
+		{
+			displayGameOverScreen(driver, irrDevice->getGUIEnvironment());
+			bGameOverDisplayed = true;
+			delayTimer = irrDevice->getTimer()->getTime();
+		}
+		else
+		{
+			// Delay for 5 seconds.
+			if ((irrDevice->getTimer()->getTime() - delayTimer) > 5000)
+			{
+				irrDevice->closeDevice();
+			}
+		}
 		break;
 
 	default:
 		break;
 	}
+}
+
+void Game::displayGameOverScreen(IVideoDriver* driver, IGUIEnvironment* guienv)
+{
+	guienv->addImage(driver->getTexture("Textures/GameOver.bmp"), vector2d<s32>(0, 0), false);
+	bGameOverDisplayed = true;
+}
+
+// Function to denote completion of game.
+void Game::displayGameCompleteScreen(IVideoDriver* driver, IGUIEnvironment* guienv)
+{
+	guienv->addImage(driver->getTexture("Textures/GameComplete.bmp"), vector2d<s32>(0, 0), false);
+	bGameCompleteDisplayed = true;
 }
 
 void Game::displayMainMenu(GameState & gameState, IrrlichtDevice* device)

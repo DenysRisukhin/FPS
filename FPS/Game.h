@@ -48,7 +48,9 @@ public:
 	void updateGameObjects(f32);
 	void handleGameState(GameState &, Player*, IrrlichtDevice*, ISceneManager*, IVideoDriver*);
 	
-	
+	void displayGameOverScreen(IVideoDriver*, IGUIEnvironment*);
+	void displayGameCompleteScreen(IVideoDriver*, IGUIEnvironment*);
+
 	void displayMainMenu(GameState &, IrrlichtDevice*);
 	//f32 getLastUpdate();
 	//void setLastUpdate(f32 update);

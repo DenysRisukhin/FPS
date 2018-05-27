@@ -53,7 +53,6 @@ Player::Player(IrrlichtDevice* irrDevice, ISceneManager* manager, IVideoDriver* 
 		
 	GunNode->setParent(camera->getNode());
 	
-
 	GunNode->setScale(core::vector3df(0.02f, 0.02f, 0.02f));
 	GunNode->setPosition(core::vector3df(7.f, -6.f, 12.f));
 	GunNode->setRotation(core::vector3df(0, 0, 90));
