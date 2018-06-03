@@ -14,6 +14,7 @@ class Terrain
 public:
 	Terrain(ISceneManager* smgr, IVideoDriver* driver);
 	ITerrainSceneNode* getNode();
+	//void remove() { terrain->remove(); }
 
 private:
 	ITerrainSceneNode* terrain;

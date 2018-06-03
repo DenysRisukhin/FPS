@@ -1,12 +1,12 @@
 #pragma once
 
-#include "PowerBall.h"
+#include <irrlicht.h>
+#include "GameObject.h"
 
-//class PowerBallEnemy : public PowerBall
-//{
-//public:
-//	PowerBallEnemy(ISceneManager* smgr, IVideoDriver* driver, vector3df start, vector3df end, f32 speed);
-//};
+using namespace irr;
+using namespace core;
+using namespace scene;
+using namespace video;
 
 class PowerBallEnemy : public GameObject
 {
@@ -19,3 +19,10 @@ protected:
 	IBillboardSceneNode* node;
 	vector3df direction;
 };
+
+//class PowerBallEnemy : public PowerBall
+//{
+//public:
+//	PowerBallEnemy(ISceneManager* smgr, IVideoDriver* driver, vector3df start, vector3df end, f32 speed);
+//};
+

@@ -6,8 +6,11 @@
 
 #include "CGunProjectile.h"
 #include "CLaserProjectile.h"
+//#include "Gui.h"
 
 #include "CCharacter.h"
+
+#include "Irrklang.h"
 
 using namespace irr;
 using namespace core;
@@ -15,6 +18,8 @@ using namespace scene;
 using namespace video;
 
 class PowerBall;
+//class PowerBallEnemy;
+
 
 #define POWERBALL_COST				20
 #define PUSH_COST					30
@@ -38,6 +43,7 @@ enum WEAPON {
 	LASER
 };
 
+
 class Player: public CCharacter {
 public:
 
@@ -45,6 +51,7 @@ public:
 	WEAPON getWeapon();
 	void setWeapon(WEAPON);
 	Player(IrrlichtDevice* irrDevice, ISceneManager* smgr, IVideoDriver* driver, Camera* camera, list<GameObject*> *updateListPtr);
+	~Player() { sound->drop(); }
 
 	void setUpdateList(list<GameObject*> *updateListPtr);
 
@@ -54,7 +61,7 @@ public:
 	vector3df getDirection();
 	
 	
-	PowerBall* Attack();
+	//PowerBall* Attack();
 	bool push();
 	void teleport();
 
@@ -87,7 +94,13 @@ public:
 	}
 
 	f32 lastAttack;
+
+	virtual void drop();
+
+	void setCamera(Camera* myCamera);
+
 private:
+	ISoundEngine	*sound;
 	list<GameObject*> * listPtr;
 	//f32 lastAttack;
 	f32 lastPush;

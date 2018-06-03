@@ -27,10 +27,14 @@ void BadFaerie::attack()
 	vector3df direction = pos - node->getAbsolutePosition();
 	direction.normalize();
 
-	PowerBallEnemy* powerBall = new PowerBallEnemy(smgr, driver, node->getAbsolutePosition(), pos, 1.0f);
+	PowerBall* powerBall = new PowerBall(smgr, driver, node->getAbsolutePosition(), pos, 1.0f);
 	lastAttack = device->getTimer()->getTime();
 
-	//listPtr->push_back(powerBall);
+	//if (powerBall != NULL)
+	//{
+	//	listPtr->push_back(powerBall);
+	//}
+
 }
 
 void BadFaerie::dodge(f32 deltaTime)
@@ -72,20 +76,21 @@ bool BadFaerie::listHasPowerBall()
 {
 	for each (GameObject* ptr in *listPtr)
 	{
-		if (dynamic_cast<PowerBall*>(ptr) != NULL)
+		if (dynamic_cast<PowerBall*>(ptr) != NULL) //PowerBallEnemy @@@@@@@@@@@@@@@@
 		{
 			return true;
 		}
 	}
-	return false;
+	return true;
 }
+
 
 bool BadFaerie::seesPowerBall()
 {
 	srand(time(NULL));
 	u8 chance = rand() % 2;
 
-	if (((node->getAbsolutePosition() - target->getNode()->getAbsolutePosition()).getLength() > 100.0f) && chance == 0 && listHasPowerBall())
+	if (((node->getAbsolutePosition() - target->getNode()->getAbsolutePosition()).getLength() > 100.0f) && chance == 0)// && listHasPowerBall())
 	{
 		return true;
 	}
@@ -139,19 +144,15 @@ void BadFaerie::update(f32 deltaTime)
 		{
 			dodge(deltaTime);
 			return;
+		}
+		if (seesPowerBall())
 		{
 			currentState = ENEMY_DODGE;
 			dodgeStart = device->getTimer()->getTime();
 			dodge(deltaTime);
-		}
-		if (seesPowerBall())
-			currentState = ENEMY_DODGE;
-	    	dodgeStart = device->getTimer()->getTime();
-		    dodge(deltaTime);
 			return;
 		}
 
-	
 		if ((node->getAbsolutePosition() - target->getNode()->getAbsolutePosition()).getLength() < 400.0f)
 		{
 			currentState = ENEMY_ATTACK;

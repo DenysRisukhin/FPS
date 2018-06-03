@@ -16,10 +16,8 @@ void GameHud::displayHealthBar(u8 health)
 		return;
 	}
 
-	device->getGUIEnvironment()->addImage(driver->getTexture("Textures/crosshair.png"), core::position2d<s32>(512 - 100, 364 - 82));
-	device->getGUIEnvironment()->addImage(
-		driver->getTexture("Textures/health.png"),
-		core::position2d<s32>(15, 510));
+	//device->getGUIEnvironment()->addImage(driver->getTexture("Textures/crosshair.png"), core::position2d<s32>(512 - 100, 364 - 82));
+	device->getGUIEnvironment()->addImage(driver->getTexture("Textures/health.png"),core::position2d<s32>(15, 510));
 
 	/*device->getGUIEnvironment()->addImage(
 		driver->getTexture("Textures/1.jpg"),

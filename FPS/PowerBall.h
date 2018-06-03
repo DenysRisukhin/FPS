@@ -15,7 +15,8 @@ public:
 	virtual void update(f32 deltaTime);
 	ISceneNode* getNode();
 
+	ISceneNode* node;
 protected:
-	IBillboardSceneNode* node;
+	//IBillboardSceneNode* node;
 	vector3df direction;
 };

@@ -69,11 +69,23 @@
     <ClCompile Include="Terrain.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="PowerBall.cpp">
-      <Filter>Projectile</Filter>
-    </ClCompile>
     <ClCompile Include="CLaserProjectile.cpp">
       <Filter>Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerBall.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Irrlicht.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Gui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,11 +131,32 @@
     <ClInclude Include="Terrain.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="PowerBall.h">
-      <Filter>Projectile</Filter>
-    </ClInclude>
     <ClInclude Include="CLaserProjectile.h">
       <Filter>Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerBall.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Irrlicht.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Gui.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IrrKlang.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

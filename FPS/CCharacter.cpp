@@ -153,3 +153,15 @@ void CCharacter::dieWall() {
 	anim->drop();
 
 }
+
+//void CCharacter::drop()
+//{
+//	if (node)
+//	{
+//		node->removeAnimators();
+//		node->remove();
+//		node = NULL;
+//		animators.clear();
+//		collisions.clear();
+//	}
+//}

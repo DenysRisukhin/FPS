@@ -1,27 +1,42 @@
 #include <irrlicht.h>
 
+#include "Global.h"
+
 using namespace irr;
 using namespace core;
 using namespace gui;
 
+//enum GameState
+//{
+//	MAIN_MENU,
+//	WAVE_1,
+//	GAME_COMPLETE,
+//	GAME_OVER
+//};
+
+//struct SAppContext
+//{
+//	IrrlichtDevice* device;
+//	GameState * gameStatePtr;
+//
+//	SAppContext(IrrlichtDevice* irrDevice, GameState * gameState)
+//	{
+//		device = irrDevice;
+//		gameStatePtr = gameState;
+//	}
+//};
+
 enum GameState
 {
-	MAIN_MENU,
+	MENU,
+	OPTIONS,
+	INGAME,
+	PAUSE,
+	OVER,
+	EXIT,
 	WAVE_1,
 	GAME_COMPLETE,
 	GAME_OVER
-};
-
-struct SAppContext
-{
-	IrrlichtDevice* device;
-	GameState * gameStatePtr;
-
-	SAppContext(IrrlichtDevice* irrDevice, GameState * gameState)
-	{
-		device = irrDevice;
-		gameStatePtr = gameState;
-	}
 };
 
 enum
@@ -37,14 +52,31 @@ enum
 #pragma once
 class EventReciever : public IEventReceiver {
 public:
-	EventReciever(SAppContext & Context);
-	virtual bool OnEvent(const SEvent& event);
+	EventReciever();
+	//EventReciever(SAppContext & Context);
+	//virtual bool OnEvent(const SEvent& event);
 	virtual bool isKeyDown(EKEY_CODE keyCode) const;
 	virtual bool isKeyUp(EKEY_CODE keyCode) const;
 	char getMouse();
 	char m_cMouse;
 
-private:
+	///--------------------
+	bool		keys[KEY_KEY_CODES_COUNT];
+	position2di	mousePosition;
+	bool		leftButtonPressed;
+	bool		mouseMove;
+
+//private:
 	bool keyDown[KEY_KEY_CODES_COUNT];
-	SAppContext &context;
+	//SAppContext &context;
+
+	///---------------------
+	bool		OnEvent(const SEvent &event);
+//	bool		isKeyDown(EKEY_CODE key) const;
+	position2di	getMousePosition() const;
+	bool		isLeftButtonPressed() const;
+	bool        isMouseMoveActive() const;
+	void		setMousePosition(vector3df position);
+	void		zeroMouse();
+	void        zeroMouseMove();
 };

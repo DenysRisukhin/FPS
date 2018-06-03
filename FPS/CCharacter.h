@@ -165,6 +165,8 @@ public:
 		if (Health < 0) Health = 0;
 	}
 
+	//virtual void drop();
+
 protected:
 	//IAIEntity* AIEntity;
 	//IAIManager* AIManager;

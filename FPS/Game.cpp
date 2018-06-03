@@ -129,6 +129,8 @@ void Game::handleCollisionEnemyPowerBall(void)
 void Game::handleCollisionWithPlayer(Player* player, Camera* camera, f32 deltaTime)
 {
 	//// handle with coins and health
+	
+	//-------------------------------
 
 	// Now for the other GameObjects.
 	if (updateList.getSize() != 0)
@@ -149,46 +151,114 @@ void Game::handleCollisionWithPlayer(Player* player, Camera* camera, f32 deltaTi
 			}
 
 			// Check for PowerBallEnemy.
-			ptr = dynamic_cast<PowerBallEnemy*>(it.operator*());
-			if (ptr != NULL)
-			{
-				// PowerBallEnemy instance.
+			//ptr = dynamic_cast<PowerBall*>(it.operator*());
+			//if (ptr != NULL)
+			//{
+			//	// PowerBallEnemy instance.
 
-				const aabbox3df boxForPowerBallEnemy = ptr->getNode()->getTransformedBoundingBox();
-				//const aabbox3df boxForPlayer = player->getNode()->getTransformedBoundingBox();
+			//	const aabbox3df boxForPowerBallEnemy = ptr->getNode()->getTransformedBoundingBox();
 
-				const aabbox3df boxForPlayer = player->getSmgr()->getActiveCamera()->getTransformedBoundingBox();
-				
+			//	const aabbox3df boxForPlayer = player->getNode()->getTransformedBoundingBox();
 
-				if (boxForPowerBallEnemy.intersectsWithBox(boxForPlayer))
-				{
-					ptr->getNode()->remove();
-					updateList.erase(it);
-					player->takeDamage(POWER_BALL);
-					std::cout << "Collision between player and ball.\n";
-				}
+			//	//const aabbox3df boxForPlayer = player->getSmgr()->getActiveCamera()->getTransformedBoundingBox();
+			//	
 
-				// Check for it.current = NULL.
-				if (tempIterator.operator==(it))
-				{
-					return;
-				}
+			//	//// COLLISION WITH Ray
+			//	//core::line3df ray(ptr->getPreviousPosition(), ptr->getPosition());
 
-				// Check for it.current->next = NULL.
-				if (tempIterator.operator==(it.operator++()))
-				{
-					return;
-				}
+			//	//if (boxForPlayer.intersectsWithLine(ray)) {
+			//	//	ptr->getNode()->remove();
+			//	//	updateList.erase(it);
+			//	//	player->takeDamage(POWER_BALL);
+			//	//	std::cout << "Collision between player and ball.\n";
+			//	//}
 
-				continue;
-			}
 
+			//	if (boxForPowerBallEnemy.intersectsWithBox(boxForPlayer))
+			//	{
+			//		ptr->getNode()->remove();
+			//		updateList.erase(it);
+			//		player->takeDamage(POWER_BALL);
+			//		std::cout << "Collision between player and ball.\n";
+			//	}
+
+			//	// Check for it.current = NULL.
+			//	if (tempIterator.operator==(it))
+			//	{
+			//		return;
+			//	}
+
+			//	// Check for it.current->next = NULL.
+			//	if (tempIterator.operator==(it.operator++()))
+			//	{
+			//		return;
+			//	}
+
+			//	continue;
+			//}
+
+			//---------------------------------------------------------------------@@@@@@@@@
 			// Check for PowerBall.
-			ptr = dynamic_cast<PowerBall*>(it.operator*());
+		
+			//ptr = dynamic_cast<PowerBall*>(it.operator*());
+			//if (ptr != NULL)
+			//{
+			////	// PowerBall instance.
+			////	// No collision required.
+			//	//const aabbox3df boxForPowerBallEnemy = ptr->getNode()->getTransformedBoundingBox();
+
+			//	core::line3df ray(ptr->getPreviousPosition(), ptr->getPosition());
+
+			//	const aabbox3df boxForPlayer = player->getNode()->getTransformedBoundingBox();
+
+			//		if (boxForPlayer.intersectsWithLine(ray)) {
+			//			//ptr->             getNode()->remove();
+			//			updateList.erase(it);
+			//			player->takeDamage(POWER_BALL);
+			//			std::cout << "Collision between player and ball.\n";
+			//		}
+
+
+			////		if (boxForPowerBallEnemy.intersectsWithBox(boxForPlayer))
+			////		{
+			////			ptr->getNode()->remove();
+			////			updateList.erase(it);
+			////			player->takeDamage(POWER_BALL);
+			////			std::cout << "Collision between player and ball.\n";
+			////		}
+
+			//	// Check for it.current = NULL.
+			//	if (tempIterator.operator==(it))
+			//	{
+			//		return;
+			//	}
+
+			//	// Check for it.current->next = NULL.
+			//	if (tempIterator.operator==(it.operator++()))
+			//	{
+			//		return;
+			//	}
+
+			//	continue;
+			//}
+
+			
+
+			// Check for BadFaerie.
+			ptr = dynamic_cast<BadFaerie*>(it.operator*());
 			if (ptr != NULL)
 			{
-				// PowerBall instance.
-				// No collision required.
+				// BadFaerie instance.
+				const aabbox3df boxForFaerie = ptr->getNode()->getTransformedBoundingBox();
+				const aabbox3df boxForPlayer = player->getNode()->getTransformedBoundingBox();
+
+				if (boxForFaerie.intersectsWithBox(boxForPlayer))
+				{
+					//player->moveBackward(deltaTime);
+					player->takeDamage(POWER_BALL);
+					std::cout << "Collision between player and BadFaire.\n";
+				}
+
 
 				// Check for it.current = NULL.
 				if (tempIterator.operator==(it))
@@ -206,34 +276,6 @@ void Game::handleCollisionWithPlayer(Player* player, Camera* camera, f32 deltaTi
 			}
 
 			
-
-			// Check for BadFaerie.
-			ptr = dynamic_cast<BadFaerie*>(it.operator*());
-			if (ptr != NULL)
-			{
-				// BadFaerie instance.
-				const aabbox3df boxForFaerie = ptr->getNode()->getTransformedBoundingBox();
-				const aabbox3df boxForPlayer = player->getNode()->getTransformedBoundingBox();
-
-				if (boxForFaerie.intersectsWithBox(boxForPlayer))
-				{
-					//player->moveBackward(deltaTime);
-				}
-
-				// Check for it.current = NULL.
-				if (tempIterator.operator==(it))
-				{
-					return;
-				}
-
-				// Check for it.current->next = NULL.
-				if (tempIterator.operator==(it.operator++()))
-				{
-					return;
-				}
-
-				continue;
-			}
 		}
 	}
 }
@@ -261,7 +303,7 @@ bool Game::collisionsBetweenEnemyAndBalls(ISceneNode* enemy)
 			ptr1 = dynamic_cast<CGunProjectile*>(it.operator*());
 			ptr3 = dynamic_cast<CLaserProjectile*>(it.operator*());
 
-			ptr2 = dynamic_cast<PowerBallEnemy*>(it.operator*());
+			ptr2 = dynamic_cast<PowerBall*>(it.operator*());
 
 			// Check for PowerBall.
 			if (ptr1 != NULL && ptr2 == NULL)
@@ -352,21 +394,21 @@ bool Game::collisionsBetweenEnemyAndBalls(ISceneNode* enemy)
 }
 
 // Function to handle collisions between faerie and player.
-void Game::collisionBetweenFaerieAndPlayer(Player* player, Camera* camera, ISceneNode* faerie, f32 deltaTime)
-{
-	if (updateList.getSize() != 0)
-	{
-		aabbox3df boxForPlayer = player->getNode()->getTransformedBoundingBox();
-		aabbox3df boxForFaerie = faerie->getTransformedBoundingBox();
-
-		if (boxForPlayer.intersectsWithBox(boxForFaerie))
-		{
-			player->getNode()->updateAbsolutePosition();
-			faerie->updateAbsolutePosition();
-			//player->moveBackward(deltaTime);
-		}
-	}
-}
+//void Game::collisionBetweenFaerieAndPlayer(Player* player, Camera* camera, ISceneNode* faerie, f32 deltaTime)
+//{
+//	if (updateList.getSize() != 0)
+//	{
+//		aabbox3df boxForPlayer = player->getNode()->getTransformedBoundingBox();
+//		aabbox3df boxForFaerie = faerie->getTransformedBoundingBox();
+//
+//		if (boxForPlayer.intersectsWithBox(boxForFaerie))
+//		{
+//			player->getNode()->updateAbsolutePosition();
+//			faerie->updateAbsolutePosition();
+//			//player->moveBackward(deltaTime);
+//		}
+//	}
+//}
 
 // Function to handle collision between two enemies.
 void Game::handleCollisionBetweenEnemies(GameObject* enemy)
@@ -425,12 +467,17 @@ void Game::handleCollisionBetweenEnemies(GameObject* enemy)
 }
 //-------------------------------------------------
 
+void Game::setBWave1Started(){
+	bWave1Started = false;
+	bWave1Finished = false;
+}
+
 // Function to handle Game State.
 void Game::handleGameState(GameState & gameState, Player* player, IrrlichtDevice* irrDevice, ISceneManager* smgr, IVideoDriver* driver)
 {
 	switch (gameState)
 	{
-	case MAIN_MENU:
+	/*case MENU:
 		if (!bMainMenuDisplayed)
 		{
 			displayMainMenu(gameState, irrDevice);
@@ -438,9 +485,9 @@ void Game::handleGameState(GameState & gameState, Player* player, IrrlichtDevice
 		}
 		bGameCompleteDisplayed = false;
 		bGameOverDisplayed = false;
-		break;
+		break;*/
 
-	case WAVE_1:
+	case INGAME:
 		if (player->getPosition().Y < 0)
 		{
 			player->kill();
@@ -460,7 +507,6 @@ void Game::handleGameState(GameState & gameState, Player* player, IrrlichtDevice
 			initiateWave1(player, irrDevice, smgr, driver);
 			std::cout << "Wave 1 started.\n";
 			irrDevice->getGUIEnvironment()->clear();
-			//player->setUpdateList(&updateList);
 		}
 		else
 		{
@@ -509,33 +555,33 @@ void Game::handleGameState(GameState & gameState, Player* player, IrrlichtDevice
 
 void Game::displayGameOverScreen(IVideoDriver* driver, IGUIEnvironment* guienv)
 {
-	guienv->addImage(driver->getTexture("Textures/GameOver.bmp"), vector2d<s32>(0, 0), false);
+	guienv->addImage(driver->getTexture("Textures/GameOver.jpg"), vector2d<s32>(-235, 0), false);
 	bGameOverDisplayed = true;
 }
 
 // Function to denote completion of game.
 void Game::displayGameCompleteScreen(IVideoDriver* driver, IGUIEnvironment* guienv)
 {
-	guienv->addImage(driver->getTexture("Textures/GameComplete.bmp"), vector2d<s32>(0, 0), false);
+	guienv->addImage(driver->getTexture("Textures/GameComplete.jpg"), vector2d<s32>(-235, 0), false);
 	bGameCompleteDisplayed = true;
 }
 
 void Game::displayMainMenu(GameState & gameState, IrrlichtDevice* device)
 {
-	IGUIEnvironment* guienv = device->getGUIEnvironment();
+	//IGUIEnvironment* guienv = device->getGUIEnvironment();
 
-	IGUISkin* skin = guienv->getSkin();
-	IGUIFont* font = guienv->getFont("Textures/fonthaettenschweiler.bmp");
-	if (font)
-		skin->setFont(font);
+	//IGUISkin* skin = guienv->getSkin();
+	//IGUIFont* font = guienv->getFont("Textures/fonthaettenschweiler.bmp");
+	//if (font)
+	//	skin->setFont(font);
 
-	skin->setFont(guienv->getBuiltInFont(), EGDF_TOOLTIP);
+	//skin->setFont(guienv->getBuiltInFont(), EGDF_TOOLTIP);
 
-	guienv->addImage(device->getVideoDriver()->getTexture("Textures/Menu.bmp"), vector2d<s32>(0, 0), false);
-	guienv->addButton(rect<s32>(210, 100, 450, 170), NULL, GUI_ID_PLAY_BUTTON, L"Play");
-	guienv->addButton(rect<s32>(210, 200, 450, 270), NULL, GUI_ID_INSTRUCTIONS_BUTTON, L"Instructions");
-	guienv->addButton(rect<s32>(210, 300, 450, 370), NULL, GUI_ID_CONTROLS_BUTTON, L"Controls");
-	guienv->addButton(rect<s32>(210, 400, 450, 470), NULL, GUI_ID_QUIT_BUTTON, L"Exit");
+	//guienv->addImage(device->getVideoDriver()->getTexture("Textures/Menu.bmp"), vector2d<s32>(0, 0), false);
+	//guienv->addButton(rect<s32>(210, 100, 450, 170), NULL, GUI_ID_PLAY_BUTTON, L"Play");
+	//guienv->addButton(rect<s32>(210, 200, 450, 270), NULL, GUI_ID_INSTRUCTIONS_BUTTON, L"Instructions");
+	//guienv->addButton(rect<s32>(210, 300, 450, 370), NULL, GUI_ID_CONTROLS_BUTTON, L"Controls");
+	//guienv->addButton(rect<s32>(210, 400, 450, 470), NULL, GUI_ID_QUIT_BUTTON, L"Exit");
 }
 
 // Function to start Wave 1.
@@ -560,13 +606,13 @@ void Game::updateWaveStatus(GameState & gameState, IrrlichtDevice* device, Playe
 
 	switch (gameState)
 	{
-	case WAVE_1:
+	case INGAME:
 		if ((device->getTimer()->getTime() - timeSinceStart) > 10000.0f && bWave1Started && !bWave1Finished)
 		{
-			for (int i = 0; i < 10; ++i)
+			/*for (int i = 0; i < 10; ++i)
 			{
 				spawnBadFaerie(player, device, smgr, driver);
-			}
+			}*/
 			std::cout << "Wave 1 afterwave spawned.\n";
 			bWave1Finished = true;
 		}
@@ -686,11 +732,12 @@ void Game::processInput(IrrlichtDevice* device, ISceneManager* smgr, IVideoDrive
 	}
 	if (reciever->isKeyDown(KEY_RETURN))
 	{
-		PowerBall* tempBall = player->Attack();
+		/*PowerBall* tempBall = player->Attack();
 		if (tempBall != NULL)
 		{
 			updateList.push_back(tempBall);
-		}
+		}*/
+
 		//player->setAttackAnimation();
 
 		//player->fire(REVOLVER, device);

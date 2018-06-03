@@ -3,17 +3,41 @@
 #include <iostream>
 //#include "PowerBall.h"
 
+#include "GUI.h"
+
 #define SHOT_DELAY_TIME 80
 
 //DecalSceneNode* decals[MAX_DECALS];
 
 int nextDecal = 0;
 
+void Player::drop()
+{
+	if (GunNode)
+	{
+		//GunNode->removeAnimators();
+		GunNode->remove();
+		GunNode = NULL;
+		//animators.clear();
+		//collisions.clear();
+	}
+}
+
 WEAPON Player::getWeapon() {
 	return weapon;
 }
 
-Player::Player(IrrlichtDevice* irrDevice, ISceneManager* manager, IVideoDriver* videoDriver, Camera* myCamera, list<GameObject*> *updateListPtr) : CCharacter(manager, 0), device(irrDevice), smgr(manager), driver(videoDriver)
+void Player::setCamera(Camera* myCamera) {
+	//camera = myCamera;
+	GunNode->setParent(myCamera->getNode());
+}
+
+Player::Player(IrrlichtDevice* irrDevice, ISceneManager* manager, IVideoDriver* videoDriver, Camera* myCamera, list<GameObject*> *updateListPtr) : 
+	CCharacter(manager, 0), 
+	device(irrDevice), 
+	smgr(manager),
+	driver(videoDriver),
+	sound(createIrrKlangDevice())
 {
 	lastTeleport = 0.0f;
 	lastPush = 0.0f;
@@ -285,6 +309,14 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 			//if (engine)
 			//	engine->play2D("stuff/sound/gunshot.wav");
 
+			//if (soundPlay)
+			//{
+				ISound *bang = sound->play2D("stuff/sound/gunshot.wav", false, true);
+				bang->setVolume(0.4f);
+				bang->setIsPaused(false);
+				bang->drop();
+		//	}
+
 			// Calculate the position to fire from
 			core::vector3df offset = core::vector3df(6.5f, -6.5f, -30);
 			core::matrix4 mat = smgr->getActiveCamera()->getAbsoluteTransformation();
@@ -309,6 +341,11 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 
 			if (ammo_rev > 0)
 				ammo_rev--;
+
+			if (ammo_rev == 0 && mag_rev > 0) {
+				mag_rev--;
+				ammo_rev = 6;
+			}
 		}
 	}break;
 	case REVEVO: {
@@ -328,6 +365,12 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 			/*if (engine)
 			engine->play2D("stuff/sound/gunshot_short.wav");
 			*/
+
+			ISound *bang = sound->play2D("stuff/sound/gunshot_short.wav", false, true);
+			bang->setVolume(0.4f);
+			bang->setIsPaused(false);
+			bang->drop();
+
 			// Calculate the position to fire from
 			core::vector3df offset = core::vector3df(6.5f, -6.5f, -30);
 			core::matrix4 mat = smgr->getActiveCamera()->getAbsoluteTransformation();
@@ -353,6 +396,11 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 
 			if (ammo_revevo > 0)
 				ammo_revevo--;
+
+			if (ammo_revevo == 0 && mag_revevo > 0) {
+				mag_revevo--;
+				ammo_revevo = 10;
+			}
 		}
 	}break;
 	case MGUN: {
@@ -372,6 +420,11 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 			//play sound
 			//if (engine)
 			//	engine->play2D("stuff/sound/gunshot.wav");
+
+			ISound *bang = sound->play2D("stuff/sound/gunshot.wav", false, true);
+			bang->setVolume(0.4f);
+			bang->setIsPaused(false);
+			bang->drop();
 
 			// Calculate the position to fire from
 			core::vector3df offset = core::vector3df(6.5f, -6.5f, 30);
@@ -396,6 +449,11 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 
 			if (ammo_mgun > 0)
 				ammo_mgun--;
+
+			if (ammo_mgun == 0 && mag_mgun > 0) {
+				mag_mgun--;
+				ammo_mgun = 25;
+			}
 		}
 	}break;//end mgun
 	case MGUNB: {
@@ -415,6 +473,11 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 			//play sound
 			/*if (engine)
 				engine->play2D("stuff/sound/gunshot_short.wav");*/
+
+			ISound *bang = sound->play2D("stuff/sound/gunshot_short.wav", false, true);
+			bang->setVolume(0.4f);
+			bang->setIsPaused(false);
+			bang->drop();
 
 			// Calculate the position to fire from
 			core::vector3df offset = core::vector3df(6.5f, -6.5f, 30);
@@ -440,6 +503,11 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 
 			if (ammo_mgunb > 0)
 				ammo_mgunb--;
+
+			if (ammo_mgunb == 0 && mag_mgunb > 0) {
+				mag_mgunb--;
+			    ammo_mgunb = 25;
+			}
 		}
 	}break;
 	case SMG: {
@@ -459,6 +527,11 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 			//play sound
 			/*if (engine)
 				engine->play2D("stuff/sound/gunshot_silencer.wav");*/
+
+			ISound *bang = sound->play2D("stuff/sound/gunshot_silencer.wav", false, true);
+			bang->setVolume(0.4f);
+			bang->setIsPaused(false);
+			bang->drop();
 
 			// Calculate the position to fire from
 			core::vector3df offset = core::vector3df(6.5f, -6.5f, 30);
@@ -484,11 +557,15 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 
 			if (ammo_smg > 0)
 				ammo_smg--;
+
+			if (ammo_smg == 0 && mag_smg > 0) {
+				mag_smg--;
+				ammo_smg = 15;
+			}
 		}
 	}break;
 	case LASER: {
-		//originally was: 'CharacterType == ECT_CHASING' but i've changed some things so....
-
+		
 		if ((device->getTimer()->getTime() - lastAttack) > SHOT_DELAY_TIME && ammo_rev > 0)
 		{
 			lastAttack = device->getTimer()->getTime();
@@ -517,6 +594,11 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 			//play sound
 			//if (engine)
 			//	engine->play2D("stuff/sound/laser.wav");
+
+			ISound *bang = sound->play2D("stuff/sound/laser.wav", false, true);
+			bang->setVolume(0.4f);
+			bang->setIsPaused(false);
+			bang->drop();
 
 			// создание декалий
 			//image = device->getVideoDriver()->getTexture("stuff/logos/burn.png");
@@ -618,32 +700,32 @@ void Player::teleport()
 	}
 }
 
-PowerBall* Player::Attack()
-{
-	if ((device->getTimer()->getTime() - lastAttack) < 200) //  || mana < POWERBALL_COST
-	{
-		return nullptr;
-	}
-
-	vector3df start = camera->getNode()->getPosition();
-	//vector3df start = core::vector3df(6.5f, -6.5f, 30);
-
-	vector3df end = (camera->getNode()->getTarget() - start);
-	end.normalize();
-	start += end*20.0f;
-
-	end = start + (end * camera->getNode()->getFarValue());
-
-
-	//vector3df direction = vector3df(0, 0, 0);// forwardDirection;
-	//direction.Y = 0; // походу это координата конечной точки снаряда по Y
-	//direction.normalize();
-
-	PowerBall* powerBall = new PowerBall(smgr, driver, start, end, 1.0f);
-	lastAttack = device->getTimer()->getTime();
-	//mana -= 20;
-	return powerBall;
-}
+//PowerBall* Player::Attack()
+//{
+//	if ((device->getTimer()->getTime() - lastAttack) < 200) //  || mana < POWERBALL_COST
+//	{
+//		return nullptr;
+//	}
+//
+//	vector3df start = camera->getNode()->getPosition();
+//	//vector3df start = core::vector3df(6.5f, -6.5f, 30);
+//
+//	vector3df end = (camera->getNode()->getTarget() - start);
+//	end.normalize();
+//	start += end*20.0f;
+//
+//	end = start + (end * camera->getNode()->getFarValue());
+//
+//
+//	//vector3df direction = vector3df(0, 0, 0);// forwardDirection;
+//	//direction.Y = 0; // походу это координата конечной точки снаряда по Y
+//	//direction.normalize();
+//
+//	PowerBall* powerBall = new PowerBall(smgr, driver, start, end, 1.0f);
+//	lastAttack = device->getTimer()->getTime();
+//	//mana -= 20;
+//	return powerBall;
+//}
 
 //bool Player::update(s32 elapsedTime, s32 weapon, IrrlichtDevice *device) {
 //

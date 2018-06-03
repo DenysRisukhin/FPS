@@ -119,7 +119,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CRT_SECURE_NO_WARNINGS;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
@@ -159,12 +159,16 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameHud.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Gui.cpp" />
+    <ClCompile Include="Irrlicht.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PowerBall.cpp" />
     <ClCompile Include="PowerBallEnemy.cpp" />
     <ClCompile Include="SkyBox.cpp" />
+    <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BadFaerie.h" />
@@ -178,11 +182,18 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameHud.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Global.h" />
+    <ClInclude Include="Gui.h" />
+    <ClInclude Include="IrrKlang.h" />
+    <ClInclude Include="Irrlicht.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PowerBall.h" />
     <ClInclude Include="PowerBallEnemy.h" />
     <ClInclude Include="SkyBox.h" />
+    <ClInclude Include="Stage.h" />
     <ClInclude Include="Terrain.h" />
+    <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

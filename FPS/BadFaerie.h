@@ -9,6 +9,8 @@ using namespace core;
 using namespace video;
 using namespace scene;
 
+class PowerBallEnemy;
+
 class BadFaerie : public Enemy
 {
 public:
