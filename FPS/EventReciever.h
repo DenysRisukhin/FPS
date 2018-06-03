@@ -34,7 +34,7 @@ enum GameState
 	PAUSE,
 	OVER,
 	EXIT,
-	WAVE_1,
+	//WAVE_1,
 	GAME_COMPLETE,
 	GAME_OVER
 };

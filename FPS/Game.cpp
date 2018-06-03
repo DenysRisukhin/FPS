@@ -256,6 +256,9 @@ void Game::handleCollisionWithPlayer(Player* player, Camera* camera, f32 deltaTi
 				{
 					//player->moveBackward(deltaTime);
 					player->takeDamage(POWER_BALL);
+
+				//	player->t
+
 					std::cout << "Collision between player and BadFaire.\n";
 				}
 
@@ -498,8 +501,10 @@ void Game::handleGameState(GameState & gameState, Player* player, IrrlichtDevice
 		}
 		else if (bWave1Finished)
 		{
-			if (!getNumOfEnemies())
+			if (!getNumOfEnemies()) {
+				std::cout << "GAME_COMPLETE.\n";
 				gameState = GAME_COMPLETE;
+			}
 		}
 		else if (!bWave1Started)// && updateList.getSize() == 0)
 		{
@@ -514,7 +519,7 @@ void Game::handleGameState(GameState & gameState, Player* player, IrrlichtDevice
 		}
 		break;
 	case GAME_COMPLETE:
-		//std::cout << "GAME_COMPLETE.\n";
+		std::cout << "GAME_COMPLETE.\n";
 		if (!bGameCompleteDisplayed)
 		{
 			displayGameCompleteScreen(driver, irrDevice->getGUIEnvironment());
