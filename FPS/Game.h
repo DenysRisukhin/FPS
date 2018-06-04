@@ -79,14 +79,15 @@ public:
 
 	void clearUpdateList() {
 
-		for (list<GameObject*>::Iterator it = updateList.begin(); it != updateList.end(); ++it)
-		{
-			--numOfEnemies;
-
-			(*it)->getNode()->remove();
-			delete *it;
+		if (updateList.size()) {
+			for (list<GameObject*>::Iterator it = updateList.begin(); it != updateList.end(); ++it)
+			{
+				std::cout << "numOfEnemies:" << (int*)--numOfEnemies << std::endl;
+				(*it)->getNode()->remove();
+				delete *it;
+			}
+			updateList.clear();
 		}
-		updateList.clear();
 }
 
 	void setNumOfEnemies(u8 num) {

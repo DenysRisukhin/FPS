@@ -521,11 +521,11 @@ void Game::handleGameState(GameState & gameState, Player* player, IrrlichtDevice
 			updateWaveStatus(gameState, irrDevice, player, smgr, driver);
 		}
 		break;
-	case GAME_COMPLETE:
+//	case GAME_COMPLETE:
 		//std::cout << "GAME_COMPLETE.\n";
 	/*	if (!bGameCompleteDisplayed)
 		{*/
-			displayGameCompleteScreen(driver, irrDevice->getGUIEnvironment());
+		//	displayGameCompleteScreen(driver, irrDevice->getGUIEnvironment());
 			//bGameCompleteDisplayed = true;
 
 			/*engine->hideCursor(false);
@@ -534,7 +534,7 @@ void Game::handleGameState(GameState & gameState, Player* player, IrrlichtDevice
 
 			//gameState = OVER;
 
-			delayTimer = irrDevice->getTimer()->getTime();
+	//		delayTimer = irrDevice->getTimer()->getTime();
 		//}
 		//else
 		//{
@@ -544,14 +544,14 @@ void Game::handleGameState(GameState & gameState, Player* player, IrrlichtDevice
 		//		irrDevice->closeDevice();
 		//	}*/
 		//}
-		break;
+	//	break;
 
-	case GAME_OVER:
+//	case GAME_OVER:
 		//if (!bGameOverDisplayed)
 		//{
-			displayGameOverScreen(driver, irrDevice->getGUIEnvironment());
+	//		displayGameOverScreen(driver, irrDevice->getGUIEnvironment());
 		//	bGameOverDisplayed = true;
-			delayTimer = irrDevice->getTimer()->getTime();
+	//		delayTimer = irrDevice->getTimer()->getTime();
 
 			//irrDevice->hideCursor(false);
 			//gui->lose(engine->getGUI(), texManager);
@@ -567,7 +567,7 @@ void Game::handleGameState(GameState & gameState, Player* player, IrrlichtDevice
 		//		irrDevice->closeDevice();
 		//	}*/
 		//}
-		break;
+	//	break;
 
 	default:
 		break;
@@ -576,15 +576,15 @@ void Game::handleGameState(GameState & gameState, Player* player, IrrlichtDevice
 
 void Game::displayGameOverScreen(IVideoDriver* driver, IGUIEnvironment* guienv)
 {
-	guienv->addImage(driver->getTexture("Textures/GameOver.jpg"), vector2d<s32>(-235, 0), false);
-	bGameOverDisplayed = true;
+	//guienv->addImage(driver->getTexture("Textures/GameOver.jpg"), vector2d<s32>(-235, 0), false);
+	//bGameOverDisplayed = true;
 }
 
 // Function to denote completion of game.
 void Game::displayGameCompleteScreen(IVideoDriver* driver, IGUIEnvironment* guienv)
 {
-	guienv->addImage(driver->getTexture("Textures/GameComplete.jpg"), vector2d<s32>(-235, 0), false);
-	bGameCompleteDisplayed = true;
+	//guienv->addImage(driver->getTexture("Textures/GameComplete.jpg"), vector2d<s32>(-235, 0), false);
+	//bGameCompleteDisplayed = true;
 }
 
 void Game::displayMainMenu(GameState & gameState, IrrlichtDevice* device)
