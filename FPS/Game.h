@@ -79,113 +79,14 @@ public:
 
 	void clearUpdateList() {
 
-		GameObject* ptr = NULL;
-
-		list<GameObject*>::Iterator it = list<GameObject*>::Iterator();
-		list<GameObject*>::Iterator tempIterator = list<GameObject*>::Iterator();
-		it = updateList.begin();
-
-		for (int i = 0; i < updateList.getSize(); ++i)
+		for (list<GameObject*>::Iterator it = updateList.begin(); it != updateList.end(); ++it)
 		{
-			if (tempIterator.operator==(it))
-			{
-				break;
-			}
+			--numOfEnemies;
 
-			ptr = dynamic_cast<Enemy*>(it.operator*());
-
-			if (ptr != NULL)
-			{
-				
-					// remove enemy from the scene
-									
-									// Removing enemy from updateList.
-									--numOfEnemies;
-								//	std::cout << "numOfEnemies:" << (int*)numOfEnemies << std::endl;
-
-									auto temp = it;
-
-									ptr->getNode()->remove();
-									ptr = NULL;
-								
-									updateList.erase(temp);
-															
-									std::cout << "updateList.getSize():" << updateList.getSize() << std::endl;
-				
-			}
-
-			if (tempIterator.operator==(it.operator++()))
-			{
-				break;
-			}
+			(*it)->getNode()->remove();
+			delete *it;
 		}
-
-		//if (updateList.getSize() != 0)
-		//{
-		//	
-
-		//	list<GameObject*>::Iterator it = list<GameObject*>::Iterator();
-		//	//list<GameObject*>::Iterator tempIterator = list<GameObject*>::Iterator();
-		//	it = updateList.begin();
-
-		//	// Going through all GameObjects.
-		//	for (int i = 0; i < updateList.getSize(); ++i)
-		//	{
-		//		std::cout << i << std::endl;
-		//		// Check for it.current = NULL.
-		//		/*if (it.operator==(tempIterator))
-		//		{
-		//			std::cout << "it.current = NULL" << std::endl;
-		//			return;
-		//		}*/
-		//		GameObject* ptr = NULL;
-		//		list<GameObject*>::Iterator tempIterator = list<GameObject*>::Iterator();
-		//		if (updateList.getSize() == 0)
-		//		{
-		//			std::cout << "updateList.getSize() == 0" << std::endl;
-		//			return;
-		//		}
-
-		//		// Check for Enemy.
-		//		ptr = dynamic_cast<GameObject*>(it.operator*());
-		//	/*	if (it.operator!=(tempIterator))
-		//		{
-		//			ptr = it.operator*();
-		//		}*/
-
-		//		if (ptr != NULL)
-		//		{
-		//			
-		//				// remove enemy from the scene
-		//				ptr->getNode()->remove();
-		//				// Removing enemy from updateList.
-		//				--numOfEnemies;
-		//				std::cout << "numOfEnemies:" << (int*)numOfEnemies << std::endl;
-
-		//				auto temp = it;
-		//				it.operator++();
-		//				
-		//				//++it;
-		//				//tempIterator++;
-		//				updateList.erase(temp);
-		//			//	continue;
-		//		
-		//				std::cout << "updateList.getSize():" << updateList.getSize() << std::endl;
-		//			//handleCollisionBetweenEnemies(ptr);
-		//		}
-
-		//		// Check for it.current->next = NULL.
-		//		/*if (tempIterator.operator==(it.operator++()))
-		//		{
-		//			
-		//			std::cout << "current->next = NULL" << std::endl;
-		//			return;
-		//		}*/
-
-		//		
-		//	}
-		//}
-		
+		updateList.clear();
 }
 
 	void setNumOfEnemies(u8 num) {

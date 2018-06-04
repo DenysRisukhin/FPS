@@ -473,6 +473,9 @@ void Game::handleCollisionBetweenEnemies(GameObject* enemy)
 void Game::setBWave1Started(){
 	bWave1Started = false;
 	bWave1Finished = false;
+
+	bGameCompleteDisplayed = false;
+	bGameOverDisplayed = false;
 }
 
 // Function to handle Game State.
@@ -480,15 +483,15 @@ void Game::handleGameState(GameState & gameState, Player* player, IrrlichtDevice
 {
 	switch (gameState)
 	{
-	/*case MENU:
-		if (!bMainMenuDisplayed)
+	//case MENU:
+		/*if (!bMainMenuDisplayed)
 		{
 			displayMainMenu(gameState, irrDevice);
 			bMainMenuDisplayed = true;
-		}
-		bGameCompleteDisplayed = false;
-		bGameOverDisplayed = false;
-		break;*/
+		}*/
+		/*bGameCompleteDisplayed = false;
+		bGameOverDisplayed = false;*/
+		//break;
 
 	case INGAME:
 		if (player->getPosition().Y < 0)
@@ -508,7 +511,7 @@ void Game::handleGameState(GameState & gameState, Player* player, IrrlichtDevice
 		}
 		else if (!bWave1Started)// && updateList.getSize() == 0)
 		{
-			bMainMenuDisplayed = false;
+			//bMainMenuDisplayed = false;
 			initiateWave1(player, irrDevice, smgr, driver);
 			std::cout << "Wave 1 started.\n";
 			irrDevice->getGUIEnvironment()->clear();
@@ -595,7 +598,7 @@ void Game::initiateWave1(Player* player, IrrlichtDevice* device, ISceneManager* 
 	bWave1Started = true;
 
 	// Spawn BadFaerie.
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < 50; ++i)
 	{
 		spawnBadFaerie(player, device, smgr, driver);
 	}
