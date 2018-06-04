@@ -98,6 +98,7 @@ public:
 
 private:
 	
+	ISoundEngine	*sound;
 	f32 lastUpdate;
 	f32 timeSinceStart;
 	ITriangleSelector* selector;

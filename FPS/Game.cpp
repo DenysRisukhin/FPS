@@ -129,7 +129,7 @@ void Game::handleCollisionEnemyPowerBall(void)
 void Game::handleCollisionWithPlayer(Player* player, Camera* camera, f32 deltaTime)
 {
 	//// handle with coins and health
-	
+	sound = player->getSound();
 	//-------------------------------
 
 	// Now for the other GameObjects.
@@ -150,100 +150,6 @@ void Game::handleCollisionWithPlayer(Player* player, Camera* camera, f32 deltaTi
 				return;
 			}
 
-			// Check for PowerBallEnemy.
-			//ptr = dynamic_cast<PowerBall*>(it.operator*());
-			//if (ptr != NULL)
-			//{
-			//	// PowerBallEnemy instance.
-
-			//	const aabbox3df boxForPowerBallEnemy = ptr->getNode()->getTransformedBoundingBox();
-
-			//	const aabbox3df boxForPlayer = player->getNode()->getTransformedBoundingBox();
-
-			//	//const aabbox3df boxForPlayer = player->getSmgr()->getActiveCamera()->getTransformedBoundingBox();
-			//	
-
-			//	//// COLLISION WITH Ray
-			//	//core::line3df ray(ptr->getPreviousPosition(), ptr->getPosition());
-
-			//	//if (boxForPlayer.intersectsWithLine(ray)) {
-			//	//	ptr->getNode()->remove();
-			//	//	updateList.erase(it);
-			//	//	player->takeDamage(POWER_BALL);
-			//	//	std::cout << "Collision between player and ball.\n";
-			//	//}
-
-
-			//	if (boxForPowerBallEnemy.intersectsWithBox(boxForPlayer))
-			//	{
-			//		ptr->getNode()->remove();
-			//		updateList.erase(it);
-			//		player->takeDamage(POWER_BALL);
-			//		std::cout << "Collision between player and ball.\n";
-			//	}
-
-			//	// Check for it.current = NULL.
-			//	if (tempIterator.operator==(it))
-			//	{
-			//		return;
-			//	}
-
-			//	// Check for it.current->next = NULL.
-			//	if (tempIterator.operator==(it.operator++()))
-			//	{
-			//		return;
-			//	}
-
-			//	continue;
-			//}
-
-			//---------------------------------------------------------------------@@@@@@@@@
-			// Check for PowerBall.
-		
-			//ptr = dynamic_cast<PowerBall*>(it.operator*());
-			//if (ptr != NULL)
-			//{
-			////	// PowerBall instance.
-			////	// No collision required.
-			//	//const aabbox3df boxForPowerBallEnemy = ptr->getNode()->getTransformedBoundingBox();
-
-			//	core::line3df ray(ptr->getPreviousPosition(), ptr->getPosition());
-
-			//	const aabbox3df boxForPlayer = player->getNode()->getTransformedBoundingBox();
-
-			//		if (boxForPlayer.intersectsWithLine(ray)) {
-			//			//ptr->             getNode()->remove();
-			//			updateList.erase(it);
-			//			player->takeDamage(POWER_BALL);
-			//			std::cout << "Collision between player and ball.\n";
-			//		}
-
-
-			////		if (boxForPowerBallEnemy.intersectsWithBox(boxForPlayer))
-			////		{
-			////			ptr->getNode()->remove();
-			////			updateList.erase(it);
-			////			player->takeDamage(POWER_BALL);
-			////			std::cout << "Collision between player and ball.\n";
-			////		}
-
-			//	// Check for it.current = NULL.
-			//	if (tempIterator.operator==(it))
-			//	{
-			//		return;
-			//	}
-
-			//	// Check for it.current->next = NULL.
-			//	if (tempIterator.operator==(it.operator++()))
-			//	{
-			//		return;
-			//	}
-
-			//	continue;
-			//}
-
-			
-
 			// Check for BadFaerie.
 			ptr = dynamic_cast<BadFaerie*>(it.operator*());
 			if (ptr != NULL)
@@ -254,12 +160,18 @@ void Game::handleCollisionWithPlayer(Player* player, Camera* camera, f32 deltaTi
 
 				if (boxForFaerie.intersectsWithBox(boxForPlayer))
 				{
+
 					//player->moveBackward(deltaTime);
 					player->takeDamage(POWER_BALL);
 
-				//	player->t
+				
 
 					std::cout << "Collision between player and BadFaire.\n";
+
+					ISound *bang = sound->play2D("sounds/damage.wav", false, true);
+					bang->setVolume(0.4f);
+					bang->setIsPaused(false);
+					bang->drop();
 				}
 
 
@@ -323,6 +235,12 @@ bool Game::collisionsBetweenEnemyAndBalls(ISceneNode* enemy)
 
 				if (enemy->getTransformedBoundingBox().intersectsWithLine(ray)) {
 					std::cout << "Collision  with GunProjectile occurred.\n";
+
+					ISound *bang = sound->play2D("sounds/crash.wav", false, true);
+					bang->setVolume(0.9f);
+					bang->setIsPaused(false);
+					bang->drop();
+
 					// Removing enemy from the scene.
 					enemy->remove();
 

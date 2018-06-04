@@ -80,6 +80,9 @@ public:
 		health = _health;
 	}
 
+	ISoundEngine* getSound() {
+		return sound;
+	}
 	// 
 	//bool update(s32 elapsedTime, s32 weapon, IrrlichtDevice *device);
 	//bool update(s32 elapsedTime, s32 weapon, IrrlichtDevice *device);
