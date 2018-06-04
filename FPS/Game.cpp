@@ -522,38 +522,51 @@ void Game::handleGameState(GameState & gameState, Player* player, IrrlichtDevice
 		}
 		break;
 	case GAME_COMPLETE:
-		std::cout << "GAME_COMPLETE.\n";
-		if (!bGameCompleteDisplayed)
-		{
+		//std::cout << "GAME_COMPLETE.\n";
+	/*	if (!bGameCompleteDisplayed)
+		{*/
 			displayGameCompleteScreen(driver, irrDevice->getGUIEnvironment());
-			bGameCompleteDisplayed = true;
+			//bGameCompleteDisplayed = true;
+
+			/*engine->hideCursor(false);
+			gui->win(engine->getGUI(), texManager);
+			player->setHealth(0);*/
+
+			//gameState = OVER;
+
 			delayTimer = irrDevice->getTimer()->getTime();
-		}
-		else
-		{
-			// Delay for 5 seconds.
-			if ((irrDevice->getTimer()->getTime() - delayTimer) > 5000)
-			{
-				irrDevice->closeDevice();
-			}
-		}
+		//}
+		//else
+		//{
+		//	// Delay for 5 seconds.
+		//	/*if ((irrDevice->getTimer()->getTime() - delayTimer) > 5000)
+		//	{
+		//		irrDevice->closeDevice();
+		//	}*/
+		//}
 		break;
 
 	case GAME_OVER:
-		if (!bGameOverDisplayed)
-		{
+		//if (!bGameOverDisplayed)
+		//{
 			displayGameOverScreen(driver, irrDevice->getGUIEnvironment());
-			bGameOverDisplayed = true;
+		//	bGameOverDisplayed = true;
 			delayTimer = irrDevice->getTimer()->getTime();
-		}
-		else
-		{
-			// Delay for 5 seconds.
-			if ((irrDevice->getTimer()->getTime() - delayTimer) > 5000)
-			{
-				irrDevice->closeDevice();
-			}
-		}
+
+			//irrDevice->hideCursor(false);
+			//gui->lose(engine->getGUI(), texManager);
+			//player->setHealth(0);
+
+			//gameState = OVER;
+		//}
+		//else
+		//{
+		//	// Delay for 5 seconds.
+		//	/*if ((irrDevice->getTimer()->getTime() - delayTimer) > 5000)
+		//	{
+		//		irrDevice->closeDevice();
+		//	}*/
+		//}
 		break;
 
 	default:
@@ -598,7 +611,7 @@ void Game::initiateWave1(Player* player, IrrlichtDevice* device, ISceneManager* 
 	bWave1Started = true;
 
 	// Spawn BadFaerie.
-	for (int i = 0; i < 50; ++i)
+	for (int i = 0; i < 2; ++i)
 	{
 		spawnBadFaerie(player, device, smgr, driver);
 	}

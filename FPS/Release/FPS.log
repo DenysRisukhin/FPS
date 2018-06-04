@@ -1,15 +1,9 @@
-﻿  Game.cpp
-Game.cpp(43): warning C4018: '<': signed/unsigned mismatch
-Game.cpp(94): warning C4018: '<': signed/unsigned mismatch
-Game.cpp(145): warning C4018: '<': signed/unsigned mismatch
-Game.cpp(298): warning C4018: '<': signed/unsigned mismatch
-Game.cpp(435): warning C4018: '<': signed/unsigned mismatch
-Game.cpp(606): warning C4244: '=': conversion from 'irr::u32' to 'irr::f32', possible loss of data
-Game.cpp(649): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-Game.cpp(654): warning C4018: '<': signed/unsigned mismatch
-Game.cpp(683): warning C4244: 'argument': conversion from 'int' to 'irr::f32', possible loss of data
+﻿  Stage.cpp
+Stage.cpp(28): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+Stage.cpp(388): warning C4244: '=': conversion from 'irr::u32' to 'irr::f32', possible loss of data
+Stage.cpp(588): warning C4244: '=': conversion from 'irr::u32' to 'irr::f32', possible loss of data
   Generating code
-  0 of 455 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  4 of 461 functions ( 0.9%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

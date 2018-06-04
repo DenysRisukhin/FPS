@@ -76,6 +76,10 @@ public:
 	u8 getMana();
 	void incrementMana();
 
+	void setHealth(u8 _health) {
+		health = _health;
+	}
+
 	// 
 	//bool update(s32 elapsedTime, s32 weapon, IrrlichtDevice *device);
 	//bool update(s32 elapsedTime, s32 weapon, IrrlichtDevice *device);
