@@ -6,7 +6,7 @@ enum EnemyState
 {
 	ENEMY_RUN,
 	ENEMY_ATTACK,
-	ENEMY_DODGE, // увернуться
+	ENEMY_DODGE, 
 	ENEMY_IDLE
 };
 

@@ -3,11 +3,8 @@
 #include <irrlicht.h>
 #include "Camera.h"
 #include "PowerBall.h"
-
 #include "CGunProjectile.h"
 #include "CLaserProjectile.h"
-//#include "Gui.h"
-
 #include "CCharacter.h"
 
 #include "Irrklang.h"
@@ -18,8 +15,6 @@ using namespace scene;
 using namespace video;
 
 class PowerBall;
-//class PowerBallEnemy;
-
 
 #define POWERBALL_COST				20
 #define PUSH_COST					30
@@ -43,7 +38,6 @@ enum WEAPON {
 	LASER
 };
 
-
 class Player: public CCharacter {
 public:
 
@@ -60,11 +54,6 @@ public:
 	vector3df getPosition();
 	vector3df getDirection();
 	
-	
-	//PowerBall* Attack();
-	bool push();
-	void teleport();
-
 	// ущерб
 	void takeDamage(u8 attackRating);
 	void kill();
@@ -83,13 +72,10 @@ public:
 	ISoundEngine* getSound() {
 		return sound;
 	}
-	// 
-	//bool update(s32 elapsedTime, s32 weapon, IrrlichtDevice *device);
-	//bool update(s32 elapsedTime, s32 weapon, IrrlichtDevice *device);
+	
 	void fire(s32 weapon, IrrlichtDevice *device);
 	void changeWeapon(s32 weapon);
 
-	//inline scene::IAnimatedMeshSceneNode* getNode() { return GunNode; }
 	scene::IAnimatedMeshSceneNode* GunNode;
 	scene::IAnimatedMeshSceneNode* HandNode;
 
@@ -109,7 +95,6 @@ public:
 private:
 	ISoundEngine	*sound;
 	list<GameObject*> * listPtr;
-	//f32 lastAttack;
 	f32 lastPush;
 	f32 lastTeleport;
 	f32 cameraDistance;
@@ -118,14 +103,12 @@ private:
 	IrrlichtDevice* device;
 	ISceneManager* smgr;
 	IVideoDriver* driver;
-	//IAnimatedMesh* mesh;
 	IAnimatedMeshSceneNode* node;
 	vector3df forwardDirection;
 	u8 health;
 	u8 mana;
 	Camera* camera;
 
-	//
 	s32 TimeSinceLastShot;
 	
 	scene::IMetaTriangleSelector* MetaSelector;

@@ -11,11 +11,6 @@
 #include "PowerBall.h"
 #include "PowerBallEnemy.h"
 #include "BadFaerie.h"
-//#include "Monster.h"
-//#include "Wraith.h"
-#include "GameHud.h"
-//#include "HealthPickup.h"
-
 #include "GameObject.h"
 
 //#ifdef _IRR_WINDOWS_
@@ -37,27 +32,15 @@ public:
 
 	void processInput(IrrlichtDevice*, ISceneManager*, IVideoDriver*, ITriangleSelector*, EventReciever*, Player*, Camera*, f32);
 
-	//----
-	//void handleCollisions(Player*, Camera*, f32);
-	//void handleCollisionWithPlayer(Player*, Camera*, f32);
-	//----
-	
 	void handleCollisions(Player*, Camera*, f32);
 	void handleCollisionWithPlayer(Player*, Camera*, f32);
 	void handleCollisionEnemyPowerBall(void);
 	void handleCollisionBetweenEnemies(GameObject*);
 	bool collisionsBetweenEnemyAndBalls(ISceneNode*);
-	//void collisionBetweenFaerieAndPlayer(Player*, Camera*, ISceneNode*, f32);
-
+	
 	void updateGameObjects(f32);
 	void handleGameState(GameState &, Player*, IrrlichtDevice*, ISceneManager*, IVideoDriver*);
-	
-	void displayGameOverScreen(IVideoDriver*, IGUIEnvironment*);
-	void displayGameCompleteScreen(IVideoDriver*, IGUIEnvironment*);
-
-	void displayMainMenu(GameState &, IrrlichtDevice*);
-	//f32 getLastUpdate();
-	//void setLastUpdate(f32 update);
+		
 	u8 getNumOfEnemies();
 
 	bool gamePaused;
@@ -70,25 +53,11 @@ public:
 
 	list<GameObject*> updateList;
 
-	// updateList = list<GameObject*>();
-	//GUI				*gui;
-
 	list<GameObject*>& getUpdateList() {
 		return updateList;
 	}
 
-	void clearUpdateList() {
-
-		if (updateList.size()) {
-			for (list<GameObject*>::Iterator it = updateList.begin(); it != updateList.end(); ++it)
-			{
-				std::cout << "numOfEnemies:" << (int*)--numOfEnemies << std::endl;
-				(*it)->getNode()->remove();
-				delete *it;
-			}
-			updateList.clear();
-		}
-}
+	void clearUpdateList();
 
 	void setNumOfEnemies(u8 num) {
 		numOfEnemies = num;
@@ -108,8 +77,6 @@ private:
 	bool bMainMenuDisplayed;
 	bool bGameOverDisplayed;
 	bool bGameCompleteDisplayed;
-
-	//Enemy* enemies[20];
 
 	BadFaerie* badFaerie;
 

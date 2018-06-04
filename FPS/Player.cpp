@@ -1,13 +1,9 @@
 #include <math.h>
 #include "Player.h"
 #include <iostream>
-//#include "PowerBall.h"
-
 #include "GUI.h"
 
 #define SHOT_DELAY_TIME 80
-
-//DecalSceneNode* decals[MAX_DECALS];
 
 int nextDecal = 0;
 
@@ -15,11 +11,8 @@ void Player::drop()
 {
 	if (GunNode)
 	{
-		//GunNode->removeAnimators();
 		GunNode->remove();
 		GunNode = NULL;
-		//animators.clear();
-		//collisions.clear();
 	}
 }
 
@@ -28,7 +21,6 @@ WEAPON Player::getWeapon() {
 }
 
 void Player::setCamera(Camera* myCamera) {
-	//camera = myCamera;
 	GunNode->setParent(myCamera->getNode());
 }
 
@@ -103,7 +95,6 @@ IAnimatedMeshSceneNode* Player::getNode()
 
 vector3df Player::getPosition()
 {
-	//GunNode->updateAbsolutePosition();
 	return GunNode->getAbsolutePosition();
 }
 
@@ -113,7 +104,6 @@ void Player::setWeapon(WEAPON weapon) {
 
 void Player::changeWeapon(s32 weapon)
 {
-	//for the new 'change weapon' function
 	switch (weapon)
 	{
 	case REVOLVER: {
@@ -270,10 +260,9 @@ void Player::changeWeapon(s32 weapon)
 		GunNode->setMaterialFlag(video::EMF_NORMALIZE_NORMALS, true);
 
 		if (HandNode) {
-			//HandNode->remove();
 			HandNode = smgr->addAnimatedMeshSceneNode(handmesh);
 
-			/*if(GunNode)*/ HandNode->setParent(GunNode);
+			HandNode->setParent(GunNode);
 			HandNode->setScale(scaleh);
 			HandNode->setPosition(posh);
 			HandNode->setRotation(roth);
@@ -289,7 +278,6 @@ void Player::changeWeapon(s32 weapon)
 
 void Player::fire(s32 weapon, IrrlichtDevice *device) {
 
-	// TimeSinceLastShot инкрементируется в апдейт 
 	switch (weapon) {
 	case REVOLVER: {
 	
@@ -305,18 +293,11 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 			gunflame->addAnimator(gunanim);
 			gunanim->drop();
 
-			//play sound
-			//if (engine)
-			//	engine->play2D("stuff/sound/gunshot.wav");
-
-			//if (soundPlay)
-			//{
-				ISound *bang = sound->play2D("stuff/sound/gunshot.wav", false, true);
-				bang->setVolume(0.4f);
-				bang->setIsPaused(false);
-				bang->drop();
-		//	}
-
+			ISound *bang = sound->play2D("stuff/sound/gunshot.wav", false, true);
+			bang->setVolume(0.4f);
+			bang->setIsPaused(false);
+			bang->drop();
+		
 			// Calculate the position to fire from
 			core::vector3df offset = core::vector3df(6.5f, -6.5f, -30);
 			core::matrix4 mat = smgr->getActiveCamera()->getAbsoluteTransformation();
@@ -330,15 +311,7 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 			TimeSinceLastShot = 0;
 			TimeSinceLastRefill = 0;
 
-			// создание декалий
-			//image = device->getVideoDriver()->getTexture("stuff/logos/bullet.png");
-			/*for (int i = 0; i<MAX_DECALS; i++)
-			{
-				decals[i] = new DecalSceneNode(smgr->getRootSceneNode(),
-					smgr, image, 10.2f);
-				decals[i]->setLifeSpan(15);
-			}*/
-
+	
 			if (ammo_rev > 0)
 				ammo_rev--;
 
@@ -361,11 +334,6 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 			gunflame->addAnimator(gunanim);
 			gunanim->drop();
 
-			//play sound
-			/*if (engine)
-			engine->play2D("stuff/sound/gunshot_short.wav");
-			*/
-
 			ISound *bang = sound->play2D("stuff/sound/gunshot_short.wav", false, true);
 			bang->setVolume(0.4f);
 			bang->setIsPaused(false);
@@ -381,18 +349,9 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 
 			listPtr->push_back(proj);
 
-
 			TimeSinceLastShot = 0;
 
 			TimeSinceLastRefill = 0;
-
-			//image = device->getVideoDriver()->getTexture("stuff/logos/bullet.png");
-			/*for (int i = 0; i<MAX_DECALS; i++)
-			{
-			decals[i] = new DecalSceneNode(smgr->getRootSceneNode(),
-			smgr, image, 10.2f);
-			decals[i]->setLifeSpan(15);
-			}*/
 
 			if (ammo_revevo > 0)
 				ammo_revevo--;
@@ -417,10 +376,6 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 			gunflame->addAnimator(gunanim);
 			gunanim->drop();
 
-			//play sound
-			//if (engine)
-			//	engine->play2D("stuff/sound/gunshot.wav");
-
 			ISound *bang = sound->play2D("stuff/sound/gunshot.wav", false, true);
 			bang->setVolume(0.4f);
 			bang->setIsPaused(false);
@@ -436,16 +391,7 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 			listPtr->push_back(proj);
 			
 			TimeSinceLastShot = 0;
-			//Ammo--;
 			TimeSinceLastRefill = 0;
-
-			//image = device->getVideoDriver()->getTexture("stuff/logos/bullet.png");
-			/*for (int i = 0; i<MAX_DECALS; i++)
-			{
-				decals[i] = new DecalSceneNode(smgr->getRootSceneNode(),
-					smgr, image, 10.2f);
-				decals[i]->setLifeSpan(15);
-			}*/
 
 			if (ammo_mgun > 0)
 				ammo_mgun--;
@@ -455,7 +401,7 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 				ammo_mgun = 25;
 			}
 		}
-	}break;//end mgun
+	}break;
 	case MGUNB: {
 		if ((device->getTimer()->getTime() - lastAttack) > 200 && ammo_mgunb > 0)
 		{
@@ -469,10 +415,6 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 			ISceneNodeAnimator* gunanim = smgr->createDeleteAnimator(50);
 			gunflame->addAnimator(gunanim);
 			gunanim->drop();
-
-			//play sound
-			/*if (engine)
-				engine->play2D("stuff/sound/gunshot_short.wav");*/
 
 			ISound *bang = sound->play2D("stuff/sound/gunshot_short.wav", false, true);
 			bang->setVolume(0.4f);
@@ -490,16 +432,7 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 			listPtr->push_back(proj);
 
 			TimeSinceLastShot = 0;
-			//Ammo--;
 			TimeSinceLastRefill = 0;
-
-			//image = device->getVideoDriver()->getTexture("stuff/logos/bullet.png");
-			/*for (int i = 0; i<MAX_DECALS; i++)
-			{
-				decals[i] = new DecalSceneNode(smgr->getRootSceneNode(),
-					smgr, image, 10.2f);
-				decals[i]->setLifeSpan(15);
-			}*/
 
 			if (ammo_mgunb > 0)
 				ammo_mgunb--;
@@ -524,10 +457,6 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 			gunflame->addAnimator(gunanim);
 			gunanim->drop();
 
-			//play sound
-			/*if (engine)
-				engine->play2D("stuff/sound/gunshot_silencer.wav");*/
-
 			ISound *bang = sound->play2D("stuff/sound/gunshot_silencer.wav", false, true);
 			bang->setVolume(0.4f);
 			bang->setIsPaused(false);
@@ -544,16 +473,7 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 			listPtr->push_back(proj);
 
 			TimeSinceLastShot = 0;
-			//Ammo--;
 			TimeSinceLastRefill = 0;
-
-		//	image = device->getVideoDriver()->getTexture("stuff/logos/bullet.png");
-			/*for (int i = 0; i<MAX_DECALS; i++)
-			{
-				decals[i] = new DecalSceneNode(smgr->getRootSceneNode(),
-					smgr, image, 10.2f);
-				decals[i]->setLifeSpan(15);
-			}*/
 
 			if (ammo_smg > 0)
 				ammo_smg--;
@@ -569,9 +489,6 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 		if ((device->getTimer()->getTime() - lastAttack) > SHOT_DELAY_TIME && ammo_rev > 0)
 		{
 			lastAttack = device->getTimer()->getTime();
-			//if (TimeSinceLastShot >= SHOT_DELAY_TIME && Ammo > 0)
-			//{
-			// Calculate the position to fire from
 			core::vector3df offset = core::vector3df(6.5f, -6.5f, 30);
 			core::matrix4 mat = smgr->getActiveCamera()->getAbsoluteTransformation();
 			mat.transformVect(offset);
@@ -579,35 +496,16 @@ void Player::fire(s32 weapon, IrrlichtDevice *device) {
 			// Fire projectile
 			CLaserProjectile* proj = new CLaserProjectile(offset, (smgr->getActiveCamera()->getTarget() - smgr->getActiveCamera()->getAbsolutePosition()).normalize(), smgr);
 
-			//	if (proj)
-			//	LaserProjectiles.push_back(proj);
-
 			listPtr->push_back(proj);
 
 			TimeSinceLastShot = 0;
 
 			Ammo--;
 
-			// пополнение
-			TimeSinceLastRefill = 0;
-
-			//play sound
-			//if (engine)
-			//	engine->play2D("stuff/sound/laser.wav");
-
 			ISound *bang = sound->play2D("stuff/sound/laser.wav", false, true);
 			bang->setVolume(0.4f);
 			bang->setIsPaused(false);
 			bang->drop();
-
-			// создание декалий
-			//image = device->getVideoDriver()->getTexture("stuff/logos/burn.png");
-			/*for (int i = 0; i<MAX_DECALS; i++)
-			{
-			decals[i] = new DecalSceneNode(smgr->getRootSceneNode(),
-			smgr, image, 10.2f);
-			decals[i]->setLifeSpan(15);
-			}*/
 		}
 	}break;
 	}//end switch
@@ -668,371 +566,4 @@ vector3df Player::getDirection()
 	return forwardDirection;
 }
 
-bool Player::push()
-{
-	if ((device->getTimer()->getTime() - lastPush) > 3000.0f && mana >= PUSH_COST)
-	{
-		mana -= PUSH_COST;
-		lastPush = device->getTimer()->getTime();
-		return true;
-	}
-	return false;
-}
 
-void Player::teleport()
-{
-	if ((device->getTimer()->getTime() - lastTeleport) > 5000.0f && mana >= TELEPORT_COST)
-	{
-		mana -= TELEPORT_COST;
-		lastTeleport = device->getTimer()->getTime();
-
-		node->updateAbsolutePosition();
-		camera->getNode()->updateAbsolutePosition();
-		forwardDirection.normalize();
-
-		node->setPosition(node->getAbsolutePosition() + (forwardDirection * 500.0f));
-		camera->getNode()->setPosition(camera->getNode()->getAbsolutePosition() + (forwardDirection * 500.0f));
-
-		node->updateAbsolutePosition();
-		camera->getNode()->updateAbsolutePosition();
-
-		camera->getNode()->setTarget(node->getAbsolutePosition());
-	}
-}
-
-//PowerBall* Player::Attack()
-//{
-//	if ((device->getTimer()->getTime() - lastAttack) < 200) //  || mana < POWERBALL_COST
-//	{
-//		return nullptr;
-//	}
-//
-//	vector3df start = camera->getNode()->getPosition();
-//	//vector3df start = core::vector3df(6.5f, -6.5f, 30);
-//
-//	vector3df end = (camera->getNode()->getTarget() - start);
-//	end.normalize();
-//	start += end*20.0f;
-//
-//	end = start + (end * camera->getNode()->getFarValue());
-//
-//
-//	//vector3df direction = vector3df(0, 0, 0);// forwardDirection;
-//	//direction.Y = 0; // походу это координата конечной точки снаряда по Y
-//	//direction.normalize();
-//
-//	PowerBall* powerBall = new PowerBall(smgr, driver, start, end, 1.0f);
-//	lastAttack = device->getTimer()->getTime();
-//	//mana -= 20;
-//	return powerBall;
-//}
-
-//bool Player::update(s32 elapsedTime, s32 weapon, IrrlichtDevice *device) {
-//
-//	//if (CCharacter::update(elapsedTime)) return true;
-//	//if (AIEntity) {
-//	// tell the paie where we are now
-//	core::vector3df pos = smgr->getActiveCamera()->getAbsolutePosition();
-//	//	AIEntity->setPosition(pos);
-//	//}
-//
-//	switch (weapon) {
-//		//case REVOLVER: {
-//		//	// Update projectiles and check collisions
-//		//	core::list<CLaserProjectile*>::Iterator projIterev = LaserProjectiles.begin();
-//
-//		//		while (projIterev != LaserProjectiles.end()) {
-//
-//		//		if ((*projIterev)->update()) {
-//
-//		//			delete *projIterev;
-//
-//		//			projIterev = LaserProjectiles.erase(projIterev);
-//		//		}
-//		//		else {
-//		//		//	CCharacter* enemy = NULL;
-//		//			bool collision = false;
-//		//			core::line3df ray((*projIterev)->getPreviousPosition(), (*projIterev)->getPosition());
-//		//			core::vector3df outVec;
-//		//			core::triangle3df outTri;
-//		//			scene::ISceneNode* outNode;
-//		//		/*	core::array<IAIEntity*> enemies = ((IPlayerAIEntity*)AIEntity)->getEnemyGroup()->Entities;
-//		//			for (u32 i = 0; i < enemies.size(); ++i) {
-//		//				enemy = (CCharacter*)(enemies[i]->getUserData());
-//		//				if (enemy->getAIEntity()->getNode()->getTransformedBoundingBox().intersectsWithLine(ray)) {
-//		//					enemy->registerHit(5);
-//		//					collision = true;
-//		//					delete *projIterev;
-//		//					projIterev = GunProjectiles.erase(projIterev);
-//		//					break;
-//		//				}
-//		//			}*/
-//		//			if (smgr->getSceneCollisionManager()->getCollisionPoint(ray, MetaSelector, outVec, outTri, outNode)) {
-//		//				//collision = true;
-//		//				//delete *projIterev;
-//		//				//projIterev = GunProjectiles.erase(projIterev);
-//		//				
-//		//				//for decals
-//		//				
-//		//				//decals[nextDecal]->Setup(outTri, outVec);
-//		//				//nextDecal++;
-//		//				//if (nextDecal >= MAX_DECALS)
-//		//				//	nextDecal = 0;
-//		//			}
-//		//			if (!collision)
-//		//				projIterev++;
-//		//		}
-//		//	}
-//		//	if (ammo_rev == 0 && mag_rev > 0) {
-//		//		mag_rev--;
-//		//		ammo_rev = 6;
-//		//	}
-//
-//		//use this for freakish results (uncomment function below)
-//		//	Projectiles.clear();
-//		//} break;
-//	case REVEVO: {
-//		// Update projectiles and check collisions
-//		core::list<CGunProjectile*>::Iterator projIterev = GunProjectiles.begin();
-//		//core::list<CLaserProjectile*>::Iterator projIterev = LaserProjectiles.begin();
-//
-//		while (projIterev != GunProjectiles.end()) {
-//			if ((*projIterev)->update()) {
-//				delete *projIterev;
-//				projIterev = GunProjectiles.erase(projIterev);
-//			}
-//			else {
-//				//	CCharacter* enemy = NULL;
-//				bool collision = false;
-//				core::line3df ray((*projIterev)->getPreviousPosition(), (*projIterev)->getPosition());
-//				core::vector3df outVec;
-//				core::triangle3df outTri;
-//				scene::ISceneNode* outNode;
-//				/*core::array<IAIEntity*> enemies = ((IPlayerAIEntity*)AIEntity)->getEnemyGroup()->Entities;
-//				for (u32 i = 0; i < enemies.size(); ++i) {
-//				enemy = (CCharacter*)(enemies[i]->getUserData());
-//				if (enemy->getAIEntity()->getNode()->getTransformedBoundingBox().intersectsWithLine(ray)) {
-//				enemy->registerHit(5);
-//				collision = true;
-//				delete *projIterevevo;
-//				projIterevevo = GunProjectiles.erase(projIterevevo);
-//				break;
-//				}*/
-//				//}
-//				if (smgr->getSceneCollisionManager()->getCollisionPoint(ray, MetaSelector, outVec, outTri, outNode)) {
-//					collision = true;
-//					//	delete *projIterev;
-//					//	projIterev = GunProjectiles.erase(projIterev);
-//
-//					//for decals
-//					/*decals[nextDecal]->Setup(outTri, outVec);
-//					nextDecal++;
-//					if (nextDecal >= MAX_DECALS)
-//					nextDecal = 0;*/
-//				}
-//				if (!collision) projIterev++;
-//			}
-//		}
-//		if (ammo_revevo == 0 && mag_revevo > 0) {
-//			mag_revevo--;
-//			ammo_revevo = 10;
-//		}
-//	} break;
-//	case MGUN: {
-//		// Update projectiles and check collisions
-//		core::list<CGunProjectile*>::Iterator projItermg = GunProjectiles.begin();
-//		while (projItermg != GunProjectiles.end()) {
-//			if ((*projItermg)->update()) {
-//				delete *projItermg;
-//				projItermg = GunProjectiles.erase(projItermg);
-//			}
-//			else {
-//				//CCharacter* enemy = NULL;
-//				bool collision = false;
-//				core::line3df ray((*projItermg)->getPreviousPosition(), (*projItermg)->getPosition());
-//				core::vector3df outVec;
-//				core::triangle3df outTri;
-//				scene::ISceneNode* outNode;
-//				/*core::array<IAIEntity*> enemies = ((IPlayerAIEntity*)AIEntity)->getEnemyGroup()->Entities;
-//				for (u32 i = 0; i < enemies.size(); ++i) {
-//				enemy = (CCharacter*)(enemies[i]->getUserData());
-//				if (enemy->getAIEntity()->getNode()->getTransformedBoundingBox().intersectsWithLine(ray)) {
-//				enemy->registerHit(15);
-//				collision = true;
-//				delete *projItermg;
-//				projItermg = GunProjectiles.erase(projItermg);
-//				break;
-//				}
-//				}*/
-//				if (smgr->getSceneCollisionManager()->getCollisionPoint(ray, MetaSelector, outVec, outTri, outNode)) {
-//					collision = true;
-//					delete *projItermg;
-//					projItermg = GunProjectiles.erase(projItermg);
-//
-//					//for decals
-//					/*decals[nextDecal]->Setup(outTri, outVec);
-//					nextDecal++;
-//					if (nextDecal >= MAX_DECALS)
-//					nextDecal = 0;*/
-//				}
-//				if (!collision) projItermg++;
-//			}//end else
-//		}//end while
-//		if (ammo_mgun == 0 && mag_mgun > 0) {
-//			mag_mgun--;
-//			ammo_mgun = 25;
-//		}
-//	} break;	//end mgun
-//	case MGUNB: {
-//		// Update projectiles and check collisions
-//		core::list<CGunProjectile*>::Iterator projItermgb = GunProjectiles.begin();
-//		while (projItermgb != GunProjectiles.end()) {
-//			if ((*projItermgb)->update()) {
-//				delete *projItermgb;
-//				projItermgb = GunProjectiles.erase(projItermgb);
-//			}
-//			else {
-//				//CCharacter* enemy = NULL;
-//				bool collision = false;
-//				core::line3df ray((*projItermgb)->getPreviousPosition(), (*projItermgb)->getPosition());
-//				core::vector3df outVec;
-//				core::triangle3df outTri;
-//				scene::ISceneNode* outNode;
-//				/*core::array<IAIEntity*> enemies = ((IPlayerAIEntity*)AIEntity)->getEnemyGroup()->Entities;
-//				for (u32 i = 0; i < enemies.size(); ++i) {
-//				enemy = (CCharacter*)(enemies[i]->getUserData());
-//				if (enemy->getAIEntity()->getNode()->getTransformedBoundingBox().intersectsWithLine(ray)) {
-//				enemy->registerHit(15);
-//				collision = true;
-//				delete *projItermgb;
-//				projItermgb = GunProjectiles.erase(projItermgb);
-//				break;
-//				}
-//				}*/
-//				if (smgr->getSceneCollisionManager()->getCollisionPoint(ray, MetaSelector, outVec, outTri, outNode)) {
-//					collision = true;
-//					delete *projItermgb;
-//					projItermgb = GunProjectiles.erase(projItermgb);
-//
-//					//for decals
-//					/*decals[nextDecal]->Setup(outTri, outVec);
-//					nextDecal++;
-//					if (nextDecal >= MAX_DECALS)
-//					nextDecal = 0;*/
-//				}
-//				if (!collision) projItermgb++;
-//			}//end else
-//		}//end while
-//		if (ammo_mgunb == 0 && mag_mgunb > 0) {
-//			mag_mgunb--;
-//			ammo_mgunb = 25;
-//		}
-//	} break;	//end mgun 2 
-//	case SMG: {
-//		// Update projectiles and check collisions
-//		core::list<CGunProjectile*>::Iterator projItersmg = GunProjectiles.begin();
-//		while (projItersmg != GunProjectiles.end()) {
-//			if ((*projItersmg)->update()) {
-//				delete *projItersmg;
-//				projItersmg = GunProjectiles.erase(projItersmg);
-//			}
-//			else {
-//				//	CCharacter* enemy = NULL;
-//				bool collision = false;
-//				core::line3df ray((*projItersmg)->getPreviousPosition(), (*projItersmg)->getPosition());
-//				core::vector3df outVec;
-//				core::triangle3df outTri;
-//				scene::ISceneNode* outNode;
-//				/*core::array<IAIEntity*> enemies = ((IPlayerAIEntity*)AIEntity)->getEnemyGroup()->Entities;
-//				for (u32 i = 0; i < enemies.size(); ++i) {
-//				enemy = (CCharacter*)(enemies[i]->getUserData());
-//				if (enemy->getAIEntity()->getNode()->getTransformedBoundingBox().intersectsWithLine(ray)) {
-//				enemy->registerHit(10);
-//				collision = true;
-//				delete *projItersmg;
-//				projItersmg = GunProjectiles.erase(projItersmg);
-//				break;
-//				}
-//				}*/
-//				if (smgr->getSceneCollisionManager()->getCollisionPoint(ray, MetaSelector, outVec, outTri, outNode)) {
-//					collision = true;
-//					delete *projItersmg;
-//					projItersmg = GunProjectiles.erase(projItersmg);
-//
-//					//for decals
-//					/*decals[nextDecal]->Setup(outTri, outVec);
-//					nextDecal++;
-//					if (nextDecal >= MAX_DECALS)
-//					nextDecal = 0;*/
-//				}
-//				if (!collision) projItersmg++;
-//			}//end else
-//		}//end while
-//		if (ammo_smg == 0 && mag_smg > 0) {
-//			mag_smg--;
-//			ammo_smg = 15;
-//		}
-//	} break;	//end smg
-//				//case LASER: {
-//				//	// Update projectiles and check collisions
-//				//	core::list<CLaserProjectile*>::Iterator projIter = LaserProjectiles.begin();
-//				//	while (projIter != LaserProjectiles.end()) {
-//
-//				//		//  if update() return false (if ammo move more then SqDistTravelled distance) iterator projIter removing
-//				//		// если пуля пролетела установленное растояние и не пересеклась ни счем то она удаляется
-//				//		if ((*projIter)->update()) {
-//				//			delete *projIter;
-//				//			projIter = LaserProjectiles.erase(projIter);
-//				//		}
-//				//		else {
-//
-//				//			//CCharacter* enemy = NULL;
-//				//			bool collision = false;
-//
-//				//			// луч создается из начальной позиции выстрела и постоянно обновляющейся позиции пули (тоесть луч растет пока пуля летит или пока не произойдет коллизия/закончется дистанция полета )
-//				//			core::line3df ray((*projIter)->getPreviousPosition(), (*projIter)->getPosition());
-//				//			core::vector3df outVec;
-//				//			core::triangle3df outTri;
-//				//			scene::ISceneNode* outNode;
-//
-//				//			// если луч пересекся с врагами
-//				//			//core::array<IAIEntity*> enemies = ((IPlayerAIEntity*)AIEntity)->getEnemyGroup()->Entities;
-//				//			//for (u32 i = 0; i < enemies.size(); ++i) {
-//				//			//	enemy = (CCharacter*)(enemies[i]->getUserData());
-//				//			//	if (enemy->getAIEntity()->getNode()->getTransformedBoundingBox().intersectsWithLine(ray)) {
-//				//			//		enemy->registerHit(50);
-//				//			//		collision = true;
-//				//			//		delete *projIter;
-//				//			//		projIter = LaserProjectiles.erase(projIter);
-//				//			//		break;
-//				//			//	}
-//				//			//}
-//
-//				//			// если луч соприкоснулся с картой создаем декали на месте соприкосновения
-//				//			if (smgr->getSceneCollisionManager()->getCollisionPoint(ray, MetaSelector, outVec, outTri, outNode)) {
-//				//				collision = true;
-//				//				delete *projIter;
-//				//				projIter = LaserProjectiles.erase(projIter);
-//
-//				//				//for decals
-//				//				/*decals[nextDecal]->Setup(outTri, outVec);
-//				//				nextDecal++;
-//				//				if (nextDecal >= MAX_DECALS)
-//				//					nextDecal = 0;*/
-//				//			}
-//
-//				//			if (!collision) 
-//				//				projIter++;
-//
-//				//		}		//end else
-//				//	}			//end while
-//				//} break; //laser
-//
-//	}
-//
-//	TimeSinceLastShot += elapsedTime;
-//	//std::cout << "elapsedTime: " << elapsedTime << std::endl;
-//
-//	//std::cout << "TimeSinceLastShot: " << TimeSinceLastShot << std::endl;
-//	return false;
-//}

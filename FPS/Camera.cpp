@@ -2,10 +2,6 @@
 
 Camera::Camera(ISceneManager* smgr)
 {
-	//node = smgr->addCameraSceneNode(0, vector3df(600, 110, 450), vector3df(0, 0, 0));
-	//node->setFarValue(42000.0f);
-
-	//ICameraSceneNode* camera = 0;
 	_smgr = smgr;
 
 	SKeyMap keyMap[10];
@@ -36,21 +32,9 @@ Camera::Camera(ISceneManager* smgr)
 	keyMap[9].KeyCode = KEY_KEY_C;
 
 	node = smgr->addCameraSceneNodeFPS(0, 100.0f, 0.41f, -1, keyMap, 18, false, 9.0f); // 0.21
-
-	//node = smgr->addCameraSceneNodeFPS(NULL, 75.0f, 0.25f, -1, keyMap, 8);
-
 	node->setPosition(core::vector3df(2700 * 2, 255 * 2, 2600 * 2));
-
 	node->setTarget(core::vector3df(0, 0, 0));
-	//node->setTarget(core::vector3df(2397 * 2, 343 * 2, 2700 * 2));
-
-	//camera->setFOV ( 100.f * core::DEGTORAD );giu
 	node->setFarValue(20000.f);
-
-	//node->get
-
-	//curPos = smgr->getActiveCamera()->getAbsolutePosition();
-	//smgr->setActiveCamera(node);
 }
 
 ICameraSceneNode* Camera::getNode()
@@ -86,18 +70,8 @@ Camera::Camera(ISceneManager* smgr, vector3df curPos) {
 	keyMap[9].Action = EKA_CROUCH;
 	keyMap[9].KeyCode = KEY_KEY_C;
 
-	node = smgr->addCameraSceneNodeFPS(0, 100.0f, 0.41f, -1, keyMap, 18, false, 9.0f); // 0.21
-
-																					   //node = smgr->addCameraSceneNodeFPS(NULL, 75.0f, 0.25f, -1, keyMap, 8);
-
+	node = smgr->addCameraSceneNodeFPS(0, 100.0f, 0.41f, -1, keyMap, 18, false, 9.0f); 
 	node->setPosition(curPos);
-
 	node->setTarget(core::vector3df(0, 0, 0));
-	//node->setTarget(core::vector3df(2397 * 2, 343 * 2, 2700 * 2));
-
-	//camera->setFOV ( 100.f * core::DEGTORAD );giu
 	node->setFarValue(20000.f);
-
-	//smgr->getActiveCamera()->r
-	//smgr->setActiveCamera(node);
 }

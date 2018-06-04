@@ -21,8 +21,7 @@ void BadFaerie::attack()
 
 	smgr->getActiveCamera()->updateAbsolutePosition();
 	core::vector3df pos = smgr->getActiveCamera()->getAbsolutePosition();
-	//target->getNode()->updateAbsolutePosition();
-	//target->getNode()->getPosition();
+
 	node->updateAbsolutePosition();
 	vector3df direction = pos - node->getAbsolutePosition();
 	direction.normalize();
@@ -68,7 +67,6 @@ void BadFaerie::run(f32 deltaTime)
 	node->setRotation(vector3df(node->getRotation().X, node->getRotation().Y - 90, node->getRotation().Z));
 	vector3df direction = target->getPosition() - node->getAbsolutePosition();
 	direction.normalize();
-	//node->setPosition(node->getAbsolutePosition() + (direction * speed * deltaTime));
 	node->setPosition(vector3df(node->getAbsolutePosition().X + (direction.X * speed * deltaTime), 135, node->getAbsolutePosition().Z + (direction.Z * speed * deltaTime)));
 }
 
@@ -76,7 +74,7 @@ bool BadFaerie::listHasPowerBall()
 {
 	for each (GameObject* ptr in *listPtr)
 	{
-		if (dynamic_cast<PowerBall*>(ptr) != NULL) //PowerBallEnemy @@@@@@@@@@@@@@@@
+		if (dynamic_cast<PowerBall*>(ptr) != NULL)
 		{
 			return true;
 		}

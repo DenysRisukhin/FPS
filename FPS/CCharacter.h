@@ -1,10 +1,6 @@
 #pragma once
 
 #include <irrlicht.h>
-//#include <IrrAI.h>
-
-//#include <irrKlang.h>
-//using namespace irrklang;
 
 using namespace irr;
 using namespace core;
@@ -15,42 +11,6 @@ using namespace video;
 class CCharacter {
 
 public:
-
-	/*! Struct describing the parameters of a CCharacter */
-	struct SCharacterDesc {
-		/**
-		\brief Constructor
-		*/
-		SCharacterDesc() {
-			SceneManager = NULL;
-			//AIManager = NULL;
-			StartWaypointID = 1;
-			WaypointGroupName = "";
-			WaypointGroupIdx = 0;
-			NPCRange = 200;
-			Name = L"";
-			RegenerateHealth = false;
-			RegenerateAmmo = false;
-			halfHealth = false;
-			isBrkObj = false;
-			bossHealth = false;
-		}
-		scene::ISceneManager* SceneManager;
-		//IrrAI::IAIManager* AIManager;
-		s32 StartWaypointID;
-		core::stringc WaypointGroupName;
-		s32 WaypointGroupIdx;
-		f32 NPCRange;
-		core::stringw Name;
-		bool RegenerateHealth;
-		bool RegenerateAmmo;
-		//start with health at 50
-		bool halfHealth;
-		bool isBrkObj;
-		bool bossHealth;
-
-
-	};
 
 	static const s32 MAX_AMMO;
 	static const s32 MAX_HEALTH;
@@ -168,8 +128,7 @@ public:
 	//virtual void drop();
 
 protected:
-	//IAIEntity* AIEntity;
-	//IAIManager* AIManager;
+	
 	scene::ISceneManager* SceneManager;
 	core::vector3df Pos;
 	s32 Health;
@@ -193,7 +152,4 @@ protected:
 	*/
 	virtual void die();
 	virtual void dieWall();
-	//sound
-//	ISoundEngine* engine;
-
 };

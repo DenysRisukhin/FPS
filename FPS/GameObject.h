@@ -7,11 +7,6 @@ using namespace core;
 using namespace scene;
 using namespace video;
 
-// speed
-// isActive = false, if call kill()
-// position
-// bNeedsUpdate  ????
-
 class GameObject {
 public:
 	GameObject();

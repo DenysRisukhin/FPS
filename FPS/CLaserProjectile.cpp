@@ -55,7 +55,6 @@ void CLaserProjectile::remove() {
 
 }
 
-//bool CLaserProjectile::update()
 void CLaserProjectile::update(f32 deltaTime) {
 
 	if (bNeedsUpdate)

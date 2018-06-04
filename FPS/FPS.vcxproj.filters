@@ -27,9 +27,6 @@
     <ClCompile Include="CCharacter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CHealthPowerupObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -58,9 +55,6 @@
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="EventReciever.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="GameHud.cpp">
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="SkyBox.cpp">
@@ -92,9 +86,6 @@
     <ClInclude Include="CCharacter.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="CHealthPowerupObject.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -120,9 +111,6 @@
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="EventReciever.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="GameHud.h">
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="SkyBox.h">

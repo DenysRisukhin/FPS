@@ -12,7 +12,6 @@ const s32 CCharacter::REFILL_PERIOD = 500;
 CCharacter::CCharacter(ISceneManager* smgr, s32 characterType) {
 
 	SceneManager = smgr;
-	//AIManager = desc.AIManager;
 	RegenerateHealth = false;
 	HalfHealth = false;
 
@@ -39,19 +38,9 @@ CCharacter::CCharacter(ISceneManager* smgr, s32 characterType) {
 	mag_smg = mag_mgun = mag_revevo;
 	mag_mgunb = mag_smg;
 	TimeSinceLastRefill = 0;
-	//AIEntity = NULL;
-
-	//engine = createIrrKlangDevice();
-
 }
 
 CCharacter::~CCharacter() {
-
-	/*if (AIEntity) {
-		AIManager->removeAIEntity(AIEntity);
-		AIEntity = NULL;
-	}*/
-
 }
 
 bool CCharacter::update(s32 elapsedTime) {
@@ -90,15 +79,6 @@ void CCharacter::die() {
 #define FRAME_TIME 50
 	scene::ISceneNodeAnimator* anim = NULL;
 
-	//play sound when killed
-	/*if (engine)
-		engine->play2D("stuff/sound/barf.wav");*/
-
-	/*	//start death animation -- testing....
-	scene::EMD2_ANIMATION_TYPE animation;
-
-	animation = scene::EMAT_DEATH_FALLBACK;
-	*/
 	// create animation for explosion
 	c8 tmp[64];
 	core::array<video::ITexture*> textures;
@@ -127,10 +107,6 @@ void CCharacter::dieWall() {
 #define FRAME_TIME 50
 	scene::ISceneNodeAnimator* anim = NULL;
 
-	//play sound when destroyed
-	/*if (engine)
-		engine->play2D("stuff/sound/impact.wav");*/
-
 	// create animation for explosion
 	c8 tmp[64];
 	core::array<video::ITexture*> textures;
@@ -153,15 +129,3 @@ void CCharacter::dieWall() {
 	anim->drop();
 
 }
-
-//void CCharacter::drop()
-//{
-//	if (node)
-//	{
-//		node->removeAnimators();
-//		node->remove();
-//		node = NULL;
-//		animators.clear();
-//		collisions.clear();
-//	}
-//}

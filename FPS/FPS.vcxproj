@@ -152,12 +152,10 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CCharacter.cpp" />
     <ClCompile Include="CGunProjectile.cpp" />
-    <ClCompile Include="CHealthPowerupObject.cpp" />
     <ClCompile Include="CLaserProjectile.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventReciever.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameHud.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Gui.cpp" />
     <ClCompile Include="Irrlicht.cpp" />
@@ -175,12 +173,10 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CCharacter.h" />
     <ClInclude Include="CGunProjectile.h" />
-    <ClInclude Include="CHealthPowerupObject.h" />
     <ClInclude Include="CLaserProjectile.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EventReciever.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="GameHud.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Gui.h" />

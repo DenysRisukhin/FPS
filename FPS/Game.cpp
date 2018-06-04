@@ -7,8 +7,7 @@ Game::Game()
 	timeSinceStart = 0.0f;
 	selector = NULL;
 	delayTimer = 0;
-	//pickup_0 = NULL;
-	//pickup_1 = NULL;
+	
 	gamePaused = false;
 	bMainMenuDisplayed = false;
 	bGameOverDisplayed = false;
@@ -16,16 +15,7 @@ Game::Game()
 	numOfEnemies = 0;
 
 	bWave1Finished = false;
-	/*bWave2Finished = false;
-	bWave3Finished = false;
-	bWave4Finished = false;
-	bWave5Finished = false;*/
-
 	bWave1Started = false;
-	/*bWave2Started = false;
-	bWave3Started = false;
-	bWave4Started = false;
-	bWave5Started = false;*/
 }
 
 u8 Game::getNumOfEnemies()
@@ -128,7 +118,6 @@ void Game::handleCollisionEnemyPowerBall(void)
 // Handle collision of GameObjects with the player.
 void Game::handleCollisionWithPlayer(Player* player, Camera* camera, f32 deltaTime)
 {
-	//// handle with coins and health
 	sound = player->getSound();
 	//-------------------------------
 
@@ -314,23 +303,6 @@ bool Game::collisionsBetweenEnemyAndBalls(ISceneNode* enemy)
 	return false;
 }
 
-// Function to handle collisions between faerie and player.
-//void Game::collisionBetweenFaerieAndPlayer(Player* player, Camera* camera, ISceneNode* faerie, f32 deltaTime)
-//{
-//	if (updateList.getSize() != 0)
-//	{
-//		aabbox3df boxForPlayer = player->getNode()->getTransformedBoundingBox();
-//		aabbox3df boxForFaerie = faerie->getTransformedBoundingBox();
-//
-//		if (boxForPlayer.intersectsWithBox(boxForFaerie))
-//		{
-//			player->getNode()->updateAbsolutePosition();
-//			faerie->updateAbsolutePosition();
-//			//player->moveBackward(deltaTime);
-//		}
-//	}
-//}
-
 // Function to handle collision between two enemies.
 void Game::handleCollisionBetweenEnemies(GameObject* enemy)
 {
@@ -396,20 +368,24 @@ void Game::setBWave1Started(){
 	bGameOverDisplayed = false;
 }
 
+void Game::clearUpdateList() {
+
+	if (updateList.size()) {
+		for (list<GameObject*>::Iterator it = updateList.begin(); it != updateList.end(); ++it)
+		{
+			std::cout << "numOfEnemies:" << (int*)--numOfEnemies << std::endl;
+			(*it)->getNode()->remove();
+			delete *it;
+		}
+		updateList.clear();
+	}
+}
+
 // Function to handle Game State.
 void Game::handleGameState(GameState & gameState, Player* player, IrrlichtDevice* irrDevice, ISceneManager* smgr, IVideoDriver* driver)
 {
 	switch (gameState)
 	{
-	//case MENU:
-		/*if (!bMainMenuDisplayed)
-		{
-			displayMainMenu(gameState, irrDevice);
-			bMainMenuDisplayed = true;
-		}*/
-		/*bGameCompleteDisplayed = false;
-		bGameOverDisplayed = false;*/
-		//break;
 
 	case INGAME:
 		if (player->getPosition().Y < 0)
@@ -427,9 +403,8 @@ void Game::handleGameState(GameState & gameState, Player* player, IrrlichtDevice
 				gameState = GAME_COMPLETE;
 			}
 		}
-		else if (!bWave1Started)// && updateList.getSize() == 0)
+		else if (!bWave1Started)
 		{
-			//bMainMenuDisplayed = false;
 			initiateWave1(player, irrDevice, smgr, driver);
 			std::cout << "Wave 1 started.\n";
 			irrDevice->getGUIEnvironment()->clear();
@@ -439,88 +414,10 @@ void Game::handleGameState(GameState & gameState, Player* player, IrrlichtDevice
 			updateWaveStatus(gameState, irrDevice, player, smgr, driver);
 		}
 		break;
-//	case GAME_COMPLETE:
-		//std::cout << "GAME_COMPLETE.\n";
-	/*	if (!bGameCompleteDisplayed)
-		{*/
-		//	displayGameCompleteScreen(driver, irrDevice->getGUIEnvironment());
-			//bGameCompleteDisplayed = true;
-
-			/*engine->hideCursor(false);
-			gui->win(engine->getGUI(), texManager);
-			player->setHealth(0);*/
-
-			//gameState = OVER;
-
-	//		delayTimer = irrDevice->getTimer()->getTime();
-		//}
-		//else
-		//{
-		//	// Delay for 5 seconds.
-		//	/*if ((irrDevice->getTimer()->getTime() - delayTimer) > 5000)
-		//	{
-		//		irrDevice->closeDevice();
-		//	}*/
-		//}
-	//	break;
-
-//	case GAME_OVER:
-		//if (!bGameOverDisplayed)
-		//{
-	//		displayGameOverScreen(driver, irrDevice->getGUIEnvironment());
-		//	bGameOverDisplayed = true;
-	//		delayTimer = irrDevice->getTimer()->getTime();
-
-			//irrDevice->hideCursor(false);
-			//gui->lose(engine->getGUI(), texManager);
-			//player->setHealth(0);
-
-			//gameState = OVER;
-		//}
-		//else
-		//{
-		//	// Delay for 5 seconds.
-		//	/*if ((irrDevice->getTimer()->getTime() - delayTimer) > 5000)
-		//	{
-		//		irrDevice->closeDevice();
-		//	}*/
-		//}
-	//	break;
 
 	default:
 		break;
 	}
-}
-
-void Game::displayGameOverScreen(IVideoDriver* driver, IGUIEnvironment* guienv)
-{
-	//guienv->addImage(driver->getTexture("Textures/GameOver.jpg"), vector2d<s32>(-235, 0), false);
-	//bGameOverDisplayed = true;
-}
-
-// Function to denote completion of game.
-void Game::displayGameCompleteScreen(IVideoDriver* driver, IGUIEnvironment* guienv)
-{
-	//guienv->addImage(driver->getTexture("Textures/GameComplete.jpg"), vector2d<s32>(-235, 0), false);
-	//bGameCompleteDisplayed = true;
-}
-
-void Game::displayMainMenu(GameState & gameState, IrrlichtDevice* device)
-{
-	//IGUIEnvironment* guienv = device->getGUIEnvironment();
-
-	//IGUISkin* skin = guienv->getSkin();
-	//IGUIFont* font = guienv->getFont("Textures/fonthaettenschweiler.bmp");
-	//if (font)
-	//	skin->setFont(font);
-
-	//skin->setFont(guienv->getBuiltInFont(), EGDF_TOOLTIP);
-
-	//guienv->addImage(device->getVideoDriver()->getTexture("Textures/Menu.bmp"), vector2d<s32>(0, 0), false);
-	//guienv->addButton(rect<s32>(210, 100, 450, 170), NULL, GUI_ID_PLAY_BUTTON, L"Play");
-	//guienv->addButton(rect<s32>(210, 200, 450, 270), NULL, GUI_ID_INSTRUCTIONS_BUTTON, L"Instructions");
-	//guienv->addButton(rect<s32>(210, 300, 450, 370), NULL, GUI_ID_CONTROLS_BUTTON, L"Controls");
-	//guienv->addButton(rect<s32>(210, 400, 450, 470), NULL, GUI_ID_QUIT_BUTTON, L"Exit");
 }
 
 // Function to start Wave 1.
@@ -529,7 +426,7 @@ void Game::initiateWave1(Player* player, IrrlichtDevice* device, ISceneManager* 
 	bWave1Started = true;
 
 	// Spawn BadFaerie.
-	for (int i = 0; i < 2; ++i)
+	for (int i = 0; i < 35; ++i)
 	{
 		spawnBadFaerie(player, device, smgr, driver);
 	}
@@ -632,69 +529,10 @@ void Game::processInput(IrrlichtDevice* device, ISceneManager* smgr, IVideoDrive
 	bool pPressed = false;
 
 	if (reciever->getMouse() == EMIE_LMOUSE_PRESSED_DOWN) {
-		//add vector maybe ????
-		//PowerBall* tempBall = player->Attack();
-		//if (tempBall != NULL)
-
-		//{
-		////	updateList.push_back(tempBall);
-		//}
-	}
-
-	//switch (reciever->getMouse())
-	//{
-	//case EMIE_LMOUSE_PRESSED_DOWN:
-	//	//pManager->getScriptManager()->runScript("level_mouse");
-	//	//PowerBall* tempBall = player->Attack();
-	//	if (tempBall != NULL)
-	//	{
-	//		updateList.push_back(tempBall);
-	//	}
-	//	break;
-
-	//case EMIE_LMOUSE_LEFT_UP:	//left mouse released
-	//	break;
-
-	//case EMIE_RMOUSE_PRESSED_DOWN:
-	//	// right mouse pressed code here
-	//	//pManager->getPlayer()->setJumpingFlag(true); 
-	//	break;
-	//case EMIE_MOUSE_WHEEL:
-	//	//pManager->getScriptManager()->runScript("level_mouse");
-	//	break;
-	//}
-
-
-	if (reciever->getMouse() == EMIE_LMOUSE_PRESSED_DOWN) {
 
 		player->fire(player->getWeapon(), device);
 	}
-	if (reciever->isKeyDown(KEY_RETURN))
-	{
-		/*PowerBall* tempBall = player->Attack();
-		if (tempBall != NULL)
-		{
-			updateList.push_back(tempBall);
-		}*/
-
-		//player->setAttackAnimation();
-
-		//player->fire(REVOLVER, device);
-	}
-	if (reciever->isKeyDown(KEY_KEY_X))
-	{
-		//pushEnemies(player);
-		//player->setAttackAnimation();
-	}
-	if (reciever->isKeyDown(KEY_KEY_C))
-	{
-		//player->teleport();
-	}
-	if (reciever->isKeyUp(KEY_KEY_X) && reciever->isKeyUp(KEY_KEY_Z) && reciever->isKeyUp(KEY_KEY_W) && reciever->isKeyUp(KEY_KEY_A) && reciever->isKeyUp(KEY_KEY_S) && reciever->isKeyUp(KEY_KEY_D))
-	{
-		//player->setIdleAnimation();
-	}
-
+	
 	if (reciever->isKeyDown(KEY_KEY_1))
 	{
 		player->changeWeapon(REVOLVER);

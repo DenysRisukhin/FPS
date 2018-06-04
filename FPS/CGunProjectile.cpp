@@ -12,14 +12,12 @@ CGunProjectile::CGunProjectile(const core::vector3df& start, const core::vector3
 	// create projectile
 	Bill = smgr->addBillboardSceneNode(SceneManager->getRootSceneNode(), core::dimension2d<f32>(15, 15), start, -3);
 	Bill->setMaterialFlag(video::EMF_LIGHTING, false);
-	Bill->setMaterialTexture(0, SceneManager->getVideoDriver()->getTexture("stuff/logos/bulletflying.jpg")); // laser.bmp   bulletflying.jpg
+	Bill->setMaterialTexture(0, SceneManager->getVideoDriver()->getTexture("stuff/logos/bulletflying.jpg")); 
 	Bill->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
 }
 
 CGunProjectile::~CGunProjectile() {
-
 	remove();
-
 }
 
 void CGunProjectile::remove() {
@@ -55,19 +53,6 @@ void CGunProjectile::remove() {
 }
 
 void CGunProjectile::update(f32 deltaTime) {
-
-	//if (SqDistTravelled > 100000000) // 1000000
-	//	return true;
-
-	//PrevPos = Bill->getAbsolutePosition();
-
-	//core::vector3df distance = Direction*PROJECTILE_SPEED;
-
-	//if (Bill)
-	//	Bill->setPosition(PrevPos + distance);
-
-	//SqDistTravelled += distance.getLengthSQ();
-
 
 	if (bNeedsUpdate)
 	{
