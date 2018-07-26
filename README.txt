@@ -16,4 +16,4 @@ Control:
 	pause menu:    ESC
 
 Link to video gameplay on Youtube:
-
+https://github.com/DenysRisukhin/FPS/blob/master/FPS/Textures/fpsCollage.jpg
