@@ -5,16 +5,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Projectile">
-      <UniqueIdentifier>{cd374385-d729-4622-812b-a9945667a654}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject">
       <UniqueIdentifier>{89063b8c-3171-4a7d-a2d4-c20c520736cb}</UniqueIdentifier>
@@ -22,39 +15,36 @@
     <Filter Include="Level">
       <UniqueIdentifier>{f9e33fae-b1e1-4329-8617-9903a43f9fa5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Enemy">
+      <UniqueIdentifier>{beb5f91e-ae8e-4ff8-a762-a263f70f8be2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Player">
+      <UniqueIdentifier>{8908334a-6a25-48fa-bfb0-22bc1d36594f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Bullet">
+      <UniqueIdentifier>{5c207a81-a09d-4534-9e50-67a301089365}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Bullet\Projectile">
+      <UniqueIdentifier>{cd374385-d729-4622-812b-a9945667a654}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{66b1486a-8e09-4ebb-b9fb-0cf938dfff9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Irrlicht">
+      <UniqueIdentifier>{d82c69a5-a7aa-486e-bd06-8f8c10ce2d10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{70ebca42-aa80-42ba-9ecf-c6b6d34fa943}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CCharacter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CGunProjectile.cpp">
-      <Filter>Projectile</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="BadFaerie.cpp">
-      <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="PowerBallEnemy.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="EventReciever.cpp">
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="SkyBox.cpp">
@@ -63,54 +53,57 @@
     <ClCompile Include="Terrain.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="CLaserProjectile.cpp">
-      <Filter>Projectile</Filter>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BadFaerie.cpp">
+      <Filter>GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>GameObject\Player</Filter>
     </ClCompile>
     <ClCompile Include="PowerBall.cpp">
-      <Filter>GameObject</Filter>
+      <Filter>GameObject\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerBallEnemy.cpp">
+      <Filter>GameObject\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="Irrlicht.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Irrlicht</Filter>
     </ClCompile>
     <ClCompile Include="Stage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Gui.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="EventReciever.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Gui.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameHandle.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="LaserProjectile.cpp">
+      <Filter>GameObject\Bullet\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="GunProjectile.cpp">
+      <Filter>GameObject\Bullet\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponManager.cpp">
+      <Filter>GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerBallProjectile.cpp">
+      <Filter>GameObject\Bullet\Projectile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CCharacter.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CGunProjectile.h">
-      <Filter>Projectile</Filter>
-    </ClInclude>
-    <ClInclude Include="PowerBallEnemy.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="BadFaerie.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="EventReciever.h">
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="SkyBox.h">
@@ -119,32 +112,59 @@
     <ClInclude Include="Terrain.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="CLaserProjectile.h">
-      <Filter>Projectile</Filter>
+    <ClInclude Include="Enemy.h">
+      <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BadFaerie.h">
+      <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerBallEnemy.h">
+      <Filter>GameObject\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="PowerBall.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Irrlicht.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Gui.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Global.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>Source Files</Filter>
+      <Filter>GameObject\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="IrrKlang.h">
-      <Filter>Source Files</Filter>
+      <Filter>Irrlicht</Filter>
+    </ClInclude>
+    <ClInclude Include="Irrlicht.h">
+      <Filter>Irrlicht</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="EventReciever.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Gui.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameHandle.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="LaserProjectile.h">
+      <Filter>GameObject\Bullet\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="GunProjectile.h">
+      <Filter>GameObject\Bullet\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponManager.h">
+      <Filter>GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerBallProjectile.h">
+      <Filter>GameObject\Bullet\Projectile</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

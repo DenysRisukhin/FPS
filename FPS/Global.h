@@ -15,16 +15,10 @@ using namespace gui;
 
 using namespace irrklang;
 
-enum Direction
-{
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT
-};
-
 #define IDLE_VECTOR		{0.f, 0.f, 0.f}
 
 #define WINDOW_WIDTH	1024
 #define WINDOW_HEIGHT	768
+
+
 

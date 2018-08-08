@@ -17,6 +17,5 @@ public:
 
 	ISceneNode* node;
 protected:
-	//IBillboardSceneNode* node;
 	vector3df direction;
 };

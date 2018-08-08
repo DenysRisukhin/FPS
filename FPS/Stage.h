@@ -1,7 +1,6 @@
 #pragma once
 
-#include "Game.h"
-
+#include "GameHandle.h"
 #include "IrrLicht.h"
 #include "Irrklang.h"
 #include "Player.h"
@@ -10,71 +9,76 @@
 #include "TextureManager.h"
 #include <time.h>
 
-
-#define ENEMY_FIELD_SIZE	{ -250.f, 180.f, 250.f, -160.f }
-#define PLAYER_LINE_SIZE	{ -200, 0.f, -500,  200, 0.f, 0 }
-
-
-#define SCENE_SKYBOX_ROTATION	{ 0.f, 270.f, 0.f }
-#define SCENE_SKYBOX_SCALE		{ 1.1f, 1.f, 0.75f }
+/**
+* Represents stage - high level building block for the game.
+*/
 
 class Stage
 {
-private:
-
-	Irrlicht		*engine;
-	ISoundEngine	*sound;
-
-
-	GUI				*gui;
-	ISound			*gameMusic;
-	TextureManager	*texManager;
-
-	rectf			enemyField;
-
-	// 3D line between two points with intersection methods.
-	line3df			playerLine;
-
-	//State			state;
-	Time			timer;
-
-	bool			soundPlay;
-
-	void toLevel(bool pause);
-
-	void menu();
-	void game();
-
-
-	void drop();
-	void menuClick();
-
 public:
 
-	bool bPressed;
-	u32 lastPress;
-
-	f32 deltaTime;
-	f32 previousTime, presentTime;
-
-	f32 previous;
-	f32 now;
-
-	s32 startTime, elapsedTime, endTime;
-
-	Game app;
-	Terrain* terrain;
-	EventReciever* reciever;
-	ITriangleSelector* selector;
-	Camera* camera;
-	Player* player;
-	Skybox* skybox;
+	/*!
+	* Initializes game data: gui, texManager, engine, gameState,
+	*                        sound, soundPlay, terrain.
+	*/
 	Stage();
+
+	/**
+	* Handling of the main game process.
+	*/
 	void loop();
+
+	/**
+	* Handling of the menu.
+	*/
+	void menu();
+
+	/**
+	* Handling of the game action phase.
+	*/
+	void actionPhase();
+
+	/**
+	* Sets Game pause.
+	*/
+	void setPause(bool pause);
+
+	/**
+	* Processing GAME_COMPLETE || GAME_OVER states.
+	*/
+	void processingResultScreen();
+
+	void initGameData();
+	void hideCursor();
+	void menuClickSound();
+
+	vector3df getGravity(const c8 * surface);
+
+	void drop();
+	
+private:
 
 	GameState gameState;
 
-	ISceneNode *skybox1;
+	Irrlicht *engine;
+	ISoundEngine *sound;
+	GUI *gui;
+	ISound *gameMusic;
+	TextureManager	*texManager;
+	Time timer;
 
-	vector3df curCameraPos;
+	EventReciever* reciever;
+	ITriangleSelector* selector;
+	bool soundPlay;
+
+	/**
+	* Level data.
+	*/
+	GameHandle app;
+	Terrain* terrain;
+	Camera* camera;
+	Player* player;
+	Skybox* skybox;
+
+	rectf enemyField;
 };

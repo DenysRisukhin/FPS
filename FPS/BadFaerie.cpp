@@ -9,31 +9,42 @@ BadFaerie::BadFaerie(vector3df position, f32 newSpeed, ISceneManager* manager, P
 	dodgeStart = 0;
 	lastAttack = 0;
 	device = irrDevice;
-	listPtr = updateListPtr;
+	actionPhaseUpdateList = updateListPtr;
 }
 
 void BadFaerie::attack()
 {
+	// Интервал между выстрелами BadFaerie 1500.0f
 	if ((device->getTimer()->getTime() - lastAttack) < 1500.0f)
 	{
 		return;
 	}
-
-	smgr->getActiveCamera()->updateAbsolutePosition();
-	core::vector3df pos = smgr->getActiveCamera()->getAbsolutePosition();
+	
 
 	node->updateAbsolutePosition();
-	vector3df direction = pos - node->getAbsolutePosition();
-	direction.normalize();
+	
+	core::vector3df posStart = node->getAbsolutePosition();
+	
 
-	PowerBall* powerBall = new PowerBall(smgr, driver, node->getAbsolutePosition(), pos, 1.0f);
+	//PowerBallProjectile* powerBall = new PowerBallProjectile(node->getAbsolutePosition().normalize(), pos.normalize(), smgr);
+
+	//PowerBall* powerBall = new PowerBall(smgr, driver, node->getAbsolutePosition(), pos, 1.0f);
 	lastAttack = device->getTimer()->getTime();
 
+	//node
+	//(node->getTarget() - node->getAbsolutePosition()).normalize()
+	//target
 	//if (powerBall != NULL)
-	//{
-	//	listPtr->push_back(powerBall);
-	//}
 
+
+	smgr->getActiveCamera()->updateAbsolutePosition();
+	core::vector3df direction = smgr->getActiveCamera()->getAbsolutePosition() - posStart;
+	direction.normalize();
+
+	actionPhaseUpdateList->push_back( new PowerBallProjectile(posStart, direction, smgr) );
+
+	//std::cout << "actionPhaseUpdateList.size()" << actionPhaseUpdateList->size() << std::endl;
+	
 }
 
 void BadFaerie::dodge(f32 deltaTime)
@@ -70,18 +81,17 @@ void BadFaerie::run(f32 deltaTime)
 	node->setPosition(vector3df(node->getAbsolutePosition().X + (direction.X * speed * deltaTime), 135, node->getAbsolutePosition().Z + (direction.Z * speed * deltaTime)));
 }
 
-bool BadFaerie::listHasPowerBall()
-{
-	for each (GameObject* ptr in *listPtr)
-	{
-		if (dynamic_cast<PowerBall*>(ptr) != NULL)
-		{
-			return true;
-		}
-	}
-	return true;
-}
-
+//bool BadFaerie::listHasPowerBall()
+//{
+//	for each (GameObject* ptr in *listPtr)
+//	{
+//		if (dynamic_cast<PowerBall*>(ptr) != NULL)
+//		{
+//			return true;
+//		}
+//	}
+//	return true;
+//}
 
 bool BadFaerie::seesPowerBall()
 {
@@ -151,8 +161,11 @@ void BadFaerie::update(f32 deltaTime)
 			return;
 		}
 
-		if ((node->getAbsolutePosition() - target->getNode()->getAbsolutePosition()).getLength() < 400.0f)
+		if ((node->getAbsolutePosition() - target->getNode()->getAbsolutePosition()).getLength() < 25400.0f) // 400
 		{
+			//node->updateAbsolutePosition();
+			//node->getPosition();
+			//node->setPosition(node->getAbsolutePosition());
 			currentState = ENEMY_ATTACK;
 			attack();
 		}

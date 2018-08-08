@@ -1,7 +1,6 @@
 #include "Skybox.h"
 
-Skybox::Skybox(ISceneManager* smgr, IVideoDriver* driver)
-{
+Skybox::Skybox(ISceneManager* smgr, IVideoDriver* driver){
 	node = smgr->addSkyBoxSceneNode(driver->getTexture("Textures/downtron.jpg"), driver->getTexture("Textures/uptron.jpg"), driver->getTexture("Textures/lefttron.jpg"), 
 		                            driver->getTexture("Textures/righttron.jpg"), driver->getTexture("Textures/fronttron.jpg"), driver->getTexture("Textures/backtron.jpg"));
 	
@@ -17,7 +16,6 @@ Skybox::Skybox(ISceneManager* smgr, IVideoDriver* driver)
 	light->enableCastShadow();
 }
 
-ISceneNode* Skybox::getNode()
-{
+ISceneNode* Skybox::getNode(){
 	return node;
 }

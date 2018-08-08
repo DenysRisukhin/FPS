@@ -1,7 +1,6 @@
 #include "Terrain.h"
 
-Terrain::Terrain(ISceneManager* smgr, IVideoDriver* driver)
-{
+Terrain::Terrain(ISceneManager* smgr, IVideoDriver* driver){
 	terrain = smgr->addTerrainSceneNode("Textures/terrain-heightmap.bmp");
 	terrain->setPosition(vector3df(0, 0, 0));
 	terrain->setScale(vector3df(40, 0.5, 40));
@@ -9,8 +8,7 @@ Terrain::Terrain(ISceneManager* smgr, IVideoDriver* driver)
 	terrain->setMaterialTexture(0, driver->getTexture("Textures/terrain-texture.bmp"));
 }
 
-ITerrainSceneNode* Terrain::getNode()
-{
+ITerrainSceneNode* Terrain::getNode(){
 	return terrain;
 }
 

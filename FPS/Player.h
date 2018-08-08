@@ -3,9 +3,9 @@
 #include <irrlicht.h>
 #include "Camera.h"
 #include "PowerBall.h"
-#include "CGunProjectile.h"
-#include "CLaserProjectile.h"
-#include "CCharacter.h"
+#include "GunProjectile.h"
+#include "LaserProjectile.h"
+#include "WeaponManager.h"
 
 #include "Irrklang.h"
 
@@ -16,19 +16,6 @@ using namespace video;
 
 class PowerBall;
 
-#define POWERBALL_COST				20
-#define PUSH_COST					30
-#define TELEPORT_COST				30
-#define MANA_REGENERATE_PER_SEC		5
-#define PICKUP_HEAL					30
-
-enum State
-{
-	IDLE,
-	ATTACK,
-	RUNNING
-};
-
 enum WEAPON {
 	REVOLVER,
 	REVEVO,
@@ -38,84 +25,89 @@ enum WEAPON {
 	LASER
 };
 
-class Player: public CCharacter {
+/*!
+* Represents the Player as fps camera with weapons on the hands
+*/
+
+class Player: public WeaponManager {
 public:
 
-	WEAPON weapon;
-	WEAPON getWeapon();
-	void setWeapon(WEAPON);
+	/*!
+	Initializes Player data.
+	@param camera FPS camera.
+	@param updateListPtr list with handling objects.
+	*/
 	Player(IrrlichtDevice* irrDevice, ISceneManager* smgr, IVideoDriver* driver, Camera* camera, list<GameObject*> *updateListPtr);
-	~Player() { sound->drop(); }
+	~Player();
 
-	void setUpdateList(list<GameObject*> *updateListPtr);
+	/**
+	* Initializes weaponNode & handNode.
+	*/
+	void initWeaponAndHandNode();
 
-	IAnimatedMesh* getMesh();
+	void setWeapon(WEAPON);
+	void setHealth(u8 health);
+	
+	WEAPON getWeapon();
+
+	/**
+	* Get weaponNode.
+	*/
 	IAnimatedMeshSceneNode* getNode();
+
+	/**
+	* Get weaponNode absolute position.
+	*/
 	vector3df getPosition();
 	vector3df getDirection();
+	u8 getHealth();
+	ISoundEngine* getSound();
+	ISceneManager* getSmgr();
 	
-	// ущерб
-	void takeDamage(u8 attackRating);
+	/**
+	*  Reduce Player health.
+	*/
+	void setDamage(u8 attackRating);
 	void kill();
 	bool isDead();
 
-	// подбирать здоровье
-	void takePickup();
-	u8 getHealth();
-	u8 getMana();
-	void incrementMana();
-
-	void setHealth(u8 _health) {
-		health = _health;
-	}
-
-	ISoundEngine* getSound() {
-		return sound;
-	}
-	
+	/**
+	* shots 
+	*/
 	void fire(s32 weapon, IrrlichtDevice *device);
+
+	/**
+	* 
+	*/
 	void changeWeapon(s32 weapon);
-
-	scene::IAnimatedMeshSceneNode* GunNode;
-	scene::IAnimatedMeshSceneNode* HandNode;
-
-	scene::IAnimatedMesh* mesh;
-	scene::IAnimatedMesh* handmesh;
-
-	ISceneManager* getSmgr() {
-		return smgr;
-	}
-
-	f32 lastAttack;
 
 	virtual void drop();
 
-	void setCamera(Camera* myCamera);
-
 private:
-	ISoundEngine	*sound;
-	list<GameObject*> * listPtr;
-	f32 lastPush;
-	f32 lastTeleport;
-	f32 cameraDistance;
-	State state;
-	f32 speed;
+
+	list<GameObject*> *listPtr;
+
+	WEAPON weapon;
+
+	IAnimatedMeshSceneNode* weaponNode;
+	IAnimatedMeshSceneNode* handNode;
+
+	IAnimatedMesh* weaponMesh;
+	IAnimatedMesh* handMesh;
+
+	ISoundEngine *sound;
 	IrrlichtDevice* device;
 	ISceneManager* smgr;
 	IVideoDriver* driver;
-	IAnimatedMeshSceneNode* node;
-	vector3df forwardDirection;
-	u8 health;
-	u8 mana;
 	Camera* camera;
 
-	s32 TimeSinceLastShot;
-	
-	scene::IMetaTriangleSelector* MetaSelector;
-	u32 now;
 	ISceneNode* gunflame;
-	ITexture* image;
 
-	core::vector3df scale, pos, rot;
-	core::vector3df scaleh, posh, roth;
+	vector3df forwardDirection;
+
+	vector3df scale, pos, rot;
+	vector3df scaleh, posh, roth;
+	
+	f32 lastAttack;
+	u8 health;
 };

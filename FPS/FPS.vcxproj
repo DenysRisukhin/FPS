@@ -150,12 +150,13 @@
   <ItemGroup>
     <ClCompile Include="BadFaerie.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="CCharacter.cpp" />
-    <ClCompile Include="CGunProjectile.cpp" />
-    <ClCompile Include="CLaserProjectile.cpp" />
+    <ClCompile Include="PowerBallProjectile.cpp" />
+    <ClCompile Include="WeaponManager.cpp" />
+    <ClCompile Include="GunProjectile.cpp" />
+    <ClCompile Include="LaserProjectile.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventReciever.cpp" />
-    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameHandle.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Gui.cpp" />
     <ClCompile Include="Irrlicht.cpp" />
@@ -171,12 +172,13 @@
   <ItemGroup>
     <ClInclude Include="BadFaerie.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="CCharacter.h" />
-    <ClInclude Include="CGunProjectile.h" />
-    <ClInclude Include="CLaserProjectile.h" />
+    <ClInclude Include="PowerBallProjectile.h" />
+    <ClInclude Include="WeaponManager.h" />
+    <ClInclude Include="GunProjectile.h" />
+    <ClInclude Include="LaserProjectile.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EventReciever.h" />
-    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameHandle.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Gui.h" />

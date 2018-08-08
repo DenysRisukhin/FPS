@@ -42,43 +42,34 @@
 #define WHITE_COLOR				{255, 255, 255, 255}
 #define BLACK_COLOR				{239, 13, 13, 0}
 
+/**
+* Represents menu as a set of buttons, images & labels.
+*/
 class GUI
 {
-
-private:
-
-	list<IGUIButton *>	buttons;
-
-	IGUIStaticText		*health;
-
-	IGUIStaticText		*ammoLabel;
-	IGUIStaticText		*magLabel;
-
-	IGUIComboBox		*musicBox;
-	IGUIComboBox		*soundBox;
-	IGUIImage			*logo;
-	IGUIImage			*life;
-	IGUIImage			*crosshair;
-
-	IGUIImage			*curWeapon;
-	IGUIImage			*ammo;
-	IGUIImage			*mag;
-
-	void addButton(IGUIEnvironment *gui, ITexture *&texture, path name, const recti size, u32 btn);
-
 public:
 
 	GUI();
 
-	void    setAmmo(const u32 newScore);
-	void    setMag(const u32 newScore);
-	void	setHealth(const s32 health);
-	void    setWeapon(IGUIEnvironment *gui, IVideoDriver *drv, Player* player);
+	/**
+	* Set labels
+	*/
+	void    setAmmoLabel(const u32 newScore);
+	void    setMagLabel(const u32 newScore);
+	void	setHealthLabel(const s32 health);
+
+	/**
+	* Set texture for the weapon.
+	*/
+	void    setWeaponTexture(IGUIEnvironment *gui, IVideoDriver *drv, Player* player);
 
 	bool	isButtonPressed(u32 id) const;
 	s32		getMusicSelection() const;
 	s32		getSoundSelection() const;
 
+	/**
+	* Creates set of buttons.
+	*/
 	void	menu(IGUIEnvironment *gui, TextureManager *&manager, IVideoDriver *drv);
 	void	options(IGUIEnvironment *gui, TextureManager *&manager);
 	void	pause(IGUIEnvironment *gui, TextureManager *&manager);
@@ -88,4 +79,23 @@ public:
 
 	void	drop(bool fScore = false, bool fHealth = false);
 
+private:
+
+	list<IGUIButton *>	buttons;
+
+	IGUIStaticText		*health;
+	IGUIStaticText		*ammoLabel;
+	IGUIStaticText		*magLabel;
+
+	IGUIComboBox		*musicBox;
+	IGUIComboBox		*soundBox;
+
+	IGUIImage			*logo;
+	IGUIImage			*life;
+	IGUIImage			*crosshair;
+	IGUIImage			*curWeapon;
+	IGUIImage			*ammo;
+	IGUIImage			*mag;
+
+	void addButton(IGUIEnvironment *gui, ITexture *&texture, path name, const recti size, u32 btn);
 };

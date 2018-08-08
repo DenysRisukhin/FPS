@@ -1,26 +1,28 @@
 #include <irrlicht.h>
-
 #include "Global.h"
 
 using namespace irr;
 using namespace core;
 using namespace gui;
 
-enum GameState
-{
+/*!
+* Represents game states.
+*/
+enum GameState {
 	MENU,
 	OPTIONS,
 	INGAME,
 	PAUSE,
 	OVER,
 	EXIT,
-	//WAVE_1,
 	GAME_COMPLETE,
 	GAME_OVER
 };
 
-enum
-{
+/*!
+* Represents numbers for buttons set(for menu).
+*/
+enum {
 	GUI_ID_QUIT_BUTTON = 101,
 	GUI_ID_PLAY_BUTTON,
 	GUI_ID_CONTROLS_BUTTON,
@@ -30,28 +32,60 @@ enum
 };
 
 #pragma once
+
+/*!
+* Represents mouse & keyboard events.
+*/
 class EventReciever : public IEventReceiver {
 public:
+
+	/*!
+	* Initializes keys & leftButtonPressed data.
+	*/
 	EventReciever();
+
+	/**
+	* Returns true if current key is pressed.
+	*/
 	virtual bool isKeyDown(EKEY_CODE keyCode) const;
+
+	/**
+	* Returns false if current key is up.
+	*/
 	virtual bool isKeyUp(EKEY_CODE keyCode) const;
+
+	/**
+	* Returns mouse event.
+	*/
 	char getMouse();
-	char m_cMouse;
 
-	///--------------------
-	bool		keys[KEY_KEY_CODES_COUNT];
-	position2di	mousePosition;
-	bool		leftButtonPressed;
-	bool		mouseMove;
+	/**
+	* Returns true if left mouse button is pressed.
+	*/
+	bool isLeftButtonPressed() const;
 
-	bool keyDown[KEY_KEY_CODES_COUNT];
+	/**
+	* Returns true if the mouse is moved.
+	*/
+	bool isMouseMoveActive() const;
+	
+	/**
+	* Handling mouse & keyboard events.
+	*/
+	bool OnEvent(const SEvent &event);
 
-	///---------------------
-	bool		OnEvent(const SEvent &event);
+	void zeroMouse();
+	void zeroMouseMove();
+
+	void setMousePosition(vector3df position);
 	position2di	getMousePosition() const;
-	bool		isLeftButtonPressed() const;
-	bool        isMouseMoveActive() const;
-	void		setMousePosition(vector3df position);
-	void		zeroMouse();
-	void        zeroMouseMove();
+
+private:
+
+	bool keys[KEY_KEY_CODES_COUNT];
+	char m_cMouse;
+	bool leftButtonPressed;
+
+	position2di	mousePosition;
+	bool mouseMove;
 };

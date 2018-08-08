@@ -1,6 +1,6 @@
 #include "Irrlicht.h"
 
-Irrlicht::Irrlicht() : reciever(NULL), device(NULL), video(NULL), manager(NULL), gui(NULL), windowSize(dimension2du(0, 0)), camera(NULL)
+Irrlicht::Irrlicht() : reciever(NULL), device(NULL), video(NULL), manager(NULL), gui(NULL), windowSize(dimension2du(0, 0))
 {
 }
 
@@ -14,7 +14,6 @@ Irrlicht::Irrlicht(wchar_t *name, dimension2du size) : windowSize(size)
 	video = device->getVideoDriver();
 	manager = device->getSceneManager();
 	gui = device->getGUIEnvironment();
-	camera = manager->addCameraSceneNode(NULL, CAMERA_POSITION, IDLE_VECTOR);
 }
 
 ISceneManager *Irrlicht::getManager() const
@@ -48,7 +47,7 @@ dimension2du Irrlicht::getCenter() const
 	return dimension2du(windowSize.Width / 2, windowSize.Height / 2);
 }
 
-u32 Irrlicht::getNow() const
+u32 Irrlicht::getCurrentTime() const
 {
 	return device->getTimer()->getTime();
 }
@@ -91,10 +90,10 @@ vector2di Irrlicht::getCursorPosition() const
 	return device->getCursorControl()->getPosition();
 }
 
-bool Irrlicht::isLeftMouseButtonPressed() const
-{
-	//return reciever->isLeftButtonPressed();
-}
+//bool Irrlicht::isLeftMouseButtonPressed() const
+//{
+//	//return reciever->isLeftButtonPressed();
+//}
 
 void Irrlicht::resetInput()
 {

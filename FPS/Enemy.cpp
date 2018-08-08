@@ -26,7 +26,13 @@ vector3df Enemy::getPosition()
 	return node->getAbsolutePosition();
 }
 
-vector3df getTargetAngle(vector3df v, vector3df r)
+void Enemy::facePlayer()
+{
+	node->updateAbsolutePosition();
+	node->setRotation(getTargetAngle(node->getAbsolutePosition(), target->getPosition()));
+}
+
+vector3df Enemy::getTargetAngle(vector3df v, vector3df r)
 {
 	//v -current node position
 	//r -target node position
@@ -41,7 +47,7 @@ vector3df getTargetAngle(vector3df v, vector3df r)
 	angle.Y = atan2(x, z);
 	angle.Y *= (180 / PI); //converting from rad to degrees
 
-	//just making sure angle is somewhere between 0-360 degrees
+	 //just making sure angle is somewhere between 0-360 degrees
 	if (angle.Y < 0) angle.Y += 360;
 	if (angle.Y >= 360) angle.Y -= 360;
 
@@ -57,12 +63,6 @@ vector3df getTargetAngle(vector3df v, vector3df r)
 	if (angle.X >= 360) angle.X -= 360;
 
 	return angle;
-}
-
-void Enemy::facePlayer()
-{
-	node->updateAbsolutePosition();
-	node->setRotation(getTargetAngle(node->getAbsolutePosition(), target->getPosition()));
 }
 
 void Enemy::pushBack()

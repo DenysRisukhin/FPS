@@ -13,7 +13,7 @@ GUI::GUI() : buttons({}), health(NULL), musicBox(NULL), soundBox(NULL), life(NUL
 {
 }
 
-void GUI::setWeapon(IGUIEnvironment *gui, IVideoDriver *drv, Player *player) {
+void GUI::setWeaponTexture(IGUIEnvironment *gui, IVideoDriver *drv, Player *player) {
 
 	drop(true, true);
 
@@ -34,44 +34,44 @@ void GUI::setWeapon(IGUIEnvironment *gui, IVideoDriver *drv, Player *player) {
 
 		curWeapon = gui->addImage(drv->getTexture("Textures/1.jpg"), core::position2d<int>(10, 10));
 
-		setAmmo(player->getAmmoRev());
-		setMag(player->getMagRev());
+		setAmmoLabel(player->getAmmoRev());
+		setMagLabel(player->getMagRev());
 
 		break;
 	case REVEVO:
 
 		curWeapon = gui->addImage(drv->getTexture("Textures/2.jpg"), core::position2d<int>(10, 10));
 
-		setAmmo(player->getAmmoRevEvo());
-		setMag(player->getMagRevEvo());
+		setAmmoLabel(player->getAmmoRevEvo());
+		setMagLabel(player->getMagRevEvo());
 
 		break;
 	case MGUN:
 		curWeapon = gui->addImage(drv->getTexture("Textures/3.jpg"), core::position2d<int>(10, 10));
 
-		setAmmo(player->getAmmoMgun());
-		setMag(player->getMagMgun());
+		setAmmoLabel(player->getAmmoMgun());
+		setMagLabel(player->getMagMgun());
 
 		break;
 	case MGUNB:
 		curWeapon = gui->addImage(drv->getTexture("Textures/4.jpg"), core::position2d<int>(10, 10));
 
-		setAmmo(player->getAmmoMgunB());
-		setMag(player->getMagMgunB());
+		setAmmoLabel(player->getAmmoMgunB());
+		setMagLabel(player->getMagMgunB());
 
 		break;
 	case SMG:
 		curWeapon = gui->addImage(drv->getTexture("Textures/5.jpg"), core::position2d<int>(10, 10));
 
-		setAmmo(player->getAmmoSMG());
-		setMag(player->getMagSMG());
+		setAmmoLabel(player->getAmmoSMG());
+		setMagLabel(player->getMagSMG());
 
 		break;
 	case LASER:
 		curWeapon = gui->addImage(drv->getTexture("Textures/6.jpg"), core::position2d<int>(10, 10));
 
-		setAmmo(000);
-		setMag(000);
+		setAmmoLabel(000);
+		setMagLabel(000);
 
 		break;
 	}
@@ -89,19 +89,19 @@ void GUI::addButton(IGUIEnvironment *gui, ITexture *&texture, path name, const r
 	buttons.push_back(button);
 }
 
-void GUI::setAmmo(const u32 newScore)
+void GUI::setAmmoLabel(const u32 newScore)
 {
 	std::wstring text = std::to_wstring(newScore);
 	ammoLabel->setText(text.c_str());
 }
 
-void GUI::setMag(const u32 newScore)
+void GUI::setMagLabel(const u32 newScore)
 {
 	std::wstring text = std::to_wstring(newScore);
 	magLabel->setText(text.c_str());
 }
 
-void GUI::setHealth(const s32 newHealth)
+void GUI::setHealthLabel(const s32 newHealth)
 {
 	std::wstring text = std::to_wstring(newHealth);
 	health->setText(text.c_str());

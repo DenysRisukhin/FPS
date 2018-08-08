@@ -4,40 +4,33 @@ TextureManager::TextureManager() : playerTex(NULL), enemyTex(NULL), buttonsTex(N
 {
 }
 
-ITexture **TextureManager::getPlayerTexture() const
-{
+ITexture **TextureManager::getPlayerTexture() const{
 	return playerTex;
 }
 
-ITexture **TextureManager::getEnemyTexture() const
-{
+ITexture **TextureManager::getEnemyTexture() const{
 	return enemyTex;
 }
 
-ITexture **TextureManager::getButtonsTexture() const
-{
+ITexture **TextureManager::getButtonsTexture() const{
 	return buttonsTex;
 }
 
-void TextureManager::setPlayerTexture(ITexture **texture)
-{
+void TextureManager::setPlayerTexture(ITexture **texture){
 	playerTex = texture;
 }
 
-void TextureManager::setEnemyTexture(ITexture **texture)
-{
+void TextureManager::setEnemyTexture(ITexture **texture){
 	enemyTex = texture;
 }
 
-void TextureManager::setButtonsTexture(ITexture **texture)
-{
+void TextureManager::setButtonsTexture(ITexture **texture){
 	buttonsTex = texture;
 }
 
-void TextureManager::loadTextures(IVideoDriver *video)
-{
+void TextureManager::loadTextures(IVideoDriver *video){
 	path name = TEXTURE_PATH;
-	playerTex = new ITexture *;
+	/*playerTex = new ITexture *;
 	playerTex[0] = video->getTexture(name + PLAYER_NAME);
 
 	enemyTex = new ITexture *[ENEMY_TEXTURES_COUNT];
@@ -45,7 +38,7 @@ void TextureManager::loadTextures(IVideoDriver *video)
 	enemyTex[1] = video->getTexture(name + ENEMY02_NAME);
 	enemyTex[2] = video->getTexture(name + ENEMY03_NAME);
 	enemyTex[3] = video->getTexture(name + ENEMY04_NAME);
-	enemyTex[4] = video->getTexture(name + ENEMY05_NAME);
+	enemyTex[4] = video->getTexture(name + ENEMY05_NAME);*/
 
 	buttonsTex = new ITexture *[BUTTON_TEXTURES_COUNT];
 	buttonsTex[0] = video->getTexture(name + BUTTON_START_NAME);
@@ -54,8 +47,7 @@ void TextureManager::loadTextures(IVideoDriver *video)
 	buttonsTex[3] = video->getTexture(name + BUTTON_QUIT_NAME);
 }
 
-void TextureManager::drop()
-{
+void TextureManager::drop(){
 	if (playerTex)
 	{
 		if (playerTex[0])

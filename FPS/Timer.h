@@ -2,10 +2,9 @@
 
 #include "Global.h"
 
-struct Time
-{
+struct Time{
 	u32 lastTime;
-	u32 now;
+	u32 presentTime;
 	u32 lastFire;
 	u32 lastStep;
 	u32 lastEnemyFire;
@@ -17,7 +16,7 @@ struct Time
 	void zeroTimes()
 	{
 		lastTime = 0;
-		now = 0;
+		presentTime = 0;
 		lastFire = 0;
 		lastStep = 0;
 		lastEnemyFire = 0;

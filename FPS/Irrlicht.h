@@ -6,45 +6,55 @@
 #define WINDOW_COLOR_DEPTH		32
 #define WINDOW_BACKGROUND_COLOR	{0, 0, 0, 0}
 
-#define CAMERA_POSITION			{ 0.f, -300.f, 0.f }
-#define LIGHT_POSITION			{ 0.f, -500.f, 0.f }
-#define LIGHT_RADIUS			5000
-
+/*!
+*Represents Irrlicht's basic objects: device, video, manager, gui, event reciever, etc.
+*/
 class Irrlicht {
-private:
-
-	EventReciever			*reciever;
-	IrrlichtDevice		*device;
-	IVideoDriver		*video;
-	ISceneManager		*manager;
-	IGUIEnvironment		*gui;
-	dimension2du		windowSize;
-	ICameraSceneNode	*camera;
 
 public:
-	Irrlicht();
+	
+	/*!
+	Initializes window using provided info.
+	@param name Window name.
+	@param size Window size.
+	*/
 	Irrlicht(wchar_t *name, dimension2du size);
+	Irrlicht();
 
-	IrrlichtDevice *    getDevice() const;
-	ISceneManager *		getManager() const;
-	IGUIEnvironment	*	getGUI() const;
-	IVideoDriver *		getVideo() const;
-	ISceneNode *		getSkyBox(path fileName) const;
+	void setTime(u32 newTime);
+	void setCursorPosition(const dimension2du position);
+	void setCursorToCenter();
+	void hideCursor(const bool flag);
 
-	dimension2du		getCenter() const;
-	u32					getNow() const;
-	void				setTime(u32 newTime);
-	bool				isKeyPressed(EKEY_CODE key) const;
-	void				hideCursor(const bool flag);
-	void				setCursorPosition(const dimension2du position);
-	void				setCursorToCenter();
-	vector2di			getCursorPosition() const;
-	bool				isLeftMouseButtonPressed() const;
-	void				resetInput();
-	void			    resetMouseMove();
-	bool				isMouseActive();
-	bool				run();
-	void				drawAll();
-	bool				drop();
+	vector2di getCursorPosition() const;
+	IrrlichtDevice *getDevice() const;
+	ISceneManager *getManager() const;
+	IGUIEnvironment	*getGUI() const;
+	IVideoDriver *getVideo() const;
+	ISceneNode *getSkyBox(path fileName) const;
+	dimension2du getCenter() const;
+	u32	getCurrentTime() const;
+
+	bool isKeyPressed(EKEY_CODE key) const;
+
+	void resetInput();
+	void resetMouseMove();
+	bool isMouseActive();
+
+	bool run();
+
+	void drawAll();
+
+	bool drop();
+
+private:
+
+	EventReciever *reciever;
+	IrrlichtDevice *device;
+	IVideoDriver *video;
+	ISceneManager *manager;
+	IGUIEnvironment *gui;
+
+	dimension2du windowSize;
 };
 #pragma once

@@ -3,7 +3,7 @@
 #include "Global.h"
 
 #define TEXTURE_PATH			"Textures/"
-#define PLAYER_NAME			"sydney.bmp"
+#define PLAYER_NAME			    "sydney.bmp"
 #define ENEMY01_NAME			"faerie2.bmp"
 #define ENEMY02_NAME			"Faerie5.bmp"
 #define ENEMY03_NAME			"nskinbl.jpg"
@@ -19,16 +19,7 @@
 
 class TextureManager
 {
-
-private:
-
-	ITexture **playerTex;
-	ITexture **enemyTex;
-	ITexture **buttonTex;
-	ITexture **buttonsTex;
-
 public:
-
 
 	TextureManager();
 
@@ -44,4 +35,10 @@ public:
 
 	void drop();
 
+private:
+
+	ITexture **playerTex;
+	ITexture **enemyTex;
+	ITexture **buttonTex;
+	ITexture **buttonsTex;
 };
