@@ -23,7 +23,7 @@ Gameplay Completion:
 	
 	Displaying additional information:     	    weapon bar, player health, ammo, magazine
 	
-	Fps camera                                  player
+	Player                                      fps camera
 	
 	Enemies	                                    badFaerie (5 objects)
 	
