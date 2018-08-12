@@ -1,10 +1,46 @@
-﻿  Stage.cpp
+﻿  BadFaerie.cpp
+BadFaerie.cpp(22): warning C4244: '=': conversion from 'irr::u32' to 'irr::f32', possible loss of data
+BadFaerie.cpp(87): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+BadFaerie.cpp(148): warning C4244: '=': conversion from 'irr::u32' to 'irr::f32', possible loss of data
+  Enemy.cpp
+Enemy.cpp(71): warning C4244: '=': conversion from 'irr::u32' to 'irr::f32', possible loss of data
+  EventReciever.cpp
+EventReciever.cpp(66): warning C4244: '=': conversion from 'const irr::f32' to 'irr::s32', possible loss of data
+EventReciever.cpp(67): warning C4244: '=': conversion from 'const irr::f32' to 'irr::s32', possible loss of data
+  GameHandle.cpp
+GameHandle.cpp(33): warning C4018: '<': signed/unsigned mismatch
+GameHandle.cpp(82): warning C4018: '<': signed/unsigned mismatch
+GameHandle.cpp(133): warning C4018: '<': signed/unsigned mismatch
+GameHandle.cpp(187): warning C4018: '<': signed/unsigned mismatch
+GameHandle.cpp(224): warning C4018: '<': signed/unsigned mismatch
+GameHandle.cpp(341): warning C4018: '<': signed/unsigned mismatch
+GameHandle.cpp(432): warning C4244: '=': conversion from 'irr::u32' to 'irr::f32', possible loss of data
+GameHandle.cpp(471): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+GameHandle.cpp(475): warning C4018: '<': signed/unsigned mismatch
+GameHandle.cpp(498): warning C4244: 'argument': conversion from 'int' to 'irr::f32', possible loss of data
+  GameObject.cpp
+  Gui.cpp
+Gui.cpp(219): warning C4244: 'argument': conversion from 'double' to 'irr::s32', possible loss of data
+  GunProjectile.cpp
+  Irrlicht.cpp
+  LaserProjectile.cpp
+  Player.cpp
+Player.cpp(298): warning C4244: '=': conversion from 'irr::u32' to 'irr::f32', possible loss of data
+Player.cpp(336): warning C4244: '=': conversion from 'irr::u32' to 'irr::f32', possible loss of data
+Player.cpp(373): warning C4244: '=': conversion from 'irr::u32' to 'irr::f32', possible loss of data
+Player.cpp(409): warning C4244: '=': conversion from 'irr::u32' to 'irr::f32', possible loss of data
+Player.cpp(446): warning C4244: '=': conversion from 'irr::u32' to 'irr::f32', possible loss of data
+Player.cpp(483): warning C4244: '=': conversion from 'irr::u32' to 'irr::f32', possible loss of data
+  PowerBallProjectile.cpp
+  Stage.cpp
 Stage.cpp(12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-Stage.cpp(164): warning C4244: '=': conversion from 'irr::u32' to 'irr::f32', possible loss of data
+Stage.cpp(162): warning C4244: '=': conversion from 'irr::u32' to 'irr::f32', possible loss of data
+  TextureManager.cpp
+  main.cpp
   Generating code
-  10 of 447 functions ( 2.2%) were compiled, the rest were copied from previous compilation.
+  2 of 447 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
+    4 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   FPS.vcxproj -> C:\Den\Programming\GitHub\FPS\Release\FPS.exe
   FPS.vcxproj -> C:\Den\Programming\GitHub\FPS\Release\FPS.pdb (Full PDB)

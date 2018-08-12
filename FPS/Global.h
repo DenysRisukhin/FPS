@@ -20,5 +20,7 @@ using namespace irrklang;
 #define WINDOW_WIDTH	1024
 #define WINDOW_HEIGHT	768
 
+#define ENEMIE_BAD_FAERIE_AMOUNT 5
+
 
 

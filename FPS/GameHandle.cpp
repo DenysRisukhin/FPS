@@ -426,7 +426,7 @@ void GameHandle::initiateWave(Player* player, IrrlichtDevice* device, ISceneMana
 	bWaveStarted = true;
 
 	// Spawn BadFaerie.
-	for (int i = 0; i < 5; ++i)
+	for (int i = 0; i < ENEMIE_BAD_FAERIE_AMOUNT; ++i)
 		spawnBadFaerie(player, device, smgr, driver, textureMngr->getEnemyTexture()[0]);
 
 	timeSinceStart = device->getTimer()->getTime();
@@ -442,7 +442,7 @@ void GameHandle::updateWaveStatus(GameState & gameState, IrrlichtDevice* device,
 	case INGAME:
 		if ((device->getTimer()->getTime() - timeSinceStart) > 10000.0f && bWaveStarted && !bWaveFinished)
 		{
-			//for (int i = 0; i < 10; ++i)
+			//for (int i = 0; i < ENEMIE_BAD_FAERIE_AMOUNT; ++i)
 			//	spawnBadFaerie(player, device, smgr, driver);
 
 			std::cout << "Wave 1 afterwave spawned.\n";
