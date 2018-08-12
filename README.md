@@ -25,7 +25,7 @@ Gameplay Completion:
 	
 	Fps camera
 	
-	Enemies								        badFaerie (5 objects)
+	Enemies	                                    badFaerie (5 objects)
 	
 	In-game menu support (IGM)        	    ● Resume
 						    ● Back

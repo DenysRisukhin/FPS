@@ -9,29 +9,29 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="GameObject">
-      <UniqueIdentifier>{89063b8c-3171-4a7d-a2d4-c20c520736cb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Enemy">
-      <UniqueIdentifier>{beb5f91e-ae8e-4ff8-a762-a263f70f8be2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Player">
-      <UniqueIdentifier>{8908334a-6a25-48fa-bfb0-22bc1d36594f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game">
-      <UniqueIdentifier>{66b1486a-8e09-4ebb-b9fb-0cf938dfff9c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Irrlicht">
-      <UniqueIdentifier>{d82c69a5-a7aa-486e-bd06-8f8c10ce2d10}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Utilities">
       <UniqueIdentifier>{70ebca42-aa80-42ba-9ecf-c6b6d34fa943}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Projectiles">
-      <UniqueIdentifier>{cd374385-d729-4622-812b-a9945667a654}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Stage">
       <UniqueIdentifier>{f9e33fae-b1e1-4329-8617-9903a43f9fa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Stage\GameHandling">
+      <UniqueIdentifier>{66b1486a-8e09-4ebb-b9fb-0cf938dfff9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Stage\GameObject">
+      <UniqueIdentifier>{89063b8c-3171-4a7d-a2d4-c20c520736cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Stage\GameObject\Enemy">
+      <UniqueIdentifier>{beb5f91e-ae8e-4ff8-a762-a263f70f8be2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Stage\GameObject\Player">
+      <UniqueIdentifier>{8908334a-6a25-48fa-bfb0-22bc1d36594f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Stage\GameObject\Projectiles">
+      <UniqueIdentifier>{cd374385-d729-4622-812b-a9945667a654}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\Irrlicht">
+      <UniqueIdentifier>{d82c69a5-a7aa-486e-bd06-8f8c10ce2d10}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -39,7 +39,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>GameObject</Filter>
+      <Filter>Stage\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Stage</Filter>
@@ -51,16 +51,16 @@
       <Filter>Stage</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>GameObject\Enemy</Filter>
+      <Filter>Stage\GameObject\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="BadFaerie.cpp">
-      <Filter>GameObject\Enemy</Filter>
+      <Filter>Stage\GameObject\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>GameObject\Player</Filter>
+      <Filter>Stage\GameObject\Player</Filter>
     </ClCompile>
     <ClCompile Include="Irrlicht.cpp">
-      <Filter>Irrlicht</Filter>
+      <Filter>Utilities\Irrlicht</Filter>
     </ClCompile>
     <ClCompile Include="Stage.cpp">
       <Filter>Stage</Filter>
@@ -69,30 +69,30 @@
       <Filter>Utilities</Filter>
     </ClCompile>
     <ClCompile Include="EventReciever.cpp">
-      <Filter>Game</Filter>
+      <Filter>Stage\GameHandling</Filter>
     </ClCompile>
     <ClCompile Include="Gui.cpp">
-      <Filter>Game</Filter>
+      <Filter>Stage\GameHandling</Filter>
     </ClCompile>
     <ClCompile Include="GameHandle.cpp">
-      <Filter>Game</Filter>
+      <Filter>Stage\GameHandling</Filter>
     </ClCompile>
     <ClCompile Include="LaserProjectile.cpp">
-      <Filter>GameObject\Projectiles</Filter>
+      <Filter>Stage\GameObject\Projectiles</Filter>
     </ClCompile>
     <ClCompile Include="GunProjectile.cpp">
-      <Filter>GameObject\Projectiles</Filter>
+      <Filter>Stage\GameObject\Projectiles</Filter>
     </ClCompile>
     <ClCompile Include="WeaponManager.cpp">
-      <Filter>GameObject\Player</Filter>
+      <Filter>Stage\GameObject\Player</Filter>
     </ClCompile>
     <ClCompile Include="PowerBallProjectile.cpp">
-      <Filter>GameObject\Projectiles</Filter>
+      <Filter>Stage\GameObject\Projectiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
-      <Filter>GameObject</Filter>
+      <Filter>Stage\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Stage</Filter>
@@ -104,19 +104,19 @@
       <Filter>Stage</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>GameObject\Enemy</Filter>
+      <Filter>Stage\GameObject\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="BadFaerie.h">
-      <Filter>GameObject\Enemy</Filter>
+      <Filter>Stage\GameObject\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>GameObject\Player</Filter>
+      <Filter>Stage\GameObject\Player</Filter>
     </ClInclude>
     <ClInclude Include="IrrKlang.h">
-      <Filter>Irrlicht</Filter>
+      <Filter>Utilities\Irrlicht</Filter>
     </ClInclude>
     <ClInclude Include="Irrlicht.h">
-      <Filter>Irrlicht</Filter>
+      <Filter>Utilities\Irrlicht</Filter>
     </ClInclude>
     <ClInclude Include="Stage.h">
       <Filter>Stage</Filter>
@@ -131,25 +131,25 @@
       <Filter>Utilities</Filter>
     </ClInclude>
     <ClInclude Include="EventReciever.h">
-      <Filter>Game</Filter>
+      <Filter>Stage\GameHandling</Filter>
     </ClInclude>
     <ClInclude Include="Gui.h">
-      <Filter>Game</Filter>
+      <Filter>Stage\GameHandling</Filter>
     </ClInclude>
     <ClInclude Include="GameHandle.h">
-      <Filter>Game</Filter>
+      <Filter>Stage\GameHandling</Filter>
     </ClInclude>
     <ClInclude Include="LaserProjectile.h">
-      <Filter>GameObject\Projectiles</Filter>
+      <Filter>Stage\GameObject\Projectiles</Filter>
     </ClInclude>
     <ClInclude Include="GunProjectile.h">
-      <Filter>GameObject\Projectiles</Filter>
+      <Filter>Stage\GameObject\Projectiles</Filter>
     </ClInclude>
     <ClInclude Include="WeaponManager.h">
-      <Filter>GameObject\Player</Filter>
+      <Filter>Stage\GameObject\Player</Filter>
     </ClInclude>
     <ClInclude Include="PowerBallProjectile.h">
-      <Filter>GameObject\Projectiles</Filter>
+      <Filter>Stage\GameObject\Projectiles</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

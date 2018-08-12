@@ -56,7 +56,6 @@ private:
 	ITexture **buttonsTex;
 	ITexture **weaponsTex;
 
-	ITexture **buttonTex;
 	ITexture **ammoTex;
 	ITexture **magTex;
 };

@@ -4,8 +4,7 @@ Irrlicht::Irrlicht() : reciever(NULL), device(NULL), video(NULL), manager(NULL),
 {
 }
 
-Irrlicht::Irrlicht(wchar_t *name, dimension2du size) : windowSize(size)
-{
+Irrlicht::Irrlicht(wchar_t *name, dimension2du size) : windowSize(size){
 	device = createDevice(EDT_OPENGL, windowSize, WINDOW_COLOR_DEPTH, false, false, false, reciever);
 	if (!device)
 		return;
@@ -16,77 +15,62 @@ Irrlicht::Irrlicht(wchar_t *name, dimension2du size) : windowSize(size)
 	gui = device->getGUIEnvironment();
 }
 
-ISceneManager *Irrlicht::getManager() const
-{
+ISceneManager *Irrlicht::getManager() const{
 	return manager;
 }
 
-IrrlichtDevice *Irrlicht::getDevice() const
-{
+IrrlichtDevice *Irrlicht::getDevice() const{
 	return device;
 }
 
-IGUIEnvironment *Irrlicht::getGUI() const
-{
+IGUIEnvironment *Irrlicht::getGUI() const{
 	return gui;
 }
 
-IVideoDriver *Irrlicht::getVideo() const
-{
+IVideoDriver *Irrlicht::getVideo() const{
 	return video;
 }
 
-ISceneNode *Irrlicht::getSkyBox(path fileName) const
-{
+ISceneNode *Irrlicht::getSkyBox(path fileName) const{
 	ISceneNode *box = manager->addSkyBoxSceneNode(video->getTexture(fileName), NULL, NULL, NULL, NULL, NULL);
 	return box;
 }
 
-dimension2du Irrlicht::getCenter() const
-{
+dimension2du Irrlicht::getCenter() const{
 	return dimension2du(windowSize.Width / 2, windowSize.Height / 2);
 }
 
-u32 Irrlicht::getCurrentTime() const
-{
+u32 Irrlicht::getCurrentTime() const{
 	return device->getTimer()->getTime();
 }
 
-void Irrlicht::setTime(u32 newTime)
-{
+void Irrlicht::setTime(u32 newTime){
 	device->getTimer()->setTime(newTime);
 }
 
-bool Irrlicht::isKeyPressed(EKEY_CODE key) const
-{
+bool Irrlicht::isKeyPressed(EKEY_CODE key) const{
 
 	return true;
-
-	//-------------
 	//return reciever->isKeyDown(key);
 }
 
-void Irrlicht::hideCursor(const bool flag)
-{
+void Irrlicht::hideCursor(const bool flag){
 	device->getCursorControl()->setVisible(!flag);
 }
 
-void Irrlicht::setCursorPosition(const dimension2du position)
-{
+void Irrlicht::setCursorPosition(const dimension2du position){
 	s32 x = position.Width;
 	s32 y = position.Height;
 	device->getCursorControl()->setPosition(x, y);
 }
 
-void Irrlicht::setCursorToCenter()
-{
+void Irrlicht::setCursorToCenter(){
 	s32 x = windowSize.Width / 2;
 	s32 y = windowSize.Height / 2;
 	device->getCursorControl()->setPosition(x, y);
 }
 
-vector2di Irrlicht::getCursorPosition() const
-{
+vector2di Irrlicht::getCursorPosition() const{
 	return device->getCursorControl()->getPosition();
 }
 
@@ -95,8 +79,7 @@ vector2di Irrlicht::getCursorPosition() const
 //	//return reciever->isLeftButtonPressed();
 //}
 
-void Irrlicht::resetInput()
-{
+void Irrlicht::resetInput(){
 	//reciever->zeroMouse();
 
 	//---------------------
@@ -110,25 +93,21 @@ bool Irrlicht::isMouseActive() {
 	//return reciever->isMouseMoveActive();
 }
 
-void Irrlicht::resetMouseMove()
-{
+void Irrlicht::resetMouseMove(){
 	//reciever->zeroMouseMove();
 }
 
-bool Irrlicht::run()
-{
+bool Irrlicht::run(){
 	return device->run();
 }
 
-void Irrlicht::drawAll()
-{
+void Irrlicht::drawAll(){
 	video->beginScene(true, true, WINDOW_BACKGROUND_COLOR);
 	manager->drawAll();
 	gui->drawAll();
 	video->endScene();
 }
 
-bool Irrlicht::drop()
-{
+bool Irrlicht::drop(){
 	return device->drop();
 }

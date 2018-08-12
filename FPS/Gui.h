@@ -81,21 +81,21 @@ public:
 
 private:
 
-	list<IGUIButton *>	buttons;
+	list<IGUIButton *> buttons;
 
-	IGUIStaticText		*health;
-	IGUIStaticText		*ammoLabel;
-	IGUIStaticText		*magLabel;
+	IGUIStaticText *health;
+	IGUIStaticText *ammoLabel;
+	IGUIStaticText *magLabel;
 
-	IGUIComboBox		*musicBox;
-	IGUIComboBox		*soundBox;
+	IGUIComboBox *musicBox;
+	IGUIComboBox *soundBox;
 
-	IGUIImage			*logo;
-	IGUIImage			*life;
-	IGUIImage			*crosshair;
-	IGUIImage			*curWeapon;
-	IGUIImage			*ammo;
-	IGUIImage			*mag;
+	IGUIImage *logo;
+	IGUIImage *life;
+	IGUIImage *crosshair;
+	IGUIImage *curWeapon;
+	IGUIImage *ammo;
+	IGUIImage *mag;
 
 	void addButton(IGUIEnvironment *gui, ITexture *&texture, path name, const recti size, u32 btn);
 };

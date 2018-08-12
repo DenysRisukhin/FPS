@@ -1,6 +1,6 @@
 #include "TextureManager.h"
 
-TextureManager::TextureManager() : enemyTex(NULL), buttonsTex(NULL)
+TextureManager::TextureManager() : enemyTex(NULL), buttonsTex(NULL), weaponsTex(NULL), ammoTex(NULL), magTex(NULL)
 {
 }
 
