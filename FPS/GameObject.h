@@ -1,6 +1,7 @@
 #pragma once
 
 #include <irrlicht.h>
+#include "Global.h"
 
 using namespace irr;
 using namespace core;
@@ -8,11 +9,10 @@ using namespace scene;
 using namespace video;
 
 /*!
-* Represents base behaviors for game objects in Action Phase (enemies, projectiles):
-* checks object Activity(true/false),
-* is object need to update,
-* set/get speed,
-* get pos.
+* Represents base behaviors for game objects in the Action Phase (enemies, projectiles):
+* checks activity of the object,
+* whether the object need to update,
+* sets/gets speed and gets prevPosition.
 */
 
 class GameObject {
@@ -36,36 +36,37 @@ public:
 	GameObject();
 
 	/**
-	* Set speed for game object
+	* Sets the speed for game object.
 	*/
 	virtual void setSpeed(f32 newSpeed);
 
 	/**
-	* Get speed for game object
+	* Gets the speed for game object.
 	*/
 	virtual f32 getSpeed();
-
-	// ?????? return NULL
+	
+	/**
+	* Returns NULL.
+	*/
 	virtual ISceneNode* getNode();
 
-	// ????? return vector3df(0, 0, 0);
+	/**
+	* Returns IDLE_VECTOR.
+	*/
 	virtual vector3df getPosition();
 
-	// ?????
 	virtual void pushBack();
 
 	/**
-	* Get current pos for game object
+	* Get current pos for game object.
 	*/
 	virtual vector3df getPreviousPosition();
 
-	/**
-	* ??????? free func
-	*/
+
 	virtual void update(f32 deltaTime);
 
 	/**
-	* Cheked if gameobject need updates
+	* Cheks if gameobject need updates.
 	* Return @param bNeedsUpdate.
 	*/
 	bool needsUpdate();
@@ -77,7 +78,7 @@ public:
 	virtual void kill();
 
 	/**
-	* Chaked object activity (lived/dead)
+	* Checks activity of the object. 
 	* Return @param bIsActive.
 	*/
 	virtual bool isActive();

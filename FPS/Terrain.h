@@ -7,6 +7,10 @@ using namespace scene;
 using namespace core;
 using namespace video;
 
+/**
+* Represents Terrain - element from the block Stage.
+*/
+
 class Terrain
 {
 public:

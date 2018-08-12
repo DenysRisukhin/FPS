@@ -34,9 +34,50 @@ void Stage::menuClickSound() {
 	bang->drop();
 }
 
+void Stage::loop() {
+
+	texManager->loadTextures(engine->getVideo());
+
+	// Loading Menu & logoImage.
+	gui->menu(engine->getGUI(), texManager, engine->getVideo());
+
+	gameMusic = sound->play2D("sounds/soundtrack.mp3", true, false, true);
+
+	gameState = MENU;
+
+	bool exitFlag = false;
+
+	while (engine->run()) {
+		switch (gameState){
+		case MENU:
+		case OPTIONS:
+		case PAUSE:
+		case OVER:
+			menu();
+			break;
+
+		case INGAME:
+			actionPhase();
+			break;
+
+		case EXIT:
+			exitFlag = true;
+			break;
+		}
+
+		if (exitFlag)
+			break;
+
+		engine->drawAll();
+	}
+
+	texManager->drop();
+	engine->drop();
+	sound->drop();
+}
+
 void Stage::menu(){
-	switch (gameState)
-	{
+	switch (gameState){
 	case MENU:
 		if (gui->isButtonPressed(START_BUTTON)){
 			menuClickSound();
@@ -115,49 +156,6 @@ void Stage::menu(){
 	}
 }
 
-void Stage::loop(){
-
-	texManager->loadTextures(engine->getVideo());
-
-	// Loading Menu & logoImage.
-	gui->menu(engine->getGUI(), texManager, engine->getVideo());
-
-	gameMusic = sound->play2D("sounds/soundtrack.mp3", true, false, true);
-	
-	gameState = MENU;
-
-	bool exitFlag = false;
-
-	while (engine->run()){
-		switch (gameState)
-		{
-		case MENU:
-		case OPTIONS:
-		case PAUSE:
-		case OVER:
-			menu();
-			break;
-
-		case INGAME:
-			actionPhase();
-			break;
-
-		case EXIT:
-			exitFlag = true;
-			break;
-		}
-
-		if (exitFlag)
-			break;
-
-		engine->drawAll();	
-	}
-
-	texManager->drop();
-	engine->drop();
-	sound->drop();
-}
-
 void Stage::actionPhase(){
 	// Counting time since last frame.
 	timer.presentTime = engine->getCurrentTime();
@@ -190,18 +188,18 @@ void Stage::actionPhase(){
 	if (gameState == INGAME || gameState == GAME_COMPLETE || gameState == GAME_OVER) {
 
 		// Cheking GAME_COMPLETE or GAME_OVER states when INGAME state is active.
-		app.handleWinLoseState(gameState, player, engine->getDevice(), engine->getManager(), engine->getVideo());
+		gameHandler.handleWinLoseState(gameState, player, engine->getDevice(), engine->getManager(), engine->getVideo(), texManager);
 	
 		// Handling user input.
-		app.processInput(engine->getDevice(), engine->getManager(), engine->getVideo(), selector, reciever, player, camera, timer.delta);
+		gameHandler.processInput(engine->getDevice(), engine->getManager(), engine->getVideo(), selector, reciever, player, camera, timer.delta);
 	
 		// Updating position for every object from GameObject.
-		app.updateGameObjects(timer.delta);
+		gameHandler.updateGameObjects(timer.delta);
 	
 		// Handling collisions between BadFaerie and projectiles.
-		app.handleCollisions(player, camera, timer.delta);
+		gameHandler.handleCollisions(player, camera, timer.delta);
 
-		gui->setWeaponTexture(engine->getGUI(),engine->getVideo(), player);
+		gui->setWeaponTexture(engine->getGUI(),engine->getVideo(), player, texManager);
 
 		// Processing GAME_COMPLETE || GAME_OVER states.
 		processingResultScreen();
@@ -212,7 +210,7 @@ void Stage::initGameData() {
 	// Instantiating game objects.
 	terrain = new Terrain(engine->getManager(), engine->getVideo());
 	camera = new Camera(engine->getManager());
-	player = new Player(engine->getDevice(), engine->getManager(), engine->getVideo(), camera, &(app.getUpdateList()));
+	player = new Player(engine->getDevice(), engine->getManager(), engine->getVideo(), camera, &(gameHandler.getUpdateList()));
 	skybox = new Skybox(engine->getManager(), engine->getVideo());
 	engine->getManager()->setShadowColor();
 
@@ -283,9 +281,9 @@ void Stage::processingResultScreen() {
 }
 
 void Stage::drop() {
-	app.setBWaveStarted();
-	app.clearUpdateList();
-	app.setNumOfEnemies(0);
+	gameHandler.setBWaveStarted();
+	gameHandler.clearUpdateList();
+	gameHandler.setNumOfEnemies(0);
 
 	player->getNode()->remove();
 	skybox->getNode()->remove();

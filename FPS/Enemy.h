@@ -3,7 +3,7 @@
 #include "Player.h"
 
 /*!
-* Represents enemies behaviours states.
+* Represents the states of behavior of enemies.
 */
 enum EnemyState
 {
@@ -12,6 +12,10 @@ enum EnemyState
 	ENEMY_DODGE, 
 	ENEMY_IDLE
 };
+
+/*!
+* Represents the types of damage.
+*/
 
 enum AttackRating
 {
@@ -31,34 +35,31 @@ public:
 	@param target Player object
 	@param currentState Enemiesy object behaviour state.
 	@param node Enemy object.
-
-	@param facingDirection ?????? it's vector .
-
-
-	@param bPushedBack ????.
-	@param pushStart ?????.
+	@param facingDirection.
+	@param bPushedBack.
+	@param pushStart.
 	*/
 	Enemy(vector3df newPosition, f32 newSpeed, ISceneManager* manager, Player* enemyTarget);
 
 	/**
-	* Rotating enemies to player face.
+	* Rotates enemies to player face.
 	*/
 	virtual void facePlayer();
 
 	/**
-	* ???? values uses in Badfaire update method
+	* Enemies must rotate face to face with the player. 
+	* Sets @param bPushedBack = true;
+	* Sets @param pushStart = device->getTimer()->getTime();
 	*/
-	//bPushedBack = true;
-	//pushStart = device->getTimer()->getTime();
 	virtual void pushBack();
 
 	/**
-	* ????????????????????? return NULL
+	* Returns NULL.
 	*/
 	ISceneNode* getNode();
 
 	/**
-	* getNodePos ???????????????????????
+	* Returns current pos.
 	*/
 	virtual vector3df getPosition();
 
@@ -86,7 +87,6 @@ protected:
 	vector3df getTargetAngle(vector3df enemy, vector3df target);
 
 	IAnimatedMeshSceneNode* node;
-	//ISceneNode* node;
 	Player* target;
 	vector3df facingDirection;
 	EnemyState currentState;

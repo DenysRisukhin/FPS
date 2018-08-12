@@ -2,10 +2,8 @@
 
 GameHandle::GameHandle(){
 	updateList = list<GameObject*>();
-	//lastUpdate = 0.0f;
 	timeSinceStart = 0.0f;
 	selector = NULL;
-	//delayTimer = 0;
 	
 	bMainMenuDisplayed = false;
 	bGameOverDisplayed = false;
@@ -32,29 +30,23 @@ void GameHandle::updateGameObjects(f32 deltaTime){
 	if (updateList.getSize() != 0){
 		list<GameObject*>::Iterator it = list<GameObject*>::Iterator();
 		it = updateList.begin();
-		for (int i = 0; i < updateList.getSize(); i++)
-		{
+		for (int i = 0; i < updateList.getSize(); i++){
 			GameObject* ptr = NULL;
 			list<GameObject*>::Iterator tempIterator = list<GameObject*>::Iterator();
-			if (updateList.getSize() == 0)
-			{
+			if (updateList.getSize() == 0){
 				return;
 			}
-			if (it.operator!=(tempIterator))
-			{
+			if (it.operator!=(tempIterator)){
 				ptr = it.operator*();
 			}
 
-			if (ptr != NULL)
-			{
-				if (!ptr->needsUpdate())
-				{
+			if (ptr != NULL){
+				if (!ptr->needsUpdate()){
 					ptr->kill();
 					ptr->getNode()->remove(); 
 					updateList.erase(it);
 				}
-				else
-				{
+				else{
 					ptr->update(deltaTime);
 					it.operator++();
 				}
@@ -63,20 +55,22 @@ void GameHandle::updateGameObjects(f32 deltaTime){
 	}
 }
 
-void GameHandle::handleCollisions(Player* player, Camera* camera, f32 deltaTime){
-	_player = player;
+void GameHandle::handleCollisions(Player* _player, Camera* camera, f32 deltaTime){
+	player = _player;
+	// Collisions with player.
 	handleCollisionWithPlayer(player, camera, deltaTime);
-	handleCollisionEnemyPowerBall();
 	handleCollisionPlayerPowerBall();
+
+	// Collisions with enemies.
+	callHandleCollisionEnemyPowerBall();
 }
 
-void GameHandle::handleCollisionWithPlayer(Player* player, Camera* camera, f32 deltaTime) {
-	sound = player->getSound();
+void GameHandle::handleCollisionWithPlayer(Player* _player, Camera* camera, f32 deltaTime) {
+	sound = _player->getSound();
 	//-------------------------------
 
 	// Now for the other GameObjects.
-	if (updateList.getSize() != 0)
-	{
+	if (updateList.getSize() != 0){
 		GameObject* ptr = NULL;
 		GameObject* ptr1 = NULL;
 
@@ -85,26 +79,22 @@ void GameHandle::handleCollisionWithPlayer(Player* player, Camera* camera, f32 d
 		it = updateList.begin();
 
 		// Going through all the GameObjects.
-		for (int i = 0; i < updateList.getSize(); ++i)
-		{
+		for (int i = 0; i < updateList.getSize(); ++i){
 			// Check for it.current = NULL.
-			if (it.operator==(tempIterator))
-			{
+			if (it.operator==(tempIterator)){
 				return;
 			}
 
 			// Check for BadFaerie.
 			ptr = dynamic_cast<BadFaerie*>(it.operator*());
-			if (ptr != NULL)
-			{
+			if (ptr != NULL){
 				// BadFaerie instance.
 				const aabbox3df boxForFaerie = ptr->getNode()->getTransformedBoundingBox();
 				const aabbox3df boxForPlayer = player->getNode()->getTransformedBoundingBox();
 
-				if (boxForFaerie.intersectsWithBox(boxForPlayer))
-				{
+				if (boxForFaerie.intersectsWithBox(boxForPlayer)){
 					//player->moveBackward(deltaTime);
-					player->setDamage(POWER_BALL);
+					player->setDamage(MONSTER_ATTACK);
 
 					std::cout << "Collision between player and BadFaire.\n";
 
@@ -115,14 +105,12 @@ void GameHandle::handleCollisionWithPlayer(Player* player, Camera* camera, f32 d
 				}
 
 				// Check for it.current = NULL.
-				if (tempIterator.operator==(it))
-				{
+				if (tempIterator.operator==(it)){
 					return;
 				}
 
 				// Check for it.current->next = NULL.
-				if (tempIterator.operator==(it.operator++()))
-				{
+				if (tempIterator.operator==(it.operator++())){
 					return;
 				}
 
@@ -134,8 +122,7 @@ void GameHandle::handleCollisionWithPlayer(Player* player, Camera* camera, f32 d
 }
 
 void GameHandle::handleCollisionPlayerPowerBall() {
-	if (updateList.getSize() != 0)
-	{
+	if (updateList.getSize() != 0){
 		GameObject* ptr = NULL;
 
 		list<GameObject*>::Iterator it = list<GameObject*>::Iterator();
@@ -143,35 +130,30 @@ void GameHandle::handleCollisionPlayerPowerBall() {
 		it = updateList.begin();
 
 		// Going through all GameObjects.
-		for (int i = 0; i < updateList.getSize(); ++i)
-		{
+		for (int i = 0; i < updateList.getSize(); ++i){
 			// Check for it.current = NULL.
-			if (it.operator==(tempIterator))
-			{
+			if (it.operator==(tempIterator)){
 				return;
 			}
 
 			// Check for Enemy.
 			ptr = dynamic_cast<PowerBallProjectile*>(it.operator*());
-			if (ptr != NULL)
-			{				
+			if (ptr != NULL){				
 					// occurred instance.
-					if (ptr->getNode() == NULL)
-					{
+					if (ptr->getNode() == NULL){
 						it.operator++();
 						continue;
 					}
 					// COLLISION WITH BOXES
 
 					aabbox3df boxForBall = ptr->getNode()->getTransformedBoundingBox();
-					aabbox3df boxForPlayer = _player->getNode()->getTransformedBoundingBox();
+					aabbox3df boxForPlayer = player->getNode()->getTransformedBoundingBox();
 
-					if (boxForBall.intersectsWithBox(boxForPlayer))
-					{
-						std::cout << "Collision with Player occurred lol.\n";
+					if (boxForBall.intersectsWithBox(boxForPlayer)){
+						std::cout << "Collision ENEMIES_POWER_BALLwith Player occurred.\n";
 
 						//player->moveBackward(deltaTime);
-						_player->setDamage(POWER_BALL);
+						player->setDamage(POWER_BALL);
 
 						ISound *bang = sound->play2D("sounds/damage.wav", false, true);
 						bang->setVolume(0.4f);
@@ -183,22 +165,18 @@ void GameHandle::handleCollisionPlayerPowerBall() {
 						ptr->getNode()->remove();
 						updateList.erase(it);
 						continue;
-					}
-				
+					}	
 			}
-
 			// Check for it.current->next = NULL.
-			if (tempIterator.operator==(it.operator++()))
-			{
+			if (tempIterator.operator==(it.operator++())){
 				return;
 			}
 		}
 	}
 }
 
-void GameHandle::handleCollisionEnemyPowerBall(void){
-	if (updateList.getSize() != 0)
-	{
+void GameHandle::callHandleCollisionEnemyPowerBall(){
+	if (updateList.getSize() != 0){
 		GameObject* ptr = NULL;
 
 		list<GameObject*>::Iterator it = list<GameObject*>::Iterator();
@@ -206,34 +184,28 @@ void GameHandle::handleCollisionEnemyPowerBall(void){
 		it = updateList.begin();
 
 		// Going through all GameObjects.
-		for (int i = 0; i < updateList.getSize(); ++i)
-		{
+		for (int i = 0; i < updateList.getSize(); ++i){
 			// Check for it.current = NULL.
-			if (it.operator==(tempIterator))
-			{
+			if (it.operator==(tempIterator)){
 				return;
 			}
 
 			// Check for Enemy.
 			ptr = dynamic_cast<Enemy*>(it.operator*());
-			if (ptr != NULL)
-			{
+			if (ptr != NULL){
 
 				// Enemy instance.
-				if (collisionsBetweenEnemyAndProjectiles(ptr->getNode()))
-				{
+				if (collisionsBetweenEnemyAndProjectiles(ptr->getNode())){
 					// Removing enemy from updateList.
 					--numOfEnemies;
 					updateList.erase(it);
 					continue;
 				}
-
 				handleCollisionBetweenEnemies(ptr);
 			}
 
 			// Check for it.current->next = NULL.
-			if (tempIterator.operator==(it.operator++()))
-			{
+			if (tempIterator.operator==(it.operator++())){
 				return;
 			}
 		}
@@ -241,8 +213,7 @@ void GameHandle::handleCollisionEnemyPowerBall(void){
 }
 
 bool GameHandle::collisionsBetweenEnemyAndProjectiles(ISceneNode* enemy){
-	if (updateList.getSize() != 0)
-	{
+	if (updateList.getSize() != 0){
 		GameObject* ptr1 = NULL, *ptr3 = NULL;
 
 		list<GameObject*>::Iterator it = list<GameObject*>::Iterator();
@@ -250,11 +221,9 @@ bool GameHandle::collisionsBetweenEnemyAndProjectiles(ISceneNode* enemy){
 		it = updateList.begin();
 
 		// Going through all GameObjects to detect Projectiles.
-		for (int i = 0; i < updateList.getSize(); ++i)
-		{
+		for (int i = 0; i < updateList.getSize(); ++i){
 			// Check for it.current = NULL.
-			if (it.operator==(tempIterator))
-			{
+			if (it.operator==(tempIterator)){
 				return false;
 			}
 
@@ -262,11 +231,9 @@ bool GameHandle::collisionsBetweenEnemyAndProjectiles(ISceneNode* enemy){
 			ptr3 = dynamic_cast<LaserProjectile*>(it.operator*());
 
 			// Check for Projectiles.
-			if (ptr1 != NULL)
-			{
+			if (ptr1 != NULL){
 				// PowerBall instance.
-				if (ptr1->getNode() == NULL)
-				{
+				if (ptr1->getNode() == NULL){
 					it.operator++();
 					continue;
 				}
@@ -293,13 +260,13 @@ bool GameHandle::collisionsBetweenEnemyAndProjectiles(ISceneNode* enemy){
 					return true;
 				}
 
-				// COLLISION WITH BOXES
+				/* COLLISION WITH BOXES
 
-				//aabbox3df boxForBall = ptr1->getNode()->getTransformedBoundingBox();
-				//aabbox3df boxForEnemy = enemy->getTransformedBoundingBox();
+				aabbox3df boxForBall = ptr1->getNode()->getTransformedBoundingBox();
+				aabbox3df boxForEnemy = enemy->getTransformedBoundingBox();
 
-				//if (boxForBall.intersectsWithBox(boxForEnemy))
-				//{
+				if (boxForBall.intersectsWithBox(boxForEnemy))
+				{*/
 				//	std::cout << "Collision occurred.\n";
 				//	// Removing enemy from the scene.
 				//	enemy->remove();
@@ -313,11 +280,9 @@ bool GameHandle::collisionsBetweenEnemyAndProjectiles(ISceneNode* enemy){
 				//}
 
 			}
-			else if (ptr3 != NULL)
-			{
+			else if (ptr3 != NULL){
 				// LazeProjectile instance.
-				if (ptr3->getNode() == NULL)
-				{
+				if (ptr3->getNode() == NULL){
 					it.operator++();
 					continue;
 				}
@@ -345,14 +310,12 @@ bool GameHandle::collisionsBetweenEnemyAndProjectiles(ISceneNode* enemy){
 			}
 			
 			// Check for it.current = NULL.
-			if (tempIterator.operator==(it))
-			{
+			if (tempIterator.operator==(it)){
 				return false;
 			}
 
 			// Check for it.current->next = NULL.
-			if (tempIterator.operator==(it.operator++()))
-			{
+			if (tempIterator.operator==(it.operator++())){
 				return false;
 			}
 		}
@@ -363,13 +326,11 @@ bool GameHandle::collisionsBetweenEnemyAndProjectiles(ISceneNode* enemy){
 void GameHandle::handleCollisionBetweenEnemies(GameObject* enemy){
 	Enemy* firstEnemy = dynamic_cast<Enemy*>(enemy);
 
-	if (firstEnemy == NULL)
-	{
+	if (firstEnemy == NULL){
 		return;
 	}
 
-	if (updateList.getSize() != 0)
-	{
+	if (updateList.getSize() != 0){
 		GameObject* ptr = NULL;
 
 		list<GameObject*>::Iterator it = list<GameObject*>::Iterator();
@@ -377,18 +338,15 @@ void GameHandle::handleCollisionBetweenEnemies(GameObject* enemy){
 		it = updateList.begin();
 
 		// Going through all GameObjects.
-		for (int i = 0; i < updateList.getSize(); ++i)
-		{
+		for (int i = 0; i < updateList.getSize(); ++i){
 			// Check for it.current = NULL.
-			if (it.operator==(tempIterator))
-			{
+			if (it.operator==(tempIterator)){
 				return;
 			}
 
 			// Check for Enemy.
 			ptr = dynamic_cast<Enemy*>(it.operator*());
-			if (ptr != NULL)
-			{
+			if (ptr != NULL){
 				// Enemy instance.
 				Enemy* secondEnemy = dynamic_cast<Enemy*>(ptr);
 
@@ -406,8 +364,7 @@ void GameHandle::handleCollisionBetweenEnemies(GameObject* enemy){
 			}
 
 			// Check for it.current->next = NULL.
-			if (tempIterator.operator==(it.operator++()))
-			{
+			if (tempIterator.operator==(it.operator++())){
 				return;
 			}
 		}
@@ -427,7 +384,7 @@ void GameHandle::clearUpdateList() {
 	if (updateList.size()) {
 		for (list<GameObject*>::Iterator it = updateList.begin(); it != updateList.end(); ++it)
 		{
-			std::cout << "numOfEnemies:" << (int*)--numOfEnemies << std::endl;
+			//std::cout << "numOfEnemies:" << (int*)--numOfEnemies << std::endl;
 			(*it)->getNode()->remove();
 			delete *it;
 		}
@@ -435,34 +392,27 @@ void GameHandle::clearUpdateList() {
 	}
 }
 
-void GameHandle::handleWinLoseState(GameState & gameState, Player* player, IrrlichtDevice* irrDevice, ISceneManager* smgr, IVideoDriver* driver){
-	switch (gameState)
-	{
-
+void GameHandle::handleWinLoseState(GameState & gameState, Player* player, IrrlichtDevice* irrDevice, ISceneManager* smgr, IVideoDriver* driver, TextureManager *&textureMngr){
+	switch (gameState){
 	case INGAME:
-		if (player->getPosition().Y < 0)
-		{
+		if (player->getPosition().Y < 0){
 			player->kill();
 		}
-		if (player->isDead())
-		{
+		if (player->isDead()){
 			gameState = GAME_OVER;
 		}
-		else if (bWaveFinished)
-		{
+		else if (bWaveFinished){
 			if (!getNumOfEnemies()) {
 				std::cout << "GAME_COMPLETE.\n";
 				gameState = GAME_COMPLETE;
 			}
 		}
-		else if (!bWaveStarted)
-		{
-			initiateWave(player, irrDevice, smgr, driver);
+		else if (!bWaveStarted){
+			initiateWave(player, irrDevice, smgr, driver, textureMngr);
 			std::cout << "Wave 1 started.\n";
 			irrDevice->getGUIEnvironment()->clear();
 		}
-		else
-		{
+		else{
 			updateWaveStatus(gameState, irrDevice, player, smgr, driver);
 		}
 		break;
@@ -472,14 +422,12 @@ void GameHandle::handleWinLoseState(GameState & gameState, Player* player, Irrli
 	}
 }
 
-void GameHandle::initiateWave(Player* player, IrrlichtDevice* device, ISceneManager* smgr, IVideoDriver* driver){
+void GameHandle::initiateWave(Player* player, IrrlichtDevice* device, ISceneManager* smgr, IVideoDriver* driver, TextureManager *&textureMngr){
 	bWaveStarted = true;
 
 	// Spawn BadFaerie.
-	for (int i = 0; i < 1; ++i)
-	{
-		spawnBadFaerie(player, device, smgr, driver);
-	}
+	for (int i = 0; i < 5; ++i)
+		spawnBadFaerie(player, device, smgr, driver, textureMngr->getEnemyTexture()[0]);
 
 	timeSinceStart = device->getTimer()->getTime();
 }
@@ -494,10 +442,9 @@ void GameHandle::updateWaveStatus(GameState & gameState, IrrlichtDevice* device,
 	case INGAME:
 		if ((device->getTimer()->getTime() - timeSinceStart) > 10000.0f && bWaveStarted && !bWaveFinished)
 		{
-			/*for (int i = 0; i < 10; ++i)
-			{
-				spawnBadFaerie(player, device, smgr, driver);
-			}*/
+			//for (int i = 0; i < 10; ++i)
+			//	spawnBadFaerie(player, device, smgr, driver);
+
 			std::cout << "Wave 1 afterwave spawned.\n";
 			bWaveFinished = true;
 		}
@@ -508,7 +455,7 @@ void GameHandle::updateWaveStatus(GameState & gameState, IrrlichtDevice* device,
 	}
 }
 
-void GameHandle::spawnBadFaerie(Player* player, IrrlichtDevice* device, ISceneManager* smgr, IVideoDriver* driver){
+void GameHandle::spawnBadFaerie(Player* player, IrrlichtDevice* device, ISceneManager* smgr, IVideoDriver* driver, ITexture *&texture){
 	++numOfEnemies;
 
 	bool bMatched;
@@ -522,45 +469,38 @@ void GameHandle::spawnBadFaerie(Player* player, IrrlichtDevice* device, ISceneMa
 	it = updateList.begin();
 
 	srand(time(NULL));
-	while (true)
-	{
+	while (true){
 		bMatched = false;
 
-		for (int i = 0; i < updateList.getSize(); ++i)
-		{
-			if (tempIterator.operator==(it))
-			{
+		for (int i = 0; i < updateList.getSize(); ++i){
+			if (tempIterator.operator==(it)){
 				break;
 			}
 
 			ptr = dynamic_cast<Enemy*>(it.operator*());
 
-			if (ptr != NULL)
-			{
-				if (ptr->getPosition() == position)
-				{
+			if (ptr != NULL){
+				if (ptr->getPosition() == position){
 					bMatched = true;
 					break;
 				}
 			}
 
-			if (tempIterator.operator==(it.operator++()))
-			{
+			if (tempIterator.operator==(it.operator++())){
 				break;
 			}
 		}
 
-		if (!bMatched && (position - player->getPosition()).getLengthSQ() > 250000.0f)
-		{
+		if (!bMatched && (position - player->getPosition()).getLengthSQ() > 250000.0f){
 			break;
 		}
 
 		position = vector3df(100 + (rand() % 900), 80, 100 + (rand() % 900));
 	}
 
-	// Setting up BadFaerie.
-	badFaerie = new BadFaerie(position, 0.1f, smgr, player, device, &updateList, device->getVideoDriver());
-	badFaerie->loadModel(smgr->getMesh("Models/faerie.md2"), driver->getTexture("Textures/faerie.bmp"));
+	// Creates badFaerie.
+	badFaerie = new BadFaerie(position, 0.1f, smgr, player, device, &updateList, device->getVideoDriver(), player->getSound());
+	badFaerie->loadModel(smgr->getMesh("Models/faerie.md2"), texture);
 	updateList.push_back(badFaerie);
 	const aabbox3df & box2 = badFaerie->getNode()->getBoundingBox();
 	vector3df radius = box2.MaxEdge - box2.getCenter();

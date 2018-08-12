@@ -1,8 +1,8 @@
 #pragma once
 
 #include <irrlicht.h>
+#include "IrrKlang.h"
 #include "Enemy.h"
-#include "PowerBallEnemy.h"
 #include "PowerBallProjectile.h"
 
 using namespace irr;
@@ -10,12 +10,10 @@ using namespace core;
 using namespace video;
 using namespace scene;
 
-//class PowerBall;
 class PowerBallProjectile;
 
-
 /*!
-* Represents BadFaerie object - type of enemies.
+* Represents BadFaerie object as type of enemies.
 */
 class BadFaerie : public Enemy
 {
@@ -32,7 +30,7 @@ public:
 	@param manager Irrlicht manager.
 	@param playerTarget Player object.
 	*/
-	BadFaerie(vector3df position, f32 newSpeed, ISceneManager* manager, Player* target, IrrlichtDevice* irrDevice, list<GameObject*> *updateListPtr, IVideoDriver* videoDriver);
+	BadFaerie(vector3df position, f32 newSpeed, ISceneManager* manager, Player* target, IrrlichtDevice* irrDevice, list<GameObject*> *updateListPtr, IVideoDriver* videoDriver, ISoundEngine* sound);
 
 	/**
 	* Loads BadFaerie model.
@@ -40,7 +38,7 @@ public:
 	virtual void loadModel(IAnimatedMesh* mesh, ITexture* texture);
 
 	/**
-	* Update method handling next things: 
+	* Updates method handling next things: 
 	* faceplayer rotation,
 	* Enemy is too far away,
 	* Enemy is behind the player,
@@ -51,27 +49,27 @@ public:
 
 	
 	/**
-	* Check, if BadFaerie see player's ammo
+	* Checks, if BadFaerie see player's ammo
 	*/
 	bool seesPowerBall();
 
 	/**
-	* Check, if actionPhaseUpdateList has player's ammo
+	* Checks, if actionPhaseUpdateList has player's ammo
 	*/
 	//bool listHasPowerBall();
 
 	/**
-	* Shot on the player
+	* Shots in the player.
 	*/
 	virtual void attack();
 
 	/**
-	* The enemy dodges the player's ammo, after player shoot
+	* The enemy dodges the player's ammo, after player shoot.
 	*/
 	virtual void dodge(f32 deltaTime);
 
 	/**
-	* Enemy move
+	* Moves of enemies.
 	*/
 	virtual void run(f32 deltaTime);
 
@@ -79,6 +77,7 @@ private:
 	f32 dodgeStart;
 	f32 lastAttack;
 	IVideoDriver* driver;
-	list<GameObject*> * actionPhaseUpdateList;
+	list<GameObject*> *updateList;
+	ISoundEngine* _sound;
 };
 

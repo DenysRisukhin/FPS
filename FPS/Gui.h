@@ -52,7 +52,7 @@ public:
 	GUI();
 
 	/**
-	* Set labels
+	* Set labels.
 	*/
 	void    setAmmoLabel(const u32 newScore);
 	void    setMagLabel(const u32 newScore);
@@ -61,7 +61,7 @@ public:
 	/**
 	* Set texture for the weapon.
 	*/
-	void    setWeaponTexture(IGUIEnvironment *gui, IVideoDriver *drv, Player* player);
+	void    setWeaponTexture(IGUIEnvironment *gui, IVideoDriver *drv, Player* player, TextureManager *&manager);
 
 	bool	isButtonPressed(u32 id) const;
 	s32		getMusicSelection() const;

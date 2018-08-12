@@ -1,23 +1,39 @@
 #include "TextureManager.h"
 
-TextureManager::TextureManager() : playerTex(NULL), enemyTex(NULL), buttonsTex(NULL)
+TextureManager::TextureManager() : enemyTex(NULL), buttonsTex(NULL)
 {
 }
 
-ITexture **TextureManager::getPlayerTexture() const{
-	return playerTex;
+ITexture **TextureManager::getAmmoTexture() const {
+	return ammoTex;
+}
+
+ITexture **TextureManager::getMagTexture() const {
+	return magTex;
 }
 
 ITexture **TextureManager::getEnemyTexture() const{
 	return enemyTex;
 }
 
+ITexture **TextureManager::getWeaponsTexture() const {
+	return weaponsTex;
+}
+
 ITexture **TextureManager::getButtonsTexture() const{
 	return buttonsTex;
 }
 
-void TextureManager::setPlayerTexture(ITexture **texture){
-	playerTex = texture;
+void TextureManager::setAmmoTexture(ITexture **texture) {
+	ammoTex = texture;
+}
+
+void TextureManager::setMagTexture(ITexture **texture) {
+	magTex = texture;
+}
+
+void TextureManager::setWeaponsTexture(ITexture **texture) {
+	weaponsTex = texture;
 }
 
 void TextureManager::setEnemyTexture(ITexture **texture){
@@ -30,31 +46,33 @@ void TextureManager::setButtonsTexture(ITexture **texture){
 
 void TextureManager::loadTextures(IVideoDriver *video){
 	path name = TEXTURE_PATH;
-	/*playerTex = new ITexture *;
-	playerTex[0] = video->getTexture(name + PLAYER_NAME);
-
+	
 	enemyTex = new ITexture *[ENEMY_TEXTURES_COUNT];
-	enemyTex[0] = video->getTexture(name + ENEMY01_NAME);
-	enemyTex[1] = video->getTexture(name + ENEMY02_NAME);
-	enemyTex[2] = video->getTexture(name + ENEMY03_NAME);
-	enemyTex[3] = video->getTexture(name + ENEMY04_NAME);
-	enemyTex[4] = video->getTexture(name + ENEMY05_NAME);*/
+	enemyTex[0] = video->getTexture(name + ENEMY01_BADFAERIE);
 
 	buttonsTex = new ITexture *[BUTTON_TEXTURES_COUNT];
 	buttonsTex[0] = video->getTexture(name + BUTTON_START_NAME);
 	buttonsTex[1] = video->getTexture(name + BUTTON_OPTIONS_NAME);
 	buttonsTex[2] = video->getTexture(name + BUTTON_BACK_NAME);
 	buttonsTex[3] = video->getTexture(name + BUTTON_QUIT_NAME);
+
+	weaponsTex = new ITexture *[WEAPONS_TEXTURES_COUNT];
+	weaponsTex[0] = video->getTexture(name + WEAPON01_REVOLVER);
+	weaponsTex[1] = video->getTexture(name + WEAPON02_REVEVO);
+	weaponsTex[2] = video->getTexture(name + WEAPON03_MGUN);
+	weaponsTex[3] = video->getTexture(name + WEAPON04_MGUNB);
+	weaponsTex[4] = video->getTexture(name + WEAPON05_SMG);
+	weaponsTex[5] = video->getTexture(name + WEAPON06_LASER);
+
+	ammoTex = new ITexture *;
+	ammoTex[0] = video->getTexture(name + AMMO_TEXTURE);
+
+	magTex = new ITexture *;
+	magTex[0] = video->getTexture(name + MAG_TEXTURE);
 }
 
 void TextureManager::drop(){
-	if (playerTex)
-	{
-		if (playerTex[0])
-			playerTex[0] = NULL;
-		delete playerTex;
-	}
-
+	
 	if (enemyTex)
 	{
 		for (u32 i = 0; i < ENEMY_TEXTURES_COUNT; i++)
@@ -73,5 +91,27 @@ void TextureManager::drop(){
 				buttonsTex[i] = NULL;
 		}
 		delete buttonsTex;
+	}
+
+	if (weaponsTex)
+	{
+		for (u32 i = 0; i < WEAPONS_TEXTURES_COUNT; i++)
+		{
+			if (weaponsTex[i])
+				weaponsTex[i] = NULL;
+		}
+		delete weaponsTex;
+	}
+
+	if (ammoTex)
+	{
+		ammoTex[0] = NULL;
+		delete ammoTex;
+	}
+
+	if (magTex)
+	{
+		magTex[0] = NULL;
+		delete magTex;
 	}
 }

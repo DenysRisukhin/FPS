@@ -12,20 +12,11 @@
     <Filter Include="GameObject">
       <UniqueIdentifier>{89063b8c-3171-4a7d-a2d4-c20c520736cb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level">
-      <UniqueIdentifier>{f9e33fae-b1e1-4329-8617-9903a43f9fa5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Enemy">
       <UniqueIdentifier>{beb5f91e-ae8e-4ff8-a762-a263f70f8be2}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject\Player">
       <UniqueIdentifier>{8908334a-6a25-48fa-bfb0-22bc1d36594f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Bullet">
-      <UniqueIdentifier>{5c207a81-a09d-4534-9e50-67a301089365}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Bullet\Projectile">
-      <UniqueIdentifier>{cd374385-d729-4622-812b-a9945667a654}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{66b1486a-8e09-4ebb-b9fb-0cf938dfff9c}</UniqueIdentifier>
@@ -36,6 +27,12 @@
     <Filter Include="Utilities">
       <UniqueIdentifier>{70ebca42-aa80-42ba-9ecf-c6b6d34fa943}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Projectiles">
+      <UniqueIdentifier>{cd374385-d729-4622-812b-a9945667a654}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Stage">
+      <UniqueIdentifier>{f9e33fae-b1e1-4329-8617-9903a43f9fa5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -45,13 +42,13 @@
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Level</Filter>
+      <Filter>Stage</Filter>
     </ClCompile>
     <ClCompile Include="SkyBox.cpp">
-      <Filter>Level</Filter>
+      <Filter>Stage</Filter>
     </ClCompile>
     <ClCompile Include="Terrain.cpp">
-      <Filter>Level</Filter>
+      <Filter>Stage</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>GameObject\Enemy</Filter>
@@ -62,17 +59,11 @@
     <ClCompile Include="Player.cpp">
       <Filter>GameObject\Player</Filter>
     </ClCompile>
-    <ClCompile Include="PowerBall.cpp">
-      <Filter>GameObject\Bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="PowerBallEnemy.cpp">
-      <Filter>GameObject\Bullet</Filter>
-    </ClCompile>
     <ClCompile Include="Irrlicht.cpp">
       <Filter>Irrlicht</Filter>
     </ClCompile>
     <ClCompile Include="Stage.cpp">
-      <Filter>Level</Filter>
+      <Filter>Stage</Filter>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
       <Filter>Utilities</Filter>
@@ -87,16 +78,16 @@
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="LaserProjectile.cpp">
-      <Filter>GameObject\Bullet\Projectile</Filter>
+      <Filter>GameObject\Projectiles</Filter>
     </ClCompile>
     <ClCompile Include="GunProjectile.cpp">
-      <Filter>GameObject\Bullet\Projectile</Filter>
+      <Filter>GameObject\Projectiles</Filter>
     </ClCompile>
     <ClCompile Include="WeaponManager.cpp">
       <Filter>GameObject\Player</Filter>
     </ClCompile>
     <ClCompile Include="PowerBallProjectile.cpp">
-      <Filter>GameObject\Bullet\Projectile</Filter>
+      <Filter>GameObject\Projectiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,13 +95,13 @@
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Level</Filter>
+      <Filter>Stage</Filter>
     </ClInclude>
     <ClInclude Include="SkyBox.h">
-      <Filter>Level</Filter>
+      <Filter>Stage</Filter>
     </ClInclude>
     <ClInclude Include="Terrain.h">
-      <Filter>Level</Filter>
+      <Filter>Stage</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>GameObject\Enemy</Filter>
@@ -121,12 +112,6 @@
     <ClInclude Include="Player.h">
       <Filter>GameObject\Player</Filter>
     </ClInclude>
-    <ClInclude Include="PowerBallEnemy.h">
-      <Filter>GameObject\Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="PowerBall.h">
-      <Filter>GameObject\Bullet</Filter>
-    </ClInclude>
     <ClInclude Include="IrrKlang.h">
       <Filter>Irrlicht</Filter>
     </ClInclude>
@@ -134,7 +119,7 @@
       <Filter>Irrlicht</Filter>
     </ClInclude>
     <ClInclude Include="Stage.h">
-      <Filter>Level</Filter>
+      <Filter>Stage</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>Utilities</Filter>
@@ -155,16 +140,16 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="LaserProjectile.h">
-      <Filter>GameObject\Bullet\Projectile</Filter>
+      <Filter>GameObject\Projectiles</Filter>
     </ClInclude>
     <ClInclude Include="GunProjectile.h">
-      <Filter>GameObject\Bullet\Projectile</Filter>
+      <Filter>GameObject\Projectiles</Filter>
     </ClInclude>
     <ClInclude Include="WeaponManager.h">
       <Filter>GameObject\Player</Filter>
     </ClInclude>
     <ClInclude Include="PowerBallProjectile.h">
-      <Filter>GameObject\Bullet\Projectile</Filter>
+      <Filter>GameObject\Projectiles</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

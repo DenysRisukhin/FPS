@@ -1,11 +1,8 @@
 #include "WeaponManager.h"
 
 const s32 WeaponManager::MAX_AMMO = 50;
-const s32 WeaponManager::MAX_HEALTH = 100;
 
 WeaponManager::WeaponManager(ISceneManager* smgr, s32 weaponType) {
-
-	SceneManager = smgr;
 	
 	ammo = MAX_AMMO;
 	ammoRev = MAX_AMMO - 44;
@@ -18,6 +15,4 @@ WeaponManager::WeaponManager(ISceneManager* smgr, s32 weaponType) {
 	magMgunb = magSmg;
 }
 
-WeaponManager::~WeaponManager() {
-}
 

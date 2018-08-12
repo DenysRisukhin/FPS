@@ -2,7 +2,6 @@
 
 #include <irrlicht.h>
 #include "Camera.h"
-#include "PowerBall.h"
 #include "GunProjectile.h"
 #include "LaserProjectile.h"
 #include "WeaponManager.h"
@@ -14,8 +13,9 @@ using namespace core;
 using namespace scene;
 using namespace video;
 
-class PowerBall;
-
+/*!
+* Represents types of weapons.
+*/
 enum WEAPON {
 	REVOLVER,
 	REVEVO,
@@ -26,7 +26,7 @@ enum WEAPON {
 };
 
 /*!
-* Represents the Player as fps camera with weapons on the hands
+* Represents the Player as fps camera with weapons on the hands.
 */
 
 class Player: public WeaponManager {
@@ -51,12 +51,12 @@ public:
 	WEAPON getWeapon();
 
 	/**
-	* Get weaponNode.
+	* Gets weaponNode.
 	*/
 	IAnimatedMeshSceneNode* getNode();
 
 	/**
-	* Get weaponNode absolute position.
+	* Gets weaponNode absolute position.
 	*/
 	vector3df getPosition();
 	vector3df getDirection();
@@ -68,16 +68,24 @@ public:
 	*  Reduce Player health.
 	*/
 	void setDamage(u8 attackRating);
+
+	/**
+	*  Sets the health of the player to NULL.
+	*/
 	void kill();
+
+	/**
+	*  Checks the health of the player.
+	*/
 	bool isDead();
 
 	/**
-	* shots 
+	* Makes shot by current weapon with correspond projectile.
 	*/
 	void fire(s32 weapon, IrrlichtDevice *device);
 
 	/**
-	* 
+	* Changes weapon.
 	*/
 	void changeWeapon(s32 weapon);
 

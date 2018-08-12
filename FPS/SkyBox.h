@@ -7,6 +7,9 @@ using namespace core;
 using namespace video;
 using namespace scene;
 
+/**
+* Represents Skybox - element from the block Stage.
+*/
 
 class Skybox {
 public:

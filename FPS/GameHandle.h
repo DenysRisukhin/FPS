@@ -12,6 +12,7 @@
 #include "BadFaerie.h"
 #include "GameObject.h"
 #include "Global.h"
+#include "TextureManager.h"
 
 #define DEBUG
 
@@ -41,16 +42,21 @@ public:
 	void handleCollisions(Player*, Camera*, f32);
 
 	/**
-	* Handling collision between GameObjects & player.
+	* Handling collision between Enemies & player.
 	*/
 	void handleCollisionWithPlayer(Player*, Camera*, f32);
 
 	/**
-	* Handling collisions between Enemies and Projectiles.
+	* Handling collision between PowerBallProjectile(Enemy ammo) & player.
 	*/
-	void handleCollisionEnemyPowerBall();
-
 	void handleCollisionPlayerPowerBall();
+
+	/**
+	* Handling two methods:
+	* 1. Collision between enemies.
+	* 2. Collision between Enemy and Projectiles(GunProjectile & LazeProjectile).
+	*/
+	void callHandleCollisionEnemyPowerBall();
 
 	/**
 	* Handling collision between enemies.
@@ -62,6 +68,7 @@ public:
 	*/
 	bool collisionsBetweenEnemyAndProjectiles(ISceneNode*);
 	
+
 	/**
 	* Update position of all GameObjects.
 	*/
@@ -70,7 +77,7 @@ public:
 	/**
 	* Handling Game State.
 	*/
-	void handleWinLoseState(GameState &, Player*, IrrlichtDevice*, ISceneManager*, IVideoDriver*);
+	void handleWinLoseState(GameState &, Player*, IrrlichtDevice*, ISceneManager*, IVideoDriver*, TextureManager *&manager);
 		
 	/**
 	*  Create first enemies wave.
@@ -80,12 +87,12 @@ public:
 	/**
 	*  Creates enemies wave.
 	*/
-	void initiateWave(Player*, IrrlichtDevice*, ISceneManager*, IVideoDriver*);
+	void initiateWave(Player*, IrrlichtDevice*, ISceneManager*, IVideoDriver*, TextureManager *&manager);
 
 	/**
 	* Spawns enemies.
 	*/
-	void spawnBadFaerie(Player* player, IrrlichtDevice* device, ISceneManager* smgr, IVideoDriver* driver);
+	void spawnBadFaerie(Player* player, IrrlichtDevice* device, ISceneManager* smgr, IVideoDriver* driver, ITexture *&texture);
 
 	/**
 	* Determines, if wave is finished or player is dead.
@@ -111,6 +118,7 @@ private:
 	BadFaerie* badFaerie;
 	ITriangleSelector* selector;
 
+
 	f32 timeSinceStart;
 
 	bool bMainMenuDisplayed;
@@ -118,9 +126,8 @@ private:
 	bool bGameCompleteDisplayed;
 	bool bWaveFinished;
 	bool bWaveStarted;
-	//bool collisionWithPlayer;
-
+	
 	u8 numOfEnemies;
 
-	Player* _player;
+	Player* player;
 };

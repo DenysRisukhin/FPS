@@ -17,7 +17,6 @@ class LaserProjectile: public GameObject {
 
 public:
 	/*!
-	**Constructor
 	@param pos The position to start from.
 	@param dir The direction to fly in.
 	@param smgr The smgr to create the projectile in.
@@ -25,7 +24,7 @@ public:
 	LaserProjectile(const core::vector3df& pos, const core::vector3df& dir, scene::ISceneManager* smgr);
 
 	/**
-	* Destructor
+	* Destructor.
 	*/
 	~LaserProjectile();
 

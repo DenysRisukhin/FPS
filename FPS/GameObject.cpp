@@ -16,7 +16,7 @@ GameObject::GameObject(vector3df position, f32 objectSpeed, ISceneManager* manag
 
 vector3df GameObject::getPosition()
 {
-	return vector3df(0, 0, 0);
+	return IDLE_VECTOR;
 }
 
 vector3df GameObject::getPreviousPosition() {

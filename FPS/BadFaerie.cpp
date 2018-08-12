@@ -2,49 +2,38 @@
 #include <iostream>
 #include <time.h>
 
-BadFaerie::BadFaerie(vector3df position, f32 newSpeed, ISceneManager* manager, Player* playerTarget, IrrlichtDevice* irrDevice, list<GameObject*> * updateListPtr, IVideoDriver* videoDriver) : Enemy(position, newSpeed, manager, playerTarget)
+BadFaerie::BadFaerie(vector3df position, f32 newSpeed, ISceneManager* manager, Player* playerTarget, IrrlichtDevice* irrDevice, list<GameObject*> * updateListPtr, IVideoDriver* videoDriver, ISoundEngine* sound) : Enemy(position, newSpeed, manager, playerTarget)
 {
 	currentState = ENEMY_IDLE;
 	driver = videoDriver;
 	dodgeStart = 0;
 	lastAttack = 0;
 	device = irrDevice;
-	actionPhaseUpdateList = updateListPtr;
+	updateList = updateListPtr;
+	_sound = sound;
 }
 
 void BadFaerie::attack()
 {
 	// Интервал между выстрелами BadFaerie 1500.0f
 	if ((device->getTimer()->getTime() - lastAttack) < 1500.0f)
-	{
 		return;
-	}
 	
-
-	node->updateAbsolutePosition();
-	
-	core::vector3df posStart = node->getAbsolutePosition();
-	
-
-	//PowerBallProjectile* powerBall = new PowerBallProjectile(node->getAbsolutePosition().normalize(), pos.normalize(), smgr);
-
-	//PowerBall* powerBall = new PowerBall(smgr, driver, node->getAbsolutePosition(), pos, 1.0f);
 	lastAttack = device->getTimer()->getTime();
 
-	//node
-	//(node->getTarget() - node->getAbsolutePosition()).normalize()
-	//target
-	//if (powerBall != NULL)
+	node->updateAbsolutePosition();
+	core::vector3df posStart = node->getAbsolutePosition();
 
-
-	smgr->getActiveCamera()->updateAbsolutePosition();
+	// Calculates direction vector
 	core::vector3df direction = smgr->getActiveCamera()->getAbsolutePosition() - posStart;
 	direction.normalize();
 
-	actionPhaseUpdateList->push_back( new PowerBallProjectile(posStart, direction, smgr) );
+	updateList->push_back( new PowerBallProjectile(posStart, direction, smgr) );
 
-	//std::cout << "actionPhaseUpdateList.size()" << actionPhaseUpdateList->size() << std::endl;
-	
+	ISound *bang = _sound->play2D("sounds/lazer.wav", false, true);
+	bang->setVolume(0.4f);
+	bang->setIsPaused(false);
+	bang->drop();
 }
 
 void BadFaerie::dodge(f32 deltaTime)

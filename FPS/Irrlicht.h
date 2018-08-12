@@ -7,7 +7,7 @@
 #define WINDOW_BACKGROUND_COLOR	{0, 0, 0, 0}
 
 /*!
-*Represents Irrlicht's basic objects: device, video, manager, gui, event reciever, etc.
+*Represents Irrlicht's basic data: device, video, manager, gui, event reciever, etc.
 */
 class Irrlicht {
 

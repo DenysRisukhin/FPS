@@ -74,7 +74,7 @@ private:
 	/**
 	* Level data.
 	*/
-	GameHandle app;
+	GameHandle gameHandler;
 	Terrain* terrain;
 	Camera* camera;
 	Player* player;

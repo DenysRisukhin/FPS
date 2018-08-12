@@ -19,9 +19,9 @@ Game Flow:
 
 Gameplay Completion:
 	
-	Displaying basic elements:                  background, menu, sky box, terrarian
+	Displaying basic elements:                  background, menu, sky box, terrarian, 6 types of weapon, projectiles
 	
-	Displaying additional information:     	    6 weapons, player health, ammo, magazine
+	Displaying additional information:     	    weapon bar, player health, ammo, magazine
 	
 	Fps camera
 	
@@ -54,4 +54,7 @@ Audio:
 	Support for the "turn on / off" functions in the OPTIONS menu
 	
 	Multiple channels
+	
+You can find the weapon models here:
+http://crgames.elementfx.com/
 	

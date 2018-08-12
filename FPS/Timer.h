@@ -2,6 +2,9 @@
 
 #include "Global.h"
 
+/**
+* Represents different variables for calculating operations with game time.
+*/
 struct Time{
 	u32 lastTime;
 	u32 presentTime;
